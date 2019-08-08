@@ -1,7 +1,13 @@
 var mongoose = require("mongoose");
+var connec = require("./connection");
 
 var conn = mongoose.connection;
 conn.on("error", console.error.bind(console, "connection error:"));
+
+var connectionString = connec.connectionString2;
+mongoose.connect(connectionString, { useNewUrlParser: true });
+
+var connectionString = connec.connectionString2;
 
 var mySchema = mongoose.Schema(
   {
