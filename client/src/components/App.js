@@ -1,29 +1,36 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-// import Glasses from "./Glasses";
+
+import "./styles/App.css";
+import Glasses from "../Glasses";
+import WineList from "./WineList";
 
 class App extends Component {
-  state = {
-    glasses: {}
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      glasses: [],
+      glass: {}
+    };
+  }
 
   componentDidMount() {
     // Call our fetch function below once the component mounts
     this.callBackendAPI()
+
       .then(res => {
         const bob = res.express;
+        // console.log(bob);
+        // bob.forEach(function(element) {
+        //   console.log(element);
+        // });
+        // const hand = bob.map(result => this.setState({ glass: result }));
+        // this.setState({ glass: hand });
         // const glasses = new Glasses(bob);
-        // this.setState({ glasses });
-        console.log(bob);
-        alert(bob);
+        this.setState({ glasses: bob });
+
         //keep doing this function to make an array from your data. also look into changing the schema
-        const bill = bob.wines;
-        console.log(bill);
-        const jim = bill.glass;
-        console.log(jim);
-        const steve = Array.from(jim);
-        console.log(steve);
+        // const steve = Array.from(bob);
+        // console.log(steve);
         // const steve = bob.wines.glass;
         // console.log(steve)
         // const jim = bob.wines.glass;
@@ -59,11 +66,11 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Welcome to React</h1>
         </header>
-        // Render the newly fetched data inside of this.state.data dude
-        <p className="App-intro">{this.state.glasses}</p>
+        <WineList glasses={this.state.glasses} />
+        // Render the newly fetched data inside of dude
+        {/* <p className="App-intro">{this.state.glasses}</p> */}
       </div>
     );
   }

@@ -1,4 +1,4 @@
-const express = require('express');
+const express = require("express");
 const app = express();
 const port = process.env.PORT || 5000;
 var wineMethods = require("./models/wineMethods");
@@ -12,13 +12,13 @@ app.listen(port, () => console.log(`Listening on port ${port}`));
 // });
 
 app.get("/express_backend", (req, res, next) => {
-    wineMethods
-      .getAll()
-      .then(items => {
-        // res.sendFile("home", { wines: JSON.stringify(items) });
-        res.send({ express: { wines: JSON.stringify(items) } });
-      })
-      .catch(err => {
-        return next(err);
-      });
-  });
+  wineMethods
+    .getAll()
+    .then(items => {
+      // res.sendFile("home", { wines: JSON.stringify(items) });
+      res.send({ express: items });
+    })
+    .catch(err => {
+      return next(err);
+    });
+});
