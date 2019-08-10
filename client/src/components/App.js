@@ -65,12 +65,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
         <WineList glasses={this.state.glasses} />
         // Render the newly fetched data inside of dude
-        {/* <p className="App-intro">{this.state.glasses}</p> */}
       </div>
     );
   }
