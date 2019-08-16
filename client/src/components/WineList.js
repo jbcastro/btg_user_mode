@@ -23,14 +23,47 @@ const WineList = props => {
       <h3>wine funfact={glass.funfact}</h3> */}
       <table>
         <tr>
-          <th>Name</th>
-          <th>Grape 1</th>
+          <th>name</th>
+          <th>wine grapes</th>
+          <th>wine grape1</th>
+          <th>wine grape2</th>
+          <th>wine grape3</th>
+
+          <th>wine year</th>
+          <th>wine place</th>
+          <th>wine area</th>
+          <th>wine country</th>
+          <th>wine appellation</th>
+          <th>wine description1</th>
+          <th>wine description2</th>
+          <th>wine description3</th>
+          <th>wine description4</th>
+          <th>wine description5</th>
+          <th>wine description6</th>
+          <th>wine funfact</th>
         </tr>
         <tr>
           <td>{glass.name}</td>
+          <td>{glass.grapes}</td>
+          <td>{glass.grape1}</td>
+          <td>{glass.grape2}</td>
+          <td>{glass.grape3}</td>
+
+          <td>{glass.year}</td>
+          <td>{glass.place}</td>
+          <td>{glass.area}</td>
+          <td>{glass.country}</td>
+          <td>{glass.appellation}</td>
+          <td>{glass.description1}</td>
+          <td>{glass.description2}</td>
+          <td>{glass.description3}</td>
+          <td>{glass.description4}</td>
+          <td>{glass.description5}</td>
+          <td>{glass.description6}</td>
+          <td>{glass.funfact}</td>
         </tr>
         <tr>
-          <td>{glass.grape1}</td>
+          <td />
         </tr>
       </table>
     </div>
