@@ -25,41 +25,38 @@ const WineList = props => {
         <tr>
           <th>name</th>
           <th>wine grapes</th>
-          <th>wine grape1</th>
-          <th>wine grape2</th>
-          <th>wine grape3</th>
+          <th>individual grape</th>
 
           <th>wine year</th>
           <th>wine place</th>
           <th>wine area</th>
           <th>wine country</th>
           <th>wine appellation</th>
-          <th>wine description1</th>
-          <th>wine description2</th>
-          <th>wine description3</th>
-          <th>wine description4</th>
-          <th>wine description5</th>
-          <th>wine description6</th>
+          <th>wine description</th>
+
           <th>wine funfact</th>
         </tr>
         <tr>
           <td>{glass.name}</td>
           <td>{glass.grapes}</td>
-          <td>{glass.grape1}</td>
-          <td>{glass.grape2}</td>
-          <td>{glass.grape3}</td>
+          <td>
+            {glass.grape1} <p>{glass.grape2}</p>
+            <p>{glass.grape3}</p>
+          </td>
 
           <td>{glass.year}</td>
           <td>{glass.place}</td>
           <td>{glass.area}</td>
           <td>{glass.country}</td>
           <td>{glass.appellation}</td>
-          <td>{glass.description1}</td>
-          <td>{glass.description2}</td>
-          <td>{glass.description3}</td>
-          <td>{glass.description4}</td>
-          <td>{glass.description5}</td>
-          <td>{glass.description6}</td>
+          <td>
+            <p>{glass.description1}</p>
+            <p> {glass.description2}</p>
+            <p>{glass.description3}</p>
+            <p> {glass.description4}</p>
+            <p>{glass.description5}</p>
+            <p>{glass.description6}</p>
+          </td>
           <td>{glass.funfact}</td>
         </tr>
         <tr>
