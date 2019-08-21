@@ -25,9 +25,7 @@ const WineList = props => {
         <tr>
           <th>name</th>
           <th>wine grapes</th>
-          <th>wine grape1</th>
-          <th>wine grape2</th>
-          <th>wine grape3</th>
+          <th>individual grape</th>
 
           <th>wine year</th>
           <th>wine place</th>
@@ -45,9 +43,10 @@ const WineList = props => {
         <tr>
           <td>{glass.name}</td>
           <td>{glass.grapes}</td>
-          <td>{glass.grape1}</td>
-          <td>{glass.grape2}</td>
-          <td>{glass.grape3}</td>
+          <td>
+            {glass.grape1} <p>{glass.grape2}</p>
+            <p>{glass.grape3}</p>
+          </td>
 
           <td>{glass.year}</td>
           <td>{glass.place}</td>
