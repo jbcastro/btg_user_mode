@@ -7,7 +7,7 @@ exports.getAll = () => {
     }
     // const kraft = result.glass
     // console.log(kraft);
-    console.log(result)
+    console.log(result);
 
     return result;
   });
@@ -18,7 +18,7 @@ exports.getOne = wine1 => {
     if (err) {
       return err;
     }
-    //console.log(result);
+    console.log(result);
     return result;
   });
 };
@@ -72,7 +72,7 @@ exports.addOne = (
 };
 
 exports.killOne = wine1 => {
-  return Wines.findOne({ winenum: wine1 }, (err, result) => {
+  return Wines.findOne({ _id: wine1 }, (err, result) => {
     if (err) throw err;
 
     result.remove(function(err) {

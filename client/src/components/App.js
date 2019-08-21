@@ -9,8 +9,12 @@ class App extends Component {
     super(props);
     this.state = {
       glasses: [],
-      glass: {}
+      glass: {},
+      curItem: {}
     };
+    this.handleSelect = this.handleSelect.bind(this);
+
+    this.handleOnClick = this.handleOnClick.bind(this);
   }
 
   componentDidMount() {
@@ -18,36 +22,9 @@ class App extends Component {
     this.callBackendAPI()
 
       .then(res => {
-        const bob = res.express;
-        // console.log(bob);
-        // bob.forEach(function(element) {
-        //   console.log(element);
-        // });
-        // const hand = bob.map(result => this.setState({ glass: result }));
-        // this.setState({ glass: hand });
-        // const glasses = new Glasses(bob);
-        this.setState({ glasses: bob });
+        const glassesData = res.express;
 
-        //keep doing this function to make an array from your data. also look into changing the schema
-        // const steve = Array.from(bob);
-        // console.log(steve);
-        // const steve = bob.wines.glass;
-        // console.log(steve)
-        // const jim = bob.wines.glass;
-        // console.log(jim);
-        // alert(jim);
-        // const removeSlash = bob.forEach(result =>
-        //  console.log(result)
-        // );
-
-        // console.log(removeSlash)
-
-        // const slash = bob.winenum
-        // console.log(slash)
-        // const glasses = new Glasses(bob)
-        // this.setState({glasses})
-        // const steve = data.bob
-        // this.setState({data:steve})
+        this.setState({ glasses: glassesData });
       })
       .catch(err => console.log(err));
   }
@@ -62,10 +39,37 @@ class App extends Component {
     return body;
   };
 
+  //set state as current item in order to delete
+  handleSelect = event => {
+    const found = this.state.glasses.find(item => {
+      return item._id === event.target.id;
+    });
+    this.setState({ curItem: found });
+  };
+  //delete item
+  handleOnClick = event => {
+    let id = this.state.curItem._id;
+
+    fetch("http://localhost:5000/express_backend/api/v1/delete/" + id)
+      .then(response => {
+        return response.json();
+      })
+      .then(results => {
+        const remainder = this.state.items.filter(item => {
+          return item._id !== id;
+        });
+        this.setState({ items: remainder, curItem: {} });
+      });
+  };
+
   render() {
     return (
       <div className="App">
-        <WineList glasses={this.state.glasses} />
+        <WineList
+          glasses={this.state.glasses}
+          handleSelect={this.handleSelect}
+          handleOnClick={this.handleOnClick}
+        />
         // Render the newly fetched data inside of dude
       </div>
     );

@@ -22,3 +22,25 @@ app.get("/express_backend", (req, res, next) => {
       return next(err);
     });
 });
+
+app.get("/delete", (req, res, next) => {
+  wineMethods
+    .killOne(req.query.winenum)
+    .then(items => {
+      res.send({ express: items });
+    })
+    .catch(err => {
+      return next(err);
+    });
+});
+
+app.get("/get", (req, res, next) => {
+  wineMethods
+    .getOne(req.query.epnum)
+    .then(items => {
+      res.send({ express: items });
+    })
+    .catch(err => {
+      return next(err);
+    });
+});

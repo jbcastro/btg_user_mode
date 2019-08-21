@@ -2,25 +2,15 @@ import React from "react";
 import "./styles/App.css";
 
 const WineList = props => {
+  const handleSelect = props.handleSelect;
+  const handleOnClick = props.handleOnClick;
+  // const beach = props.glasses;
+  // console.log(beach);
+  // const boys = beach.map(wilson => wilson._id);
+  // console.log(boys);
+
   const content = props.glasses.map(glass => (
-    <div key={glass.winenum}>
-      {/* <h3>wine name={glass.name}</h3>
-      <h3>wine grape1={glass.grape1}</h3>
-      <h3>wine grape2={glass.grape2}</h3>
-      <h3>wine grape3={glass.grape3}</h3>
-      <h3>wine grapes={glass.grapes}</h3>
-      <h3>wine year={glass.year}</h3>
-      <h3>wine place={glass.place}</h3>
-      <h3>wine area={glass.area}</h3>
-      <h3>wine country={glass.country}</h3>
-      <h3>wine appellation={glass.appellation}</h3>
-      <h3>wine description1={glass.description1}</h3>
-      <h3>wine description2={glass.description2}</h3>
-      <h3>wine description3={glass.description3}</h3>
-      <h3>wine description4={glass.description4}</h3>
-      <h3>wine description5={glass.description5}</h3>
-      <h3>wine description6={glass.description6}</h3>
-      <h3>wine funfact={glass.funfact}</h3> */}
+    <div key={glass._id}>
       <table>
         <tr>
           <th>name</th>
@@ -37,7 +27,11 @@ const WineList = props => {
           <th>wine funfact</th>
         </tr>
         <tr>
-          <td>{glass.name}</td>
+          <td>
+            <button id={glass._id} onClick={e => handleSelect(e)}>
+              {glass.name}
+            </button>
+          </td>
           <td>{glass.grapes}</td>
           <td>
             {glass.grape1} <p>{glass.grape2}</p>
@@ -50,12 +44,12 @@ const WineList = props => {
           <td>{glass.country}</td>
           <td>{glass.appellation}</td>
           <td>
-            <p>{glass.description1}</p>
-            <p> {glass.description2}</p>
-            <p>{glass.description3}</p>
-            <p> {glass.description4}</p>
-            <p>{glass.description5}</p>
-            <p>{glass.description6}</p>
+            {glass.description1}
+            {glass.description2}
+            {glass.description3}
+            {glass.description4}
+            {glass.description5}
+            {glass.description6}
           </td>
           <td>{glass.funfact}</td>
         </tr>
@@ -63,6 +57,7 @@ const WineList = props => {
           <td />
         </tr>
       </table>
+      <button onClick={e => handleOnClick(e)}>delete brah?</button>
     </div>
   ));
 
