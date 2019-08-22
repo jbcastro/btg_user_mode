@@ -5,8 +5,7 @@ exports.getAll = () => {
     if (err) {
       return err;
     }
-    // const kraft = result.glass
-    // console.log(kraft);
+
     console.log(result);
 
     return result;
@@ -14,7 +13,7 @@ exports.getAll = () => {
 };
 
 exports.getOne = wine1 => {
-  return Wines.findOne({ winenum: wine1 }, (err, result) => {
+  return Wines.findOne({ _id: wine1 }, (err, result) => {
     if (err) {
       return err;
     }

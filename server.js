@@ -1,5 +1,8 @@
 const express = require("express");
+var cors = require("cors");
+
 const app = express();
+app.use(cors());
 const port = process.env.PORT || 5000;
 var wineMethods = require("./models/wineMethods");
 
@@ -23,9 +26,9 @@ app.get("/express_backend", (req, res, next) => {
     });
 });
 
-app.get("/delete", (req, res, next) => {
+app.get("/express_backend/get/", (req, res, next) => {
   wineMethods
-    .killOne(req.query.winenum)
+    .getOne(req.query._id)
     .then(items => {
       res.send({ express: items });
     })
@@ -34,9 +37,9 @@ app.get("/delete", (req, res, next) => {
     });
 });
 
-app.get("/get", (req, res, next) => {
+app.get("/express_backend/delete", (req, res, next) => {
   wineMethods
-    .getOne(req.query.epnum)
+    .killOne(req.query._id)
     .then(items => {
       res.send({ express: items });
     })
@@ -44,3 +47,64 @@ app.get("/get", (req, res, next) => {
       return next(err);
     });
 });
+
+app.post("/express_backend/add", (req, res, next) => {
+  wineMethods
+    .addOne({
+      winenum: req.query.winenum,
+      name: req.query.name,
+      grape1: req.query.grape1,
+      grape2: req.query.grape2,
+      grape3: req.query.grape3,
+      grapes: req.query.grapes,
+      year: req.query.year,
+      place: req.query.place,
+      area: req.query.area,
+      country: req.query.country,
+      appellation: req.query.appellation,
+      description1: req.query.description1,
+      description2: req.query.description2,
+      description3: req.query.description3,
+      description4: req.query.description4,
+      description5: req.query.description5,
+      description6: req.query.description6,
+      funfact: req.query.funfact
+    })
+    .then(items => {
+      res.send({ express: items });
+    })
+    .catch(err => {
+      return next(err);
+    });
+});
+
+// app.post("/express_backend/add", (req, res, next) => {
+//   if (!req.body_id) {
+//     let wine = new Wine({
+//       winenum: req.body.winenum,
+//       name: req.body.name,
+//       grape1: req.body.grape1,
+//       grape2: req.body.grape2,
+//       grape3: req.body.grape3,
+//       grapes: req.body.grapes,
+//       year: req.body.year,
+//       place: req.body.place,
+//       area: req.body.area,
+//       country: req.body.country,
+//       appellation: req.body.appellation,
+//       description1: req.body.description1,
+//       description2: req.body.description2,
+//       description3: req.body.description3,
+//       description4: req.body.description4,
+//       description5: req.body.description5,
+//       description6: req.body.description6,
+//       funfact: req.body.funfact
+//     });
+//     wine.save((err, newWine) => {
+//       if (err) return next(err);
+//       console.log(newWine);
+//     });
+//   } else {
+//     console.log(party);
+//   }
+// });

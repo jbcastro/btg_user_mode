@@ -37,17 +37,17 @@ var mySchema = mongoose.Schema(
 
 module.exports = mongoose.model("Wine", mySchema);
 
-var Wines = mongoose.model("Wine", mySchema);
+// var Wines = mongoose.model("Wine", mySchema);
 
-Wines.find({}, function(err, winenum) {
-  if (err) throw err;
-  console.log(winenum);
-});
+// Wines.find({}, function(err, winenum) {
+//   if (err) throw err;
+//   console.log(winenum);
+// });
 
-Wines.findOne({ year: "nv" }, (err, wines) => {
-  if (err) throw err;
-  console.log(wines);
-});
+// Wines.findOne({ year: "nv" }, (err, wines) => {
+//   if (err) throw err;
+//   console.log(wines);
+// });
 
 // Wines.killOne({ winenum: "test1111" }, (err, wines) => {
 //   if (err) throw err;

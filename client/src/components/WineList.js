@@ -28,7 +28,7 @@ const WineList = props => {
         </tr>
         <tr>
           <td>
-            <button id={glass._id} onClick={e => handleSelect(e)}>
+            <button id={glass._id} onClick={event => handleSelect(event)}>
               {glass.name}
             </button>
           </td>
@@ -57,7 +57,7 @@ const WineList = props => {
           <td />
         </tr>
       </table>
-      <button onClick={e => handleOnClick(e)}>delete brah?</button>
+      <button onClick={() => handleOnClick()}>delete brah?</button>
     </div>
   ));
 

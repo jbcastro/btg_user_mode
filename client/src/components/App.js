@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import "./styles/App.css";
 import Glasses from "../Glasses";
 import WineList from "./WineList";
+import AddForm from "./AddForm";
 
 class App extends Component {
   constructor(props) {
@@ -15,6 +16,8 @@ class App extends Component {
     this.handleSelect = this.handleSelect.bind(this);
 
     this.handleOnClick = this.handleOnClick.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.onChange = this.onChange.bind(this);
   }
 
   componentDidMount() {
@@ -40,17 +43,29 @@ class App extends Component {
   };
 
   //set state as current item in order to delete
+
   handleSelect = event => {
-    const found = this.state.glasses.find(item => {
-      return item._id === event.target.id;
-    });
-    this.setState({ curItem: found });
+    let id = event.target.id;
+
+    fetch(`http://localhost:5000/express_backend/get?_id=${id}`)
+      .then(res => res.json())
+
+      .then(data => {
+        this.setState({ curItem: data });
+      });
   };
+  // handleSelect = event => {
+  //   const found = this.state.glasses.find(item => {
+  //     return item._id === event.target.id;
+  //   });
+  //   this.setState({ curItem: found });
+  // };
   //delete item
   handleOnClick = event => {
-    let id = this.state.curItem._id;
+    //still working on this
+    let id = this.state.curItem.express._id;
 
-    fetch("http://localhost:5000/express_backend/api/v1/delete/" + id)
+    fetch(`http://localhost:5000/express_backend/delete?_id=${id}`)
       .then(response => {
         return response.json();
       })
@@ -62,6 +77,13 @@ class App extends Component {
       });
   };
 
+  handleSubmit = event => {
+    //this will be for adding wines
+  };
+  onChange = event => {
+    //this is for when wines are being insterted
+  };
+
   render() {
     return (
       <div className="App">
@@ -70,7 +92,10 @@ class App extends Component {
           handleSelect={this.handleSelect}
           handleOnClick={this.handleOnClick}
         />
-        // Render the newly fetched data inside of dude
+        <AddForm
+          handleSubmit={this.handleSubmit}
+          curItem={this.state.curItem}
+        />
       </div>
     );
   }
