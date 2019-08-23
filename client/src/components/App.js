@@ -73,9 +73,66 @@ class App extends Component {
       });
   };
 
-  handleSubmit = event => {
-    //this will be for adding wines
-  };
+  handleSubmit() {
+    let name = this.state.curItem.name;
+    fetch(`http://localhost:5000/express_backend/add?=${name}`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        winenum: this.state.curItem.winenum,
+        name: this.state.curItem.winenum,
+        grape1: "grape1",
+        grape2: "grape2",
+        grape3: "grape3",
+        grapes: "grapes",
+        year: "year",
+        place: "place",
+        area: "area",
+        country: "country",
+        appellation: "appellation",
+        description1: "description1",
+        description2: "description2",
+        description3: "description3",
+        description4: "description4",
+        description5: "description5",
+        description6: "description6",
+        funfact: "funfact"
+      })
+    });
+  }
+
+  // handleSubmit = () => {
+  //   let newItem = this.state.curItem;
+  //   let id = this.state.curItem.name;
+
+  //   if (!newItem.name) {
+  //     return;
+  //   }
+  //   fetch(`http://localhost:5000/express_backend/add`, {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(newItem)
+  //   });
+  // .then(res => res.json())
+  // .then(json => {
+  //   let newData;
+  //   if (!newData._id) {
+  //     newData = this.state.items;
+  //     newItem._id = json._id;
+  //     newData.push(newItem);
+  //   } else {
+  //     newData = this.state.items.map(item => {
+  //       if (item._id === newItem._id) {
+  //         item = newItem;
+  //       }
+  //       return item;
+  //     });
+  //   }
+  // });
+  // };
   onChange = event => {
     var newItem = this.state.curItem;
     newItem[event.target.name] = event.target.value;
