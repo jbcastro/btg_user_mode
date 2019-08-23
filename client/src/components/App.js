@@ -51,19 +51,15 @@ class App extends Component {
       .then(res => res.json())
 
       .then(data => {
-        this.setState({ curItem: data });
+        const noExpress = data.express;
+        this.setState({ curItem: noExpress });
       });
   };
-  // handleSelect = event => {
-  //   const found = this.state.glasses.find(item => {
-  //     return item._id === event.target.id;
-  //   });
-  //   this.setState({ curItem: found });
-  // };
+
   //delete item
   handleOnClick = event => {
     //still working on this
-    let id = this.state.curItem.express._id;
+    let id = this.state.curItem._id;
 
     fetch(`http://localhost:5000/express_backend/delete?_id=${id}`)
       .then(response => {
@@ -81,7 +77,9 @@ class App extends Component {
     //this will be for adding wines
   };
   onChange = event => {
-    //this is for when wines are being insterted
+    var newItem = this.state.curItem;
+    newItem[event.target.name] = event.target.value;
+    this.setState({ curItem: newItem });
   };
 
   render() {
@@ -90,11 +88,12 @@ class App extends Component {
         <WineList
           glasses={this.state.glasses}
           handleSelect={this.handleSelect}
-          handleOnClick={this.handleOnClick}
         />
         <AddForm
           handleSubmit={this.handleSubmit}
           curItem={this.state.curItem}
+          onChange={this.onChange}
+          handleOnClick={this.handleOnClick}
         />
       </div>
     );

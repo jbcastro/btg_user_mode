@@ -47,28 +47,30 @@ app.get("/express_backend/delete", (req, res, next) => {
       return next(err);
     });
 });
+const namezer = "matt";
 
 app.post("/express_backend/add", (req, res, next) => {
+  //not working at the moment
   wineMethods
     .addOne({
-      winenum: req.query.winenum,
-      name: req.query.name,
-      grape1: req.query.grape1,
-      grape2: req.query.grape2,
-      grape3: req.query.grape3,
-      grapes: req.query.grapes,
-      year: req.query.year,
-      place: req.query.place,
-      area: req.query.area,
-      country: req.query.country,
-      appellation: req.query.appellation,
-      description1: req.query.description1,
-      description2: req.query.description2,
-      description3: req.query.description3,
-      description4: req.query.description4,
-      description5: req.query.description5,
-      description6: req.query.description6,
-      funfact: req.query.funfact
+      winenum: "req.query.winenum",
+      name: namezer,
+      grape1: "grape1",
+      grape2: "grape2",
+      grape3: "grape3",
+      grapes: "grapes",
+      year: "year",
+      place: "place",
+      area: "area",
+      country: "country",
+      appellation: "appellation",
+      description1: "description1",
+      description2: "description2",
+      description3: "description3",
+      description4: "description4",
+      description5: "description5",
+      description6: "description6",
+      funfact: "funfact"
     })
     .then(items => {
       res.send({ express: items });

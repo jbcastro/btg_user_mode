@@ -3,11 +3,6 @@ import "./styles/App.css";
 
 const WineList = props => {
   const handleSelect = props.handleSelect;
-  const handleOnClick = props.handleOnClick;
-  // const beach = props.glasses;
-  // console.log(beach);
-  // const boys = beach.map(wilson => wilson._id);
-  // console.log(boys);
 
   const content = props.glasses.map(glass => (
     <div key={glass._id}>
@@ -57,7 +52,6 @@ const WineList = props => {
           <td />
         </tr>
       </table>
-      <button onClick={() => handleOnClick()}>delete brah?</button>
     </div>
   ));
 

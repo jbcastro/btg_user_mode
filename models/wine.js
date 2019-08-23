@@ -11,24 +11,25 @@ var connectionString = connec.connectionString2;
 
 var mySchema = mongoose.Schema(
   {
-    winenum: { type: String, required: true },
-    name: String,
-    grape1: String,
-    grape2: String,
-    grape3: String,
-    grapes: String,
-    year: String,
-    place: String,
-    area: String,
-    country: String,
-    appellation: String,
-    description1: String,
-    description2: String,
-    description3: String,
-    description4: String,
-    description5: String,
-    description6: String,
-    funfact: String
+    winenum: { type: String },
+    name: { type: String },
+
+    grape1: { type: String },
+    grape2: { type: String },
+    grape3: { type: String },
+    grapes: { type: String },
+    year: { type: String },
+    place: { type: String },
+    area: { type: String },
+    country: { type: String },
+    appellation: { type: String },
+    description1: { type: String },
+    description2: { type: String },
+    description3: { type: String },
+    description4: { type: String },
+    description5: { type: String },
+    description6: { type: String },
+    funfact: { type: String }
   },
   {
     versionKey: false
