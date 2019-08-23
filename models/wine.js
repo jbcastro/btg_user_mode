@@ -12,7 +12,7 @@ var connectionString = connec.connectionString2;
 var mySchema = mongoose.Schema(
   {
     winenum: { type: String },
-    name: { type: String },
+    name: { type: String, require: true },
 
     grape1: { type: String },
     grape2: { type: String },
