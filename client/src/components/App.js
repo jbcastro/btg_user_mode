@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       glasses: [],
       glass: {},
+      filter:"",
       curItem: {}
     };
     this.handleSelect = this.handleSelect.bind(this);
@@ -57,7 +58,7 @@ class App extends Component {
   };
 
   //delete item
-  handleOnClick = event => {
+  handleOnClick = () => {
     //still working on this
     let id = this.state.curItem._id;
 
@@ -65,11 +66,11 @@ class App extends Component {
       .then(response => {
         return response.json();
       })
-      .then(results => {
-        const remainder = this.state.items.filter(item => {
+      .then((results) => {
+        const remainder = this.state.glasses.filter((item) => {
           return item._id !== id;
         });
-        this.setState({ items: remainder, curItem: {} });
+        this.setState({ glasses: remainder, curItem: {} });
       });
   };
 
