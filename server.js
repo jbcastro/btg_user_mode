@@ -54,6 +54,7 @@ app.get("/express_backend/delete", (req, res, next) => {
     });
 });
 
+<<<<<<< HEAD
 
 app.post('/express_backend/add', function(req, res) {
    
@@ -96,6 +97,38 @@ console.log(result);
 //       console.log(newWine);
 //       // res.json({ updated: 0, _id: newWine_id });
 //     });
+=======
+app.post("/express_backend/add/", (req, res, next) => {
+  //not working at the moment
+  // if (!req.body._id) {
+  wineMethods.addOne({
+    winenum: req.body.winenum,
+    name: req.body.name,
+
+    grape1: req.body.grape1,
+    grape2: req.body.grape2,
+    grape3: req.body.grape3,
+    grapes: req.body.grapes,
+    year: req.body.year,
+    place: req.body.place,
+    area: req.body.area,
+    country: req.body.country,
+    appellation: req.body.appellation,
+    description1: req.body.description1,
+    description2: req.body.description2,
+    description3: req.body.description3,
+    description4: req.body.description4,
+    description5: req.body.description5,
+    description6: req.body.description6,
+    funfact: req.body.funfact
+  });
+  wine.save((err, newWine) => {
+    if (err) return next(err);
+    console.log(newWine);
+    // res.json({ updated: 0, _id: newWine_id });
+  });
+});
+>>>>>>> adc565aba627e71f3e45f4071a44226417c73ebc
 //   } else {
 //     // Wines.updateOne(
 //     //   {
