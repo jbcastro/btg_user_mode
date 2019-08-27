@@ -22,31 +22,44 @@ const WineList = props => {
           <th>wine funfact</th>
         </tr>
         <tr>
+          <button id={glass._id} onClick={event => handleSelect(event)}>
+            {glass.name}
+          </button>
+
           <td>
-            <button id={glass._id} onClick={event => handleSelect(event)}>
-              {glass.name}
-            </button>
+            <button>{glass.grapes}</button>
           </td>
-          <td>{glass.grapes}</td>
           <td>
-            {glass.grape1} <p>{glass.grape2}</p>
-            <p>{glass.grape3}</p>
+            <button>{glass.grape1}</button> <button>{glass.grape2}</button>
+            <button>{glass.grape3}</button>
           </td>
 
-          <td>{glass.year}</td>
-          <td>{glass.place}</td>
-          <td>{glass.area}</td>
-          <td>{glass.country}</td>
-          <td>{glass.appellation}</td>
           <td>
-            {glass.description1}
-            {glass.description2}
-            {glass.description3}
-            {glass.description4}
-            {glass.description5}
-            {glass.description6}
+            <button>{glass.year}</button>
           </td>
-          <td>{glass.funfact}</td>
+          <td>
+            <button>{glass.place}</button>
+          </td>
+          <td>
+            <button>{glass.area}</button>
+          </td>
+          <td>
+            <button>{glass.country}</button>
+          </td>
+          <td>
+            <button>{glass.appellation}</button>
+          </td>
+          <td>
+            <button>{glass.description1}</button>
+            <button>{glass.description2}</button>
+            <button>{glass.description3}</button>
+            <button>{glass.description4}</button>
+            <button>{glass.description5}</button>
+            <button>{glass.description6}</button>
+          </td>
+          <td>
+            <button>{glass.funfact}</button>
+          </td>
         </tr>
         <tr>
           <td />

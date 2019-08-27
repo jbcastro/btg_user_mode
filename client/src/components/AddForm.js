@@ -2,22 +2,21 @@ import React from "react";
 import "./styles/App.css";
 
 const AddForm = props => {
-  // const curItem = props.curItem;
   const handleSubmit = props.handleSubmit;
-  // const onChange = props.onChange;
+
   const handleOnClick = props.handleOnClick;
 
   return (
     <div>
       <form>
-        <input
+        {/* <input
           type="text"
           name="winenum"
           placeholder="winenum"
           onChange={props.onChange}
           value={props.curItem.winenum || ""}
-        />
-        <p />
+        /> */}
+
         <input
           type="text"
           name="name"
@@ -25,7 +24,6 @@ const AddForm = props => {
           onChange={props.onChange}
           value={props.curItem.name || ""}
         />
-        <p />
 
         <input
           type="text"
@@ -34,7 +32,7 @@ const AddForm = props => {
           onChange={props.onChange}
           value={props.curItem.grape1 || ""}
         />
-        <p />
+
         <input
           type="text"
           name="grape2"
@@ -42,7 +40,6 @@ const AddForm = props => {
           onChange={props.onChange}
           value={props.curItem.grape2 || ""}
         />
-        <p />
 
         <input
           type="text"
@@ -51,7 +48,7 @@ const AddForm = props => {
           onChange={props.onChange}
           value={props.curItem.grape3 || ""}
         />
-        <p />
+
         <input
           type="text"
           name="grapes"
@@ -59,7 +56,7 @@ const AddForm = props => {
           onChange={props.onChange}
           value={props.curItem.grapes || ""}
         />
-        <p />
+
         <input
           type="text"
           name="year"
@@ -67,7 +64,7 @@ const AddForm = props => {
           onChange={props.onChange}
           value={props.curItem.year || ""}
         />
-        <p />
+
         <input
           type="text"
           name="place"
@@ -75,7 +72,7 @@ const AddForm = props => {
           onChange={props.onChange}
           value={props.curItem.place || ""}
         />
-        <p />
+
         <input
           type="text"
           name="area"
@@ -83,7 +80,7 @@ const AddForm = props => {
           onChange={props.onChange}
           value={props.curItem.area || ""}
         />
-        <p />
+
         <input
           type="text"
           name="country"
@@ -91,7 +88,7 @@ const AddForm = props => {
           onChange={props.onChange}
           value={props.curItem.country || ""}
         />
-        <p />
+
         <input
           type="text"
           name="appellation"
@@ -99,7 +96,7 @@ const AddForm = props => {
           onChange={props.onChange}
           value={props.curItem.appellation || ""}
         />
-        <p />
+
         <input
           type="text"
           name="description1"
@@ -107,7 +104,7 @@ const AddForm = props => {
           onChange={props.onChange}
           value={props.curItem.description1 || ""}
         />
-        <p />
+
         <input
           type="text"
           name="description2"
@@ -115,7 +112,7 @@ const AddForm = props => {
           onChange={props.onChange}
           value={props.curItem.description2 || ""}
         />
-        <p />
+
         <input
           type="text"
           name="description3"
@@ -123,7 +120,7 @@ const AddForm = props => {
           onChange={props.onChange}
           value={props.curItem.description3 || ""}
         />
-        <p />
+
         <input
           type="text"
           name="description4"
@@ -131,7 +128,7 @@ const AddForm = props => {
           onChange={props.onChange}
           value={props.curItem.description4 || ""}
         />
-        <p />
+
         <input
           type="text"
           name="description5"
@@ -139,7 +136,7 @@ const AddForm = props => {
           onChange={props.onChange}
           value={props.curItem.description5 || ""}
         />
-        <p />
+
         <input
           type="text"
           name="description6"
@@ -147,7 +144,7 @@ const AddForm = props => {
           onChange={props.onChange}
           value={props.curItem.description6 || ""}
         />
-        <p />
+
         <input
           type="text"
           name="funfact"
@@ -155,7 +152,6 @@ const AddForm = props => {
           onChange={props.onChange}
           value={props.curItem.funfact || ""}
         />
-        <p />
       </form>
       <button onClick={() => handleOnClick()}>delete brah?</button>
       <button onClick={() => handleSubmit()}>add</button>

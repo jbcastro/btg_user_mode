@@ -11,7 +11,7 @@ class App extends Component {
     this.state = {
       glasses: [],
       glass: {},
-      filter:"",
+      filter: "",
       curItem: {}
     };
     this.handleSelect = this.handleSelect.bind(this);
@@ -43,8 +43,7 @@ class App extends Component {
     return body;
   };
 
-  //set state as current item in order to delete
-
+  //set state as current item in order to delete or update
   handleSelect = event => {
     let id = event.target.id;
 
@@ -59,55 +58,54 @@ class App extends Component {
 
   //delete item
   handleOnClick = () => {
-    //still working on this
     let id = this.state.curItem._id;
 
     fetch(`http://localhost:5000/express_backend/delete?_id=${id}`)
       .then(response => {
         return response.json();
       })
-      .then((results) => {
-        const remainder = this.state.glasses.filter((item) => {
+      .then(results => {
+        const remainder = this.state.glasses.filter(item => {
           return item._id !== id;
         });
         this.setState({ glasses: remainder, curItem: {} });
       });
   };
 
+  //for adding and updating
   handleSubmit() {
     let name = this.state.curItem.name;
+    let newWine = this.state.curItem;
     fetch(`http://localhost:5000/express_backend/add?=${name}`, {
       method: "POST",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        winenum: this.state.curItem.winenum,
-        name: this.state.curItem.name,
-        grape1: this.state.curItem.grape1,
-        grape2: this.state.curItem.grape2,
-        grape3: this.state.curItem.grape3,
-        grapes: this.state.curItem.grapes,
-        year: this.state.curItem.year,
-        place: this.state.curItem.place,
-        area: this.state.curItem.area,
-        country: this.state.curItem.country,
-        appellation: this.state.curItem.appellation,
-        description1: this.state.curItem.description1,
-        description2: this.state.curItem.description2,
-        description3: this.state.curItem.description3,
-        description4: this.state.curItem.description4,
-        description5: this.state.curItem.description5,
-        description6: this.state.curItem.description6,
-        funfact: this.state.curItem.funfact
-      })
-    }).then(
-     this.state.glasses.push(this.state.curItem)
-    )
+      body: JSON.stringify(newWine)
+    })
+      .then(res => res.json())
+      .then(json => {
+        let glassesArray;
+        if (!newWine._id) {
+          glassesArray = this.state.glasses;
+
+          newWine._id = json._id;
+          glassesArray.push(newWine);
+          this.setState({ glasses: glassesArray });
+        } else {
+          glassesArray = this.state.glasses.map(item => {
+            if (item._id === newWine._id) {
+              item = newWine;
+            }
+            return item;
+          });
+        }
+        this.setState({ glasses: glassesArray });
+      });
   }
 
-
+  //making whatever is typed in as current item
   onChange = event => {
     var newItem = this.state.curItem;
     newItem[event.target.name] = event.target.value;
