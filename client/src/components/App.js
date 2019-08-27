@@ -84,56 +84,30 @@ class App extends Component {
       },
       body: JSON.stringify({
         winenum: this.state.curItem.winenum,
-        name: this.state.curItem.winenum,
-        grape1: "grape1",
-        grape2: "grape2",
-        grape3: "grape3",
-        grapes: "grapes",
-        year: "year",
-        place: "place",
-        area: "area",
-        country: "country",
-        appellation: "appellation",
-        description1: "description1",
-        description2: "description2",
-        description3: "description3",
-        description4: "description4",
-        description5: "description5",
-        description6: "description6",
-        funfact: "funfact"
+        name: this.state.curItem.name,
+        grape1: this.state.curItem.grape1,
+        grape2: this.state.curItem.grape2,
+        grape3: this.state.curItem.grape3,
+        grapes: this.state.curItem.grapes,
+        year: this.state.curItem.year,
+        place: this.state.curItem.place,
+        area: this.state.curItem.area,
+        country: this.state.curItem.country,
+        appellation: this.state.curItem.appellation,
+        description1: this.state.curItem.description1,
+        description2: this.state.curItem.description2,
+        description3: this.state.curItem.description3,
+        description4: this.state.curItem.description4,
+        description5: this.state.curItem.description5,
+        description6: this.state.curItem.description6,
+        funfact: this.state.curItem.funfact
       })
-    });
+    }).then(
+     this.state.glasses.push(this.state.curItem)
+    )
   }
 
-  // handleSubmit = () => {
-  //   let newItem = this.state.curItem;
-  //   let id = this.state.curItem.name;
 
-  //   if (!newItem.name) {
-  //     return;
-  //   }
-  //   fetch(`http://localhost:5000/express_backend/add`, {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(newItem)
-  //   });
-  // .then(res => res.json())
-  // .then(json => {
-  //   let newData;
-  //   if (!newData._id) {
-  //     newData = this.state.items;
-  //     newItem._id = json._id;
-  //     newData.push(newItem);
-  //   } else {
-  //     newData = this.state.items.map(item => {
-  //       if (item._id === newItem._id) {
-  //         item = newItem;
-  //       }
-  //       return item;
-  //     });
-  //   }
-  // });
-  // };
   onChange = event => {
     var newItem = this.state.curItem;
     newItem[event.target.name] = event.target.value;

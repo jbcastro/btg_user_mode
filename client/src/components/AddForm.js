@@ -94,10 +94,10 @@ const AddForm = props => {
         <p />
         <input
           type="text"
-          name="appelation"
-          placeholder="appelation"
+          name="appellation"
+          placeholder="appellation"
           onChange={props.onChange}
-          value={props.curItem.appelation || ""}
+          value={props.curItem.appellation || ""}
         />
         <p />
         <input
