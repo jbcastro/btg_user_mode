@@ -1,5 +1,6 @@
 import React from "react";
 import "./styles/App.css";
+import Button from "@material-ui/core/Button";
 
 const AddForm = props => {
   const handleSubmit = props.handleSubmit;
@@ -153,8 +154,20 @@ const AddForm = props => {
           value={props.curItem.funfact || ""}
         />
       </form>
-      <button onClick={() => handleOnClick()}>delete brah?</button>
-      <button onClick={() => handleSubmit()}>add</button>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => handleOnClick()}
+      >
+        delete brah?
+      </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => handleSubmit()}
+      >
+        add
+      </Button>
     </div>
   );
 };

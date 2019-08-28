@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-
 import "./styles/App.css";
 import Glasses from "../Glasses";
 import WineList from "./WineList";
 import AddForm from "./AddForm";
+import Button from "@material-ui/core/Button";
 
 class App extends Component {
   constructor(props) {
@@ -12,13 +12,15 @@ class App extends Component {
       glasses: [],
       glass: {},
       filter: "",
-      curItem: {}
+      curItem: {},
+      filteredWines: []
     };
     this.handleSelect = this.handleSelect.bind(this);
 
     this.handleOnClick = this.handleOnClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.filterWines = this.filterWines.bind(this);
   }
 
   componentDidMount() {
@@ -112,12 +114,24 @@ class App extends Component {
     this.setState({ curItem: newItem });
   };
 
+  filterWines = wineFilter => {
+    let filteredWines = this.state.glasses;
+    filteredWines = filteredWines.filter(wine => {
+      let wineName = filteredWines.name.toLowerCase();
+      return wineName.indexOf(wineFilter.toLowerCase()) !== -1;
+    });
+    this.setState({ filteredWines });
+  };
+
   render() {
     return (
       <div className="App">
         <WineList
           glasses={this.state.glasses}
           handleSelect={this.handleSelect}
+          wines={this.state.filteredWines}
+          match={this.props.match}
+          onChange={this.filterWines}
         />
         <AddForm
           handleSubmit={this.handleSubmit}

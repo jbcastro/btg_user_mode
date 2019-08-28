@@ -1,5 +1,6 @@
 import React from "react";
 import "./styles/App.css";
+import Button from "@material-ui/core/Button";
 
 const WineList = props => {
   const handleSelect = props.handleSelect;
@@ -27,38 +28,71 @@ const WineList = props => {
           </button>
 
           <td>
-            <button>{glass.grapes}</button>
+            <Button variant="contained" color="primary">
+              {glass.grapes}
+            </Button>
           </td>
           <td>
-            <button>{glass.grape1}</button> <button>{glass.grape2}</button>
-            <button>{glass.grape3}</button>
+            <Button variant="contained" color="primary">
+              {glass.grape1}
+            </Button>{" "}
+            <Button variant="contained" color="primary">
+              {glass.grape2}
+            </Button>
+            <Button variant="contained" color="primary">
+              {glass.grape3}
+            </Button>
           </td>
 
           <td>
-            <button>{glass.year}</button>
+            <Button variant="contained" color="primary">
+              {glass.year}
+            </Button>
           </td>
           <td>
-            <button>{glass.place}</button>
+            <Button variant="contained" color="primary">
+              {glass.place}
+            </Button>
           </td>
           <td>
-            <button>{glass.area}</button>
+            <Button variant="contained" color="primary">
+              {glass.area}
+            </Button>
           </td>
           <td>
-            <button>{glass.country}</button>
+            <Button variant="contained" color="primary">
+              {glass.country}
+            </Button>
           </td>
           <td>
-            <button>{glass.appellation}</button>
+            <Button variant="contained" color="primary">
+              {glass.appellation}
+            </Button>
           </td>
           <td>
-            <button>{glass.description1}</button>
-            <button>{glass.description2}</button>
-            <button>{glass.description3}</button>
-            <button>{glass.description4}</button>
-            <button>{glass.description5}</button>
-            <button>{glass.description6}</button>
+            <Button variant="contained" color="primary">
+              {glass.description1}
+            </Button>
+            <Button variant="contained" color="primary">
+              {glass.description2}
+            </Button>
+            <Button variant="contained" color="primary">
+              {glass.description3}
+            </Button>
+            <Button variant="contained" color="primary">
+              {glass.description4}
+            </Button>
+            <Button variant="contained" color="primary">
+              {glass.description5}
+            </Button>
+            <Button variant="contained" color="primary">
+              {glass.description6}
+            </Button>
           </td>
           <td>
-            <button>{glass.funfact}</button>
+            <Button variant="contained" color="primary">
+              {glass.funfact}
+            </Button>
           </td>
         </tr>
         <tr>
