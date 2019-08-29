@@ -4,6 +4,7 @@ import Glasses from "../Glasses";
 import WineList from "./WineList";
 import AddForm from "./AddForm";
 import Button from "@material-ui/core/Button";
+import FilterForm from "./FilterForm";
 
 class App extends Component {
   constructor(props) {
@@ -20,7 +21,9 @@ class App extends Component {
     this.handleOnClick = this.handleOnClick.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.filterWines = this.filterWines.bind(this);
+    this.onSelect = this.onSelect.bind(this);
+    // this.filterWines = this.filterWines.bind(this);
+    // this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -114,24 +117,56 @@ class App extends Component {
     this.setState({ curItem: newItem });
   };
 
-  filterWines = wineFilter => {
-    let filteredWines = this.state.glasses;
-    filteredWines = filteredWines.filter(wine => {
-      let wineName = filteredWines.name.toLowerCase();
-      return wineName.indexOf(wineFilter.toLowerCase()) !== -1;
-    });
-    this.setState({ filteredWines });
+  onSelect = event => {
+    let value = event.target.value;
+    const id = event.target.id;
+
+    const glasses = this.state.glasses;
+
+    var grapes = glasses.filter(
+      result => result.value !== id
+      // console.log(result.value);
+    );
+    this.setState({ glasses: grapes });
+
+    const grapez = glasses.map(
+      result => result.grape1 + result.grape2 + result.grape3
+    );
+    // console.log(grapez);
+
+    console.log(grapes);
+
+    console.log(value);
+    // console.log(id);
   };
+
+  // filterWines = wineFilter => {
+  //   //todo
+  //   let filteredWines = this.state.glasses;
+  //   filteredWines = filteredWines.filter(wine => {
+  //     let wineName = filteredWines.name.toLowerCase();
+  //     return wineName.indexOf(wineFilter.toLowerCase()) !== -1;
+  //   });
+  //   this.setState({ filteredWines });
+  // };
+  // handleChange = event => {
+  //   this.setState({ wineFilter: event.target.value });
+  //   this.props.onChange(event.target.value);
+  // };
 
   render() {
     return (
       <div className="App">
+        {/* <FilterForm
+          onChange={this.filterWines}
+          wineFilter={this.state.wineFilter}
+        /> */}
         <WineList
           glasses={this.state.glasses}
           handleSelect={this.handleSelect}
           wines={this.state.filteredWines}
           match={this.props.match}
-          onChange={this.filterWines}
+          onSelect={this.onSelect}
         />
         <AddForm
           handleSubmit={this.handleSubmit}
