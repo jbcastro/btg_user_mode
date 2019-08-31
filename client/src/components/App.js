@@ -120,21 +120,54 @@ class App extends Component {
   onSelect = event => {
     let value = event.target.value;
     const id = event.target.id;
-
     const glasses = this.state.glasses;
 
+    const grapez = glasses.map(result => [
+      result.grape1,
+      result.grape2,
+      result.grape3
+    ]);
+    console.log(grapez);
+
     var grapes = glasses.filter(
-      result => result.value !== id
+      result => {
+        if (value === "grapes") {
+          return result.grapes === id;
+        } else if (value === "grape") {
+          return (
+            result.grape1 === id || result.grape2 === id || result.grape3 === id
+          );
+
+          //safgasfg
+        } else if (value === "year") {
+          return result.year === id;
+        } else if (value === "place") {
+          return result.place === id;
+        } else if (value === "place") {
+          return result.place === id;
+        } else if (value === "area") {
+          return result.area === id;
+        } else if (value === "country") {
+          return result.country === id;
+        } else if (value === "appellation") {
+          return result.appellation === id;
+        } else if (value === "place") {
+          return result.place === id;
+        }
+      }
       // console.log(result.value);
     );
+    // var butt = grapes;
+    // var steve = result;
+    // var stabler = steve.butt;
+    // console.log(stabler);
+
+    // return stabler !== id;
     this.setState({ glasses: grapes });
 
-    const grapez = glasses.map(
-      result => result.grape1 + result.grape2 + result.grape3
-    );
     // console.log(grapez);
 
-    console.log(grapes);
+    console.log(id);
 
     console.log(value);
     // console.log(id);

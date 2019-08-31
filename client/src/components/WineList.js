@@ -5,6 +5,12 @@ const WineList = props => {
   const handleSelect = props.handleSelect;
   const onSelect = props.onSelect;
   const grapes = "grapes";
+  const year = "year";
+  const place = "place";
+  const area = "area";
+  const country = "country";
+  const appellation = "appellation";
+  const grape = "grape";
 
   const content = props.glasses.map(glass => (
     <div key={glass._id}>
@@ -38,29 +44,77 @@ const WineList = props => {
             </button>
           </td>
           <td>
-            <button>{glass.grape1}</button>{" "}
+            <button
+              id={glass.grape1}
+              value={grape}
+              onClick={event => onSelect(event)}
+            >
+              {glass.grape1}
+            </button>
             <p>
-              <button>{glass.grape2}</button>
+              <button
+                id={glass.grape2}
+                value={grape}
+                onClick={event => onSelect(event)}
+              >
+                {glass.grape2}
+              </button>
             </p>
             <p>
-              <button>{glass.grape3}</button>
+              <button
+                id={glass.grape3}
+                value={grape}
+                onClick={event => onSelect(event)}
+              >
+                {glass.grape3}
+              </button>
             </p>
           </td>
 
           <td>
-            <button>{glass.year}</button>
+            <button
+              id={glass.year}
+              value={year}
+              onClick={event => onSelect(event)}
+            >
+              {glass.year}
+            </button>
           </td>
           <td>
-            <button>{glass.place}</button>
+            <button
+              id={glass.place}
+              value={place}
+              onClick={event => onSelect(event)}
+            >
+              {glass.place}
+            </button>
           </td>
           <td>
-            <button>{glass.area}</button>
+            <button
+              id={glass.area}
+              value={area}
+              onClick={event => onSelect(event)}
+            >
+              {glass.area}
+            </button>
           </td>
           <td>
-            <button>{glass.country}</button>
+            <button
+              id={glass.country}
+              value={country}
+              onClick={event => onSelect(event)}
+            >
+              {glass.country}
+            </button>
           </td>
           <td>
-            <button>{glass.appellation}</button>
+            <button
+              id={glass.appellation}
+              value={appellation}
+              onClick={event => onSelect(event)}
+            >
+              {glass.appellation}
+            </button>
           </td>
           <td>
             <button>{glass.description1}</button>
