@@ -5,6 +5,11 @@ import WineList from "./WineList";
 import AddForm from "./AddForm";
 import Button from "@material-ui/core/Button";
 import FilterForm from "./FilterForm";
+import WineTable from "./WineTable";
+import AddEditForm from "./AddEditForm";
+import MatTable from "./MatTable";
+// import RenderTableData from "./RenderTableData";
+// import RenderTableHeader from "./RenderTableHeader";
 
 class App extends Component {
   constructor(props) {
@@ -120,49 +125,46 @@ class App extends Component {
   onSelect = event => {
     let value = event.target.value;
     const id = event.target.id;
+
     const glasses = this.state.glasses;
 
-    const grapez = glasses.map(result => [
-      result.grape1,
-      result.grape2,
-      result.grape3
-    ]);
-    console.log(grapez);
+    var grapes = glasses.filter(result => {
+      if (value === "grapes") {
+        return result.grapes === id;
+      } else if (value === "grape") {
+        return (
+          result.grape1 === id || result.grape2 === id || result.grape3 === id
+        );
 
-    var grapes = glasses.filter(
-      result => {
-        if (value === "grapes") {
-          return result.grapes === id;
-        } else if (value === "grape") {
-          return (
-            result.grape1 === id || result.grape2 === id || result.grape3 === id
-          );
+        //safgasfg
+      } else if (value === "year") {
+        return result.year === id;
+      } else if (value === "place") {
+        return result.place === id;
+      } else if (value === "place") {
+        return result.place === id;
+      } else if (value === "area") {
+        return result.area === id;
+      } else if (value === "country") {
+        return result.country === id;
+      } else if (value === "appellation") {
+        return result.appellation === id;
+      } else if (value === "place") {
+        return result.place === id;
+      } else if (value === "description") {
+        return (
+          result.description1 === id ||
+          result.description2 === id ||
+          result.description3 === id ||
+          result.description4 === id ||
+          result.description5 === id ||
+          result.description6 === id
+        );
 
-          //safgasfg
-        } else if (value === "year") {
-          return result.year === id;
-        } else if (value === "place") {
-          return result.place === id;
-        } else if (value === "place") {
-          return result.place === id;
-        } else if (value === "area") {
-          return result.area === id;
-        } else if (value === "country") {
-          return result.country === id;
-        } else if (value === "appellation") {
-          return result.appellation === id;
-        } else if (value === "place") {
-          return result.place === id;
-        }
+        //safgasfg
       }
-      // console.log(result.value);
-    );
-    // var butt = grapes;
-    // var steve = result;
-    // var stabler = steve.butt;
-    // console.log(stabler);
+    });
 
-    // return stabler !== id;
     this.setState({ glasses: grapes });
 
     // console.log(grapez);
@@ -190,23 +192,26 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/* <FilterForm
-          onChange={this.filterWines}
-          wineFilter={this.state.wineFilter}
-        /> */}
-        <WineList
+        {/* <MatTable glasses={this.state.glasses} /> */}
+        <AddEditForm
+          handleSubmit={this.handleSubmit}
+          curItem={this.state.curItem}
+          onChange={this.onChange}
+          handleOnClick={this.handleOnClick}
+        />
+        <WineTable
           glasses={this.state.glasses}
           handleSelect={this.handleSelect}
           wines={this.state.filteredWines}
           match={this.props.match}
           onSelect={this.onSelect}
         />
-        <AddForm
+        {/* <AddForm
           handleSubmit={this.handleSubmit}
           curItem={this.state.curItem}
           onChange={this.onChange}
           handleOnClick={this.handleOnClick}
-        />
+        /> */}
       </div>
     );
   }

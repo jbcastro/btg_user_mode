@@ -1,9 +1,11 @@
 import React from "react";
-// import "./styles/App.css";
+import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
+import MenuItem from "@material-ui/core/MenuItem";
+import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
-const AddForm = props => {
+const AddEditForm = props => {
   const handleSubmit = props.handleSubmit;
 
   const handleOnClick = props.handleOnClick;
@@ -12,150 +14,199 @@ const AddForm = props => {
     button: {
       margin: theme.spacing(1)
     },
+    container: {
+      display: "flex",
+      flexWrap: "wrap"
+    },
+    textField: {
+      marginLeft: theme.spacing(1),
+      marginRight: theme.spacing(1),
+      width: 200
+    },
+    dense: {
+      marginTop: 19
+    },
+    menu: {
+      width: 200
+    },
+    button: {
+      margin: theme.spacing(1)
+    },
     input: {
       display: "none"
     }
   }));
 
+  const currencies = [
+    {
+      value: "USD",
+      label: "$"
+    }
+  ];
+
   const classes = useStyles();
 
   return (
     <div>
-      <form>
-        <input
+      <form className={classes.container} noValidate autoComplete="off">
+        <TextField
+          required
+          label="Name"
+          className={classes.textField}
           type="text"
           name="name"
           placeholder="name"
           onChange={props.onChange}
           value={props.curItem.name || ""}
+          margin="normal"
         />
-
-        <input
-          type="text"
-          name="grape1"
-          placeholder="grape 1"
-          onChange={props.onChange}
-          value={props.curItem.grape1 || ""}
-        />
-
-        <input
-          type="text"
-          name="grape2"
-          placeholder="grape 2"
-          onChange={props.onChange}
-          value={props.curItem.grape2 || ""}
-        />
-
-        <input
-          type="text"
-          name="grape3"
-          placeholder="grape 3"
-          onChange={props.onChange}
-          value={props.curItem.grape3 || ""}
-        />
-
-        <input
+        <TextField
+          required
+          label="Grapes"
           type="text"
           name="grapes"
-          placeholder="grapes"
+          placeholder="Grapes"
           onChange={props.onChange}
           value={props.curItem.grapes || ""}
+          margin="normal"
         />
-
-        <input
+        <TextField
+          required
+          label="Grape 1"
           type="text"
-          name="year"
-          placeholder="year"
+          name="grape1"
+          placeholder="Grape 1"
+          onChange={props.onChange}
+          value={props.curItem.grape1 || ""}
+          margin="normal"
+        />
+        <TextField
+          label="Grape 2"
+          type="text"
+          name="grape2"
+          placeholder="Grape 2"
+          onChange={props.onChange}
+          value={props.curItem.grape2 || ""}
+          margin="normal"
+        />
+        <TextField
+          label="Grape 3"
+          type="text"
+          name="grape3"
+          placeholder="Grape 3"
+          onChange={props.onChange}
+          value={props.curItem.grape3 || ""}
+          margin="normal"
+        />
+        <TextField
+          required
+          label="Year"
+          type="text"
+          name="grape1"
+          placeholder="Year"
           onChange={props.onChange}
           value={props.curItem.year || ""}
+          margin="normal"
         />
-
-        <input
+        <TextField
+          required
+          label="Place"
           type="text"
           name="place"
-          placeholder="place"
+          placeholder="Place"
           onChange={props.onChange}
           value={props.curItem.place || ""}
+          margin="normal"
         />
-
-        <input
+        <TextField
+          required
+          label="Area"
           type="text"
           name="area"
-          placeholder="area"
+          placeholder="Area"
           onChange={props.onChange}
           value={props.curItem.area || ""}
+          margin="normal"
         />
-
-        <input
-          type="text"
-          name="country"
-          placeholder="country"
-          onChange={props.onChange}
-          value={props.curItem.country || ""}
-        />
-
-        <input
+        <TextField
+          required
+          label="Appellation"
           type="text"
           name="appellation"
-          placeholder="appellation"
+          placeholder="Appellation"
           onChange={props.onChange}
           value={props.curItem.appellation || ""}
+          margin="normal"
         />
-
-        <input
+        <TextField
+          required
+          label="Description1"
           type="text"
           name="description1"
-          placeholder="description1"
+          placeholder="Description1"
           onChange={props.onChange}
           value={props.curItem.description1 || ""}
+          margin="normal"
         />
-
-        <input
+        <TextField
+          label="Description2"
           type="text"
           name="description2"
-          placeholder="description2"
+          placeholder="Description2"
           onChange={props.onChange}
           value={props.curItem.description2 || ""}
+          margin="normal"
         />
-
-        <input
+        <TextField
+          label="Description3"
           type="text"
           name="description3"
-          placeholder="description3"
+          placeholder="Description3"
           onChange={props.onChange}
           value={props.curItem.description3 || ""}
+          margin="normal"
         />
-
-        <input
+        <TextField
+          label="Description4"
           type="text"
           name="description4"
-          placeholder="description4"
+          placeholder="Description4"
           onChange={props.onChange}
           value={props.curItem.description4 || ""}
+          margin="normal"
         />
-
-        <input
+        <TextField
+          label="Description5"
           type="text"
           name="description5"
-          placeholder="description5"
+          placeholder="Description5"
           onChange={props.onChange}
           value={props.curItem.description5 || ""}
+          margin="normal"
         />
-
-        <input
+        <TextField
+          label="Description6"
           type="text"
           name="description6"
-          placeholder="description6"
+          placeholder="Description6"
           onChange={props.onChange}
           value={props.curItem.description6 || ""}
+          margin="normal"
         />
-
-        <input
+        <TextField
+          fullWidth
+          multiline
+          label="Funfact"
           type="text"
           name="funfact"
-          placeholder="funfact"
+          style={{ margin: 8 }}
+          placeholder="Fun Fact"
           onChange={props.onChange}
           value={props.curItem.funfact || ""}
+          margin="normal"
+          InputLabelProps={{
+            shrink: true
+          }}
         />
       </form>
       <Button
@@ -178,4 +229,4 @@ const AddForm = props => {
   );
 };
 
-export default AddForm;
+export default AddEditForm;
