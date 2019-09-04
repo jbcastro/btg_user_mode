@@ -10,10 +10,14 @@ import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import { maxWidth } from "@material-ui/system";
+import { purple } from "@material-ui/core/colors";
 
 const WineTable = props => {
   const handleSelect = props.handleSelect;
   const onSelect = props.onSelect;
+  const onClick = props.onClick;
+  const clickMe = props.clickMe;
+  const showMyComponent = props.showMyComponent;
   const grapes = "grapes";
   const year = "year";
   const place = "place";
@@ -22,7 +26,10 @@ const WineTable = props => {
   const appellation = "appellation";
   const grape = "grape";
   const description = "description";
+  let funfact;
+
   const timeStamp1 = props.glasses;
+
   const timeStamp = timeStamp1.map(result => result.timestamp);
   console.log(timeStamp);
 
@@ -31,6 +38,7 @@ const WineTable = props => {
       console.log("yo");
     }
   }
+
   const useStyles = makeStyles(theme => ({
     button: {
       margin: theme.spacing(1)
@@ -58,16 +66,17 @@ const WineTable = props => {
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
+          <ButtonBase>Clear</ButtonBase>
           <TableRow className={classes.tableRow}>
-            <TableCell>Name</TableCell>
-            <TableCell align="right">Grapes</TableCell>
-            <TableCell align="right">Individual Grapes</TableCell>
-            <TableCell align="right">Year</TableCell>
-            <TableCell align="right">Place</TableCell>
-            <TableCell align="right">Area</TableCell>
-            <TableCell align="right">Country</TableCell>
-            <TableCell align="right">Appellation</TableCell>
-            <TableCell align="right">Description</TableCell>
+            <TableCell emphasis="bold">Name</TableCell>
+            <TableCell align="center">Grapes</TableCell>
+            <TableCell align="center">Individual Grapes</TableCell>
+            <TableCell align="center">Year</TableCell>
+            <TableCell align="center">Place</TableCell>
+            <TableCell align="center">Area</TableCell>
+            <TableCell align="center">Country</TableCell>
+            <TableCell align="center">Appellation</TableCell>
+            <TableCell align="center">Description</TableCell>
             <TableCell align="center">Fun Fact</TableCell>
           </TableRow>
         </TableHead>
@@ -79,7 +88,7 @@ const WineTable = props => {
         } */}
 
         <TableBody className={classes.tableRow}>
-          {props.glasses.map(glass => (
+          {props.glasses.map((glass, idx) => (
             <TableRow key={glass._id}>
               <TableCell component="th" scope="row">
                 <ButtonBase
@@ -220,8 +229,11 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
-                {/* Needs to be changed to where it is clicked and then the fun fact appears */}
-                <ButtonBase worm="click me">Click Me</ButtonBase>
+                <ButtonBase onClick={event => onClick(event)}>
+                  {showMyComponent
+                    ? (funfact = glass.funfact + "  " + "CLICK HERE TO CLOSE")
+                    : (funfact = "Click Me")}
+                </ButtonBase>
               </TableCell>
             </TableRow>
           ))}

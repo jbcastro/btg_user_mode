@@ -1,5 +1,6 @@
 import React from "react";
 import MaterialTable from "material-table";
+import Glasses from "../Glasses";
 
 //still a work in progress
 
@@ -9,7 +10,7 @@ const MatTable = props => {
   const glassMap = glasses.map(result => result.name);
   console.log(glassMap);
 
-  const grapet = glasses.grapes;
+  const grapet = Glasses.grapes;
   console.log(grapet);
 
   return (
@@ -20,10 +21,7 @@ const MatTable = props => {
         { title: "Grapes", field: "grapes" }
       ]}
       // data={glasses.map(result => result.name)}
-      data={[
-        { name: "name", grapes: "grapes" },
-        { name: "name2", grapes: "grapes2" }
-      ]}
+      data={[glasses]}
     />
   );
 };

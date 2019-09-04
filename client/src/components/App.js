@@ -19,7 +19,9 @@ class App extends Component {
       glass: {},
       filter: "",
       curItem: {},
-      filteredWines: []
+      filteredWines: [],
+
+      showMyComponent: false
     };
     this.handleSelect = this.handleSelect.bind(this);
 
@@ -27,6 +29,7 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onSelect = this.onSelect.bind(this);
+    this.onClick = this.onClick.bind(this);
     // this.filterWines = this.filterWines.bind(this);
     // this.handleChange = this.handleChange.bind(this);
   }
@@ -160,19 +163,10 @@ class App extends Component {
           result.description5 === id ||
           result.description6 === id
         );
-
-        //safgasfg
       }
     });
 
     this.setState({ glasses: grapes });
-
-    // console.log(grapez);
-
-    console.log(id);
-
-    console.log(value);
-    // console.log(id);
   };
 
   // filterWines = wineFilter => {
@@ -188,6 +182,9 @@ class App extends Component {
   //   this.setState({ wineFilter: event.target.value });
   //   this.props.onChange(event.target.value);
   // };
+  onClick = event => {
+    this.setState(state => ({ showMyComponent: !this.state.showMyComponent }));
+  };
 
   render() {
     return (
@@ -205,13 +202,9 @@ class App extends Component {
           wines={this.state.filteredWines}
           match={this.props.match}
           onSelect={this.onSelect}
+          onClick={this.onClick}
+          showMyComponent={this.state.showMyComponent}
         />
-        {/* <AddForm
-          handleSubmit={this.handleSubmit}
-          curItem={this.state.curItem}
-          onChange={this.onChange}
-          handleOnClick={this.handleOnClick}
-        /> */}
       </div>
     );
   }
