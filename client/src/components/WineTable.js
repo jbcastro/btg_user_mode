@@ -22,7 +22,15 @@ const WineTable = props => {
   const appellation = "appellation";
   const grape = "grape";
   const description = "description";
+  const timeStamp1 = props.glasses;
+  const timeStamp = timeStamp1.map(result => result.timestamp);
+  console.log(timeStamp);
 
+  function timeStampCheck(timeStamp) {
+    if (timeStamp > Date) {
+      console.log("yo");
+    }
+  }
   const useStyles = makeStyles(theme => ({
     button: {
       margin: theme.spacing(1)
@@ -39,7 +47,8 @@ const WineTable = props => {
       minWidth: 650
     },
     tableRow: {
-      maxWidth: "1%"
+      height: "1px",
+      width: "1px"
     }
   }));
 

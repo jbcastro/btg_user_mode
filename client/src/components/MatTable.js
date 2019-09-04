@@ -19,7 +19,11 @@ const MatTable = props => {
         { title: "Name", field: "name" },
         { title: "Grapes", field: "grapes" }
       ]}
-      data={[{ name: glassMap, grapes: grapet }]}
+      // data={glasses.map(result => result.name)}
+      data={[
+        { name: "name", grapes: "grapes" },
+        { name: "name2", grapes: "grapes2" }
+      ]}
     />
   );
 };

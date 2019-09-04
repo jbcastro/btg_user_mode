@@ -29,7 +29,8 @@ var mySchema = mongoose.Schema(
     description4: { type: String },
     description5: { type: String },
     description6: { type: String },
-    funfact: { type: String }
+    funfact: { type: String },
+    timestamp: { type: Date }
   },
   {
     versionKey: false

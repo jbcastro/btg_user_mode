@@ -54,6 +54,7 @@ app.get("/express_backend/delete", (req, res, next) => {
 });
 
 app.post("/express_backend/add", (req, res) => {
+  // const
   if (!req.body._id) {
     let small = new Wines({
       _id: req.body._id,
@@ -74,7 +75,8 @@ app.post("/express_backend/add", (req, res) => {
       description4: req.body.description4,
       description5: req.body.description5,
       description6: req.body.description6,
-      funfact: req.body.funfact
+      funfact: req.body.funfact,
+      timestamp: Date.now()
     });
     small.save((err, newWine) => {
       if (err) return handleError(err);
@@ -103,7 +105,8 @@ app.post("/express_backend/add", (req, res) => {
         description4: req.body.description4,
         description5: req.body.description5,
         description6: req.body.description6,
-        funfact: req.body.funfact
+        funfact: req.body.funfact,
+        timestamp: Date.now()
       },
       (err, result) => {
         if (err) return next(err);
