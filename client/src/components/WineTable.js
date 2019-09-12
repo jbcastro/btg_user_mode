@@ -9,7 +9,7 @@ import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
 import Button from "@material-ui/core/Button";
 import ButtonBase from "@material-ui/core/ButtonBase";
-import { maxWidth } from "@material-ui/system";
+import { maxWidth, flexbox } from "@material-ui/system";
 import { purple } from "@material-ui/core/colors";
 
 const WineTable = props => {
@@ -27,6 +27,7 @@ const WineTable = props => {
   const grape = "grape";
   const description = "description";
   let funfact;
+  const onClear = props.onClear;
 
   const timeStamp1 = props.glasses;
 
@@ -52,11 +53,14 @@ const WineTable = props => {
     },
 
     table: {
-      minWidth: 650
+      // minWidth: 650
     },
     tableRow: {
       height: "1px",
       width: "1px"
+    },
+    Paper: {
+      display: "flex"
     }
   }));
 
@@ -66,7 +70,9 @@ const WineTable = props => {
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
-          <ButtonBase>Clear</ButtonBase>
+          <ButtonBase onClick={event => onClear(event)}>
+            Clear Filters
+          </ButtonBase>
           <TableRow className={classes.tableRow}>
             <TableCell emphasis="bold">Name</TableCell>
             <TableCell align="center">Grapes</TableCell>

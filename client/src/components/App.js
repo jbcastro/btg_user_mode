@@ -20,6 +20,7 @@ class App extends Component {
       filter: "",
       curItem: {},
       filteredWines: [],
+      unFilteredWines: [],
 
       showMyComponent: false
     };
@@ -30,6 +31,7 @@ class App extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSelect = this.onSelect.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.onClear = this.onClear.bind(this);
     // this.filterWines = this.filterWines.bind(this);
     // this.handleChange = this.handleChange.bind(this);
   }
@@ -42,6 +44,7 @@ class App extends Component {
         const glassesData = res.express;
 
         this.setState({ glasses: glassesData });
+        this.setState({ unFilteredWines: glassesData });
       })
       .catch(err => console.log(err));
   }
@@ -186,6 +189,11 @@ class App extends Component {
     this.setState(state => ({ showMyComponent: !this.state.showMyComponent }));
   };
 
+  onClear = event => {
+    const unFilteredWines1 = this.state.unFilteredWines;
+    this.setState({ glasses: unFilteredWines1 });
+  };
+
   render() {
     return (
       <div className="App">
@@ -204,6 +212,7 @@ class App extends Component {
           onSelect={this.onSelect}
           onClick={this.onClick}
           showMyComponent={this.state.showMyComponent}
+          onClear={this.onClear}
         />
       </div>
     );
