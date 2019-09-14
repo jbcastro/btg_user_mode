@@ -194,6 +194,15 @@ const AddEditForm = props => {
           margin="normal"
         />
         <TextField
+          label="Price"
+          type="text"
+          name="price"
+          placeholder="Price"
+          onChange={props.onChange}
+          value={props.curItem.price || ""}
+          margin="normal"
+        />
+        <TextField
           fullWidth
           multiline
           label="Funfact"

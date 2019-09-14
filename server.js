@@ -76,7 +76,8 @@ app.post("/express_backend/add", (req, res) => {
       description5: req.body.description5,
       description6: req.body.description6,
       funfact: req.body.funfact,
-      timestamp: Date.now()
+      timestamp: Date.now(),
+      price: req.body.price
     });
     small.save((err, newWine) => {
       if (err) return handleError(err);
@@ -106,6 +107,7 @@ app.post("/express_backend/add", (req, res) => {
         description5: req.body.description5,
         description6: req.body.description6,
         funfact: req.body.funfact,
+        price: req.body.price,
         timestamp: Date.now()
       },
       (err, result) => {

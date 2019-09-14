@@ -152,6 +152,14 @@ const AddForm = props => {
 
         <input
           type="text"
+          name="price"
+          placeholder="price"
+          onChange={props.onChange}
+          value={props.curItem.price || ""}
+        />
+
+        <input
+          type="text"
           name="funfact"
           placeholder="funfact"
           onChange={props.onChange}

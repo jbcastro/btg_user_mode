@@ -26,6 +26,7 @@ const WineTable = props => {
   const appellation = "appellation";
   const grape = "grape";
   const description = "description";
+  const price = "price";
   let funfact;
   const onClear = props.onClear;
 
@@ -52,15 +53,17 @@ const WineTable = props => {
       marginTop: theme.spacing(3)
     },
 
-    table: {
-      // minWidth: 650
-    },
+    table: {},
     tableRow: {
       height: "1px",
-      width: "1px"
+      maxWidth: "1px",
+      wordBreak: "break-word"
     },
     Paper: {
       display: "flex"
+    },
+    head: {
+      display: "flex-box"
     }
   }));
 
@@ -69,7 +72,7 @@ const WineTable = props => {
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
-        <TableHead>
+        <TableHead className={classes.head}>
           <ButtonBase onClick={event => onClear(event)}>
             Clear Filters
           </ButtonBase>
@@ -83,6 +86,7 @@ const WineTable = props => {
             <TableCell align="center">Country</TableCell>
             <TableCell align="center">Appellation</TableCell>
             <TableCell align="center">Description</TableCell>
+            <TableCell align="center">Price</TableCell>
             <TableCell align="center">Fun Fact</TableCell>
           </TableRow>
         </TableHead>
@@ -234,6 +238,13 @@ const WineTable = props => {
                   {glass.description6}
                 </ButtonBase>
               </TableCell>
+              <ButtonBase
+                id={glass.price}
+                value={price}
+                onClick={event => onSelect(event)}
+              >
+                {glass.price}
+              </ButtonBase>
               <TableCell>
                 <ButtonBase onClick={event => onClick(event)}>
                   {showMyComponent
