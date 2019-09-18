@@ -22,6 +22,7 @@ var mySchema = mongoose.Schema(
     place: { type: String },
     area: { type: String },
     country: { type: String },
+    mise: { type: String },
     appellation: { type: String },
     description1: { type: String },
     description2: { type: String },

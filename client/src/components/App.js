@@ -8,6 +8,8 @@ import FilterForm from "./FilterForm";
 import WineTable from "./WineTable";
 import AddEditForm from "./AddEditForm";
 import MatTable from "./MatTable";
+import MobileBlocks from "./MobileBlocks";
+import BlocksTest from "./BlocksTest";
 // import RenderTableData from "./RenderTableData";
 // import RenderTableHeader from "./RenderTableHeader";
 
@@ -63,13 +65,23 @@ class App extends Component {
   handleSelect = event => {
     let id = event.target.id;
 
-    fetch(`http://localhost:5000/express_backend/get?_id=${id}`)
-      .then(res => res.json())
+    const glasses = this.state.glasses;
+    const butt = glasses.map(result => {
+      if (result._id === id) {
+        return this.setState({ curItem: result });
+      }
+    });
 
-      .then(data => {
-        const noExpress = data.express;
-        this.setState({ curItem: noExpress });
-      });
+    // if (butt === id) {
+    //   let steve = "y0o";
+    //   this.setState({ curItem: steve });
+    // }
+    // const butt = glasses.map(result => {
+    //   return (steve = result._id);
+    //   if (steve === id) {
+    //     this.setState({ curItem: butt });
+    //   }
+    // });
   };
 
   //delete item
@@ -197,6 +209,17 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <BlocksTest
+          glasses={this.state.glasses}
+          handleSelect={this.handleSelect}
+          wines={this.state.filteredWines}
+          match={this.props.match}
+          onSelect={this.onSelect}
+          onClick={this.onClick}
+          onClear={this.onClear}
+          curItem={this.state.curItem}
+        />
+
         {/* <MatTable glasses={this.state.glasses} /> */}
         <AddEditForm
           handleSubmit={this.handleSubmit}

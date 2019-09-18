@@ -21,7 +21,7 @@ const MatTable = props => {
         { title: "Grapes", field: "grapes" }
       ]}
       // data={glasses.map(result => result.name)}
-      data={[glasses]}
+      data={[{ name: "Steve", grapes: "Jim" }]}
     />
   );
 };

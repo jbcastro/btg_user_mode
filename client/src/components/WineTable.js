@@ -27,13 +27,13 @@ const WineTable = props => {
   const grape = "grape";
   const description = "description";
   const price = "price";
+  const mise = "mise";
   let funfact;
   const onClear = props.onClear;
 
   const timeStamp1 = props.glasses;
 
   const timeStamp = timeStamp1.map(result => result.timestamp);
-  console.log(timeStamp);
 
   function timeStampCheck(timeStamp) {
     if (timeStamp > Date) {
@@ -85,6 +85,7 @@ const WineTable = props => {
             <TableCell align="center">Area</TableCell>
             <TableCell align="center">Country</TableCell>
             <TableCell align="center">Appellation</TableCell>
+            <TableCell align="center">Mise</TableCell>
             <TableCell align="center">Description</TableCell>
             <TableCell align="center">Price</TableCell>
             <TableCell align="center">Fun Fact</TableCell>
@@ -191,6 +192,15 @@ const WineTable = props => {
               </TableCell>
               <TableCell>
                 <ButtonBase
+                  id={glass.mise}
+                  value={mise}
+                  onClick={event => onSelect(event)}
+                >
+                  {glass.mise}
+                </ButtonBase>
+              </TableCell>
+              <TableCell>
+                <ButtonBase
                   id={glass.description1}
                   value={description}
                   onClick={event => onSelect(event)}
@@ -238,13 +248,15 @@ const WineTable = props => {
                   {glass.description6}
                 </ButtonBase>
               </TableCell>
-              <ButtonBase
-                id={glass.price}
-                value={price}
-                onClick={event => onSelect(event)}
-              >
-                {glass.price}
-              </ButtonBase>
+              <TableCell>
+                <ButtonBase
+                  id={glass.price}
+                  value={price}
+                  onClick={event => onSelect(event)}
+                >
+                  {glass.price}
+                </ButtonBase>
+              </TableCell>
               <TableCell>
                 <ButtonBase onClick={event => onClick(event)}>
                   {showMyComponent

@@ -102,7 +102,7 @@ const AddEditForm = props => {
           required
           label="Year"
           type="text"
-          name="grape1"
+          name="year"
           placeholder="Year"
           onChange={props.onChange}
           value={props.curItem.year || ""}
@@ -119,13 +119,22 @@ const AddEditForm = props => {
           margin="normal"
         />
         <TextField
-          required
           label="Area"
           type="text"
           name="area"
           placeholder="Area"
           onChange={props.onChange}
           value={props.curItem.area || ""}
+          margin="normal"
+        />
+        <TextField
+          required
+          label="Country"
+          type="text"
+          name="country"
+          placeholder="Country"
+          onChange={props.onChange}
+          value={props.curItem.country || ""}
           margin="normal"
         />
         <TextField
@@ -200,6 +209,15 @@ const AddEditForm = props => {
           placeholder="Price"
           onChange={props.onChange}
           value={props.curItem.price || ""}
+          margin="normal"
+        />
+        <TextField
+          label="Mise"
+          type="text"
+          name="mise"
+          placeholder="Mise"
+          onChange={props.onChange}
+          value={props.curItem.mise || ""}
           margin="normal"
         />
         <TextField
