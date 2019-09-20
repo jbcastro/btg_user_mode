@@ -43,7 +43,9 @@ exports.addOne = (
   funfact1,
   timestamp1,
   price1,
-  mise1
+  mise1,
+  added1,
+  removed1
 ) => {
   return Wines.create(
     {
@@ -67,7 +69,9 @@ exports.addOne = (
       funfact: funfact1,
       timestamp: timestamp1,
       price: price1,
-      mise: mise1
+      mise: mise1,
+      added: added1,
+      removed: removed1
     },
     (err, result) => {
       if (err) throw err;

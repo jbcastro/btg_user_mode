@@ -4,11 +4,14 @@ import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import Checkbox from "@material-ui/core/Checkbox";
 
 const AddEditForm = props => {
   const handleSubmit = props.handleSubmit;
 
   const handleOnClick = props.handleOnClick;
+  const justAdded = props.justAdded;
+  const justRemoved = props.justRemoved;
 
   const useStyles = makeStyles(theme => ({
     button: {
@@ -244,6 +247,9 @@ const AddEditForm = props => {
       >
         add
       </Button>
+
+      <Checkbox checked={props.curItem.added} onChange={justAdded} />
+      <Checkbox checked={props.curItem.removed} onChange={justRemoved} />
       <Button
         variant="contained"
         color="secondary"

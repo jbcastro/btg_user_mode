@@ -9,7 +9,9 @@ import WineTable from "./WineTable";
 import AddEditForm from "./AddEditForm";
 import MatTable from "./MatTable";
 import MobileBlocks from "./MobileBlocks";
-import BlocksTest from "./BlocksTest";
+import { transcode } from "buffer";
+import { tsCallSignatureDeclaration } from "@babel/types";
+// import BlocksTest from "./BlocksTest";
 // import RenderTableData from "./RenderTableData";
 // import RenderTableHeader from "./RenderTableHeader";
 
@@ -34,6 +36,9 @@ class App extends Component {
     this.onSelect = this.onSelect.bind(this);
     this.onClick = this.onClick.bind(this);
     this.onClear = this.onClear.bind(this);
+    this.justAdded = this.justAdded.bind(this);
+    this.justRemoved = this.justRemoved.bind(this);
+
     // this.filterWines = this.filterWines.bind(this);
     // this.handleChange = this.handleChange.bind(this);
   }
@@ -206,10 +211,18 @@ class App extends Component {
     this.setState({ glasses: unFilteredWines1 });
   };
 
+  justAdded = event => {
+    const curItem = this.state.curItem;
+    const curItemAdded = curItem.added;
+    this.setState({ curItemAdded: false });
+  };
+
+  justRemoved = event => {};
+
   render() {
     return (
       <div className="App">
-        <BlocksTest
+        <MobileBlocks
           glasses={this.state.glasses}
           handleSelect={this.handleSelect}
           wines={this.state.filteredWines}
@@ -218,6 +231,8 @@ class App extends Component {
           onClick={this.onClick}
           onClear={this.onClear}
           curItem={this.state.curItem}
+          justAdded={this.justAdded}
+          justRemoved={this.justRemoved}
         />
 
         {/* <MatTable glasses={this.state.glasses} /> */}

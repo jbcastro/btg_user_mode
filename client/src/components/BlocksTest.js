@@ -16,8 +16,6 @@ import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ButtonBase from "@material-ui/core/ButtonBase";
-@import "@material/card/mdc-card";
-
 
 const BlocksTest = props => {
   return (

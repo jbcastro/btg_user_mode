@@ -32,7 +32,9 @@ var mySchema = mongoose.Schema(
     description6: { type: String },
     funfact: { type: String },
     timestamp: { type: Date },
-    price: { type: Number }
+    price: { type: Number },
+    added: { type: Boolean },
+    removed: { type: Boolean }
   },
   {
     versionKey: false
