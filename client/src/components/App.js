@@ -144,17 +144,21 @@ class App extends Component {
     newItem[event.target.name] = event.target.value;
     this.setState({ curItem: newItem });
   };
-
+//filter to just wines that have the features ie certain grapes, area, etc
   onSelect = event => {
-    let value = event.target.value;
+    let value = event.target.value.toLowerCase();
     const id = event.target.id;
-
+    
+    // if(value==!null){
+    //   return value.toLowerCase()
+    // }
     const glasses = this.state.glasses;
-
+   
     var grapes = glasses.filter(result => {
+      
       if (value === "grapes") {
         return result.grapes === id;
-      } else if (value === "grape") {
+      } else if (value === "grape" ) {
         return (
           result.grape1 === id || result.grape2 === id || result.grape3 === id
         );
@@ -162,8 +166,7 @@ class App extends Component {
         //safgasfg
       } else if (value === "year") {
         return result.year === id;
-      } else if (value === "place") {
-        return result.place === id;
+      
       } else if (value === "place") {
         return result.place === id;
       } else if (value === "area") {
@@ -184,7 +187,8 @@ class App extends Component {
           result.description6 === id
         );
       }
-    });
+    })
+  
 
     this.setState({ glasses: grapes });
   };

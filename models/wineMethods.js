@@ -45,7 +45,9 @@ exports.addOne = (
   price1,
   mise1,
   added1,
-  removed1
+  removed1,
+  color1,
+  active1
 ) => {
   return Wines.create(
     {
@@ -71,7 +73,9 @@ exports.addOne = (
       price: price1,
       mise: mise1,
       added: added1,
-      removed: removed1
+      removed: removed1,
+      color:color1,
+      active:active1
     },
     (err, result) => {
       if (err) throw err;

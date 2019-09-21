@@ -76,6 +76,11 @@ const MobileBlocks = props => {
   function handleExpandClick() {
     setExpanded(!expanded);
   }
+  // const ifNull = id=>{
+  //   if(id===!null){
+  //     return id.toLowerCase()
+  //   }
+  // }
 
   return (
     <div>
@@ -140,6 +145,7 @@ const MobileBlocks = props => {
               </ButtonBase>{" "}
               served in a{" "}
               <ButtonBase
+              
                 id={glass.mise}
                 value={mise}
                 onClick={event => onSelect(event)}

@@ -80,7 +80,9 @@ app.post("/express_backend/add", (req, res) => {
       price: req.body.price,
       mise: req.body.mise,
       added: req.body.added,
-      removed: req.body.removed
+      removed: req.body.removed,
+      color:req.body.color,
+        active:req.body.active
     });
     small.save((err, newWine) => {
       if (err) return handleError(err);
@@ -114,7 +116,9 @@ app.post("/express_backend/add", (req, res) => {
         timestamp: Date.now(),
         mise: req.body.mise,
         added: req.body.added,
-        removed: req.body.removed
+        removed: req.body.removed,
+        color:req.body.color,
+        active:req.body.active
       },
       (err, result) => {
         if (err) return next(err);
