@@ -5,6 +5,10 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Checkbox from "@material-ui/core/Checkbox";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
+import InputLabel from "@material-ui/core/InputLabel";
 
 const AddEditForm = props => {
   const handleSubmit = props.handleSubmit;
@@ -12,6 +16,25 @@ const AddEditForm = props => {
   const handleOnClick = props.handleOnClick;
   const justAdded = props.justAdded;
   const justRemoved = props.justRemoved;
+  const onChange = props.onChange;
+  const handleToggleClick = props.handleToggleClick;
+  const added = props.curItem.added;
+  function isAdded() {
+    if (added === true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  function isRemoved() {
+    if (removed === true) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  const removed = props.curItem.removed;
 
   const useStyles = makeStyles(theme => ({
     button: {
@@ -37,6 +60,17 @@ const AddEditForm = props => {
     },
     input: {
       display: "none"
+    },
+    root: {
+      display: "flex",
+      flexWrap: "wrap"
+    },
+    formControl: {
+      margin: theme.spacing(1),
+      minWidth: 120
+    },
+    selectEmpty: {
+      marginTop: theme.spacing(2)
     }
   }));
 
@@ -46,7 +80,10 @@ const AddEditForm = props => {
       label: "$"
     }
   ];
-
+  const [values, setValues] = React.useState({
+    color: "",
+    name: "hai"
+  });
   const classes = useStyles();
 
   return (
@@ -155,7 +192,7 @@ const AddEditForm = props => {
           label="Description1"
           type="text"
           name="description1"
-          placeholder="Description1"
+          placeholder="Description 1"
           onChange={props.onChange}
           value={props.curItem.description1 || ""}
           margin="normal"
@@ -164,7 +201,7 @@ const AddEditForm = props => {
           label="Description2"
           type="text"
           name="description2"
-          placeholder="Description2"
+          placeholder="Description 2"
           onChange={props.onChange}
           value={props.curItem.description2 || ""}
           margin="normal"
@@ -173,7 +210,7 @@ const AddEditForm = props => {
           label="Description3"
           type="text"
           name="description3"
-          placeholder="Description3"
+          placeholder="Description 3"
           onChange={props.onChange}
           value={props.curItem.description3 || ""}
           margin="normal"
@@ -182,7 +219,7 @@ const AddEditForm = props => {
           label="Description4"
           type="text"
           name="description4"
-          placeholder="Description4"
+          placeholder="Description 4"
           onChange={props.onChange}
           value={props.curItem.description4 || ""}
           margin="normal"
@@ -191,7 +228,7 @@ const AddEditForm = props => {
           label="Description5"
           type="text"
           name="description5"
-          placeholder="Description5"
+          placeholder="Description 5"
           onChange={props.onChange}
           value={props.curItem.description5 || ""}
           margin="normal"
@@ -200,11 +237,48 @@ const AddEditForm = props => {
           label="Description6"
           type="text"
           name="description6"
-          placeholder="Description6"
+          placeholder="Description 6"
           onChange={props.onChange}
           value={props.curItem.description6 || ""}
           margin="normal"
         />
+        <TextField
+          label="Description7"
+          type="text"
+          name="description7"
+          placeholder="Description 7"
+          onChange={props.onChange}
+          value={props.curItem.description7 || ""}
+          margin="normal"
+        />
+        <TextField
+          label="Description8"
+          type="text"
+          name="description8"
+          placeholder="Description 8"
+          onChange={props.onChange}
+          value={props.curItem.description8 || ""}
+          margin="normal"
+        />
+        <TextField
+          label="Description9"
+          type="text"
+          name="description9"
+          placeholder="Description 9"
+          onChange={props.onChange}
+          value={props.curItem.description9 || ""}
+          margin="normal"
+        />
+        <TextField
+          label="Description10"
+          type="text"
+          name="description10"
+          placeholder="Description 10"
+          onChange={props.onChange}
+          value={props.curItem.description10 || ""}
+          margin="normal"
+        />
+
         <TextField
           label="Price"
           type="text"
@@ -223,6 +297,44 @@ const AddEditForm = props => {
           value={props.curItem.mise || ""}
           margin="normal"
         />
+        <FormControl className={classes.formControl}>
+          <InputLabel shrink htmlFor="color-native-label-placeholder">
+            Color
+          </InputLabel>{" "}
+          <Select
+            value={props.curItem.color}
+            onChange={onChange}
+            inputProps={{
+              name: "color",
+              id: "color-simple"
+            }}
+          >
+            <MenuItem value={"red"}>red</MenuItem>
+            <MenuItem value={"white"}>white</MenuItem>
+            <MenuItem value={"dessert"}>dessert</MenuItem>
+            <MenuItem value={"corovan"}>corovan</MenuItem>
+            <MenuItem value={"sparkling"}>sparkling</MenuItem>
+          </Select>
+        </FormControl>
+        {/* form for added,deleted,hidden */}
+        <FormControl className={classes.formControl}>
+          <InputLabel shrink htmlFor="status-native-label-placeholder">
+            Status
+          </InputLabel>
+          <Select
+            value={values.status}
+            onChange={onChange}
+            inputProps={{
+              name: "status",
+              id: "status-simple"
+            }}
+          >
+            <MenuItem value={"added"}>added</MenuItem>
+            <MenuItem value={"removed"}>removed</MenuItem>
+            <MenuItem value={"hidden"}>hidden</MenuItem>
+            <MenuItem value={"none"}>none</MenuItem>
+          </Select>
+        </FormControl>
         <TextField
           fullWidth
           multiline
@@ -245,11 +357,9 @@ const AddEditForm = props => {
         className={classes.button}
         onClick={() => handleSubmit()}
       >
-        add
+        add/update
       </Button>
 
-      <Checkbox checked={props.curItem.added} onChange={justAdded} />
-      <Checkbox checked={props.curItem.removed} onChange={justRemoved} />
       <Button
         variant="contained"
         color="secondary"

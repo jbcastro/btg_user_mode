@@ -40,14 +40,17 @@ exports.addOne = (
   description41,
   description51,
   description61,
+  description71,
+  description81,
+  description91,
+  description101,
   funfact1,
   timestamp1,
   price1,
   mise1,
-  added1,
-  removed1,
+
   color1,
-  active1
+  status1
 ) => {
   return Wines.create(
     {
@@ -68,14 +71,17 @@ exports.addOne = (
       description4: description41,
       description5: description51,
       description6: description61,
+      description7: description71,
+      description8: description81,
+      description9: description91,
+      description10: description101,
       funfact: funfact1,
       timestamp: timestamp1,
       price: price1,
       mise: mise1,
-      added: added1,
-      removed: removed1,
-      color:color1,
-      active:active1
+
+      color: color1,
+      status: status1
     },
     (err, result) => {
       if (err) throw err;

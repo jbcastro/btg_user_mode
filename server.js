@@ -75,14 +75,17 @@ app.post("/express_backend/add", (req, res) => {
       description4: req.body.description4,
       description5: req.body.description5,
       description6: req.body.description6,
+      description7: req.body.description7,
+      description8: req.body.description8,
+      description9: req.body.description9,
+      description10: req.body.description10,
       funfact: req.body.funfact,
       timestamp: Date.now(),
       price: req.body.price,
       mise: req.body.mise,
-      added: req.body.added,
-      removed: req.body.removed,
-      color:req.body.color,
-        active:req.body.active
+
+      color: req.body.color,
+      status: req.body.status
     });
     small.save((err, newWine) => {
       if (err) return handleError(err);
@@ -111,14 +114,18 @@ app.post("/express_backend/add", (req, res) => {
         description4: req.body.description4,
         description5: req.body.description5,
         description6: req.body.description6,
+        description7: req.body.description7,
+        description8: req.body.description8,
+        description9: req.body.description9,
+        description10: req.body.description10,
+
         funfact: req.body.funfact,
         price: req.body.price,
         timestamp: Date.now(),
         mise: req.body.mise,
-        added: req.body.added,
-        removed: req.body.removed,
-        color:req.body.color,
-        active:req.body.active
+
+        color: req.body.color,
+        status: req.body.status
       },
       (err, result) => {
         if (err) return next(err);

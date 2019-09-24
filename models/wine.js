@@ -22,7 +22,7 @@ var mySchema = mongoose.Schema(
     place: { type: String },
     area: { type: String },
     country: { type: String },
-    
+
     appellation: { type: String },
     description1: { type: String },
     description2: { type: String },
@@ -30,14 +30,18 @@ var mySchema = mongoose.Schema(
     description4: { type: String },
     description5: { type: String },
     description6: { type: String },
+    description7: { type: String },
+    description8: { type: String },
+    description9: { type: String },
+    description10: { type: String },
+
     funfact: { type: String },
     timestamp: { type: Date },
     price: { type: Number },
     mise: { type: String },
-    added: { type: Boolean },
-    removed: { type: Boolean },
-    color:{type:String},
-    active:{type:Boolean}
+
+    color: { type: String },
+    status: { type: String }
   },
   {
     versionKey: false

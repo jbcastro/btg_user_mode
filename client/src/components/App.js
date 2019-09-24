@@ -36,8 +36,7 @@ class App extends Component {
     this.onSelect = this.onSelect.bind(this);
     this.onClick = this.onClick.bind(this);
     this.onClear = this.onClear.bind(this);
-    this.justAdded = this.justAdded.bind(this);
-    this.justRemoved = this.justRemoved.bind(this);
+    this.handleToggleClick = this.handleToggleClick.bind(this);
 
     // this.filterWines = this.filterWines.bind(this);
     // this.handleChange = this.handleChange.bind(this);
@@ -71,22 +70,12 @@ class App extends Component {
     let id = event.target.id;
 
     const glasses = this.state.glasses;
-    const butt = glasses.map(result => {
+
+    const setCurItem = glasses.map(result => {
       if (result._id === id) {
         return this.setState({ curItem: result });
       }
     });
-
-    // if (butt === id) {
-    //   let steve = "y0o";
-    //   this.setState({ curItem: steve });
-    // }
-    // const butt = glasses.map(result => {
-    //   return (steve = result._id);
-    //   if (steve === id) {
-    //     this.setState({ curItem: butt });
-    //   }
-    // });
   };
 
   //delete item
@@ -142,23 +131,23 @@ class App extends Component {
   onChange = event => {
     var newItem = this.state.curItem;
     newItem[event.target.name] = event.target.value;
+
     this.setState({ curItem: newItem });
   };
-//filter to just wines that have the features ie certain grapes, area, etc
+  //filter to just wines that have the features ie certain grapes, area, etc
   onSelect = event => {
     let value = event.target.value.toLowerCase();
     const id = event.target.id;
-    
+
     // if(value==!null){
     //   return value.toLowerCase()
     // }
     const glasses = this.state.glasses;
-   
+
     var grapes = glasses.filter(result => {
-      
       if (value === "grapes") {
         return result.grapes === id;
-      } else if (value === "grape" ) {
+      } else if (value === "grape") {
         return (
           result.grape1 === id || result.grape2 === id || result.grape3 === id
         );
@@ -166,7 +155,6 @@ class App extends Component {
         //safgasfg
       } else if (value === "year") {
         return result.year === id;
-      
       } else if (value === "place") {
         return result.place === id;
       } else if (value === "area") {
@@ -187,8 +175,7 @@ class App extends Component {
           result.description6 === id
         );
       }
-    })
-  
+    });
 
     this.setState({ glasses: grapes });
   };
@@ -214,19 +201,27 @@ class App extends Component {
     const unFilteredWines1 = this.state.unFilteredWines;
     this.setState({ glasses: unFilteredWines1 });
   };
+  handleToggleClick(event) {
+    // this.setState(prevState => ({
+    //   curItem: {
+    //     ...prevState.curItem,
+    //     added: false
+    //   }
+    // }));
+    // const value = event.target.value;
+    // this.setState({ ...this.state.curItem, added: false });
+  }
+  ///render portion
 
-  justAdded = event => {
-    const curItem = this.state.curItem;
-    const curItemAdded = curItem.added;
-    this.setState({ curItemAdded: false });
-  };
-
-  justRemoved = event => {};
+  //
+  //
+  //
+  //
 
   render() {
     return (
       <div className="App">
-        <MobileBlocks
+        {/* <MobileBlocks
           glasses={this.state.glasses}
           handleSelect={this.handleSelect}
           wines={this.state.filteredWines}
@@ -237,7 +232,7 @@ class App extends Component {
           curItem={this.state.curItem}
           justAdded={this.justAdded}
           justRemoved={this.justRemoved}
-        />
+        /> */}
 
         {/* <MatTable glasses={this.state.glasses} /> */}
         <AddEditForm
@@ -245,6 +240,7 @@ class App extends Component {
           curItem={this.state.curItem}
           onChange={this.onChange}
           handleOnClick={this.handleOnClick}
+          handleToggleClick={this.handleToggleClick}
         />
         <WineTable
           glasses={this.state.glasses}

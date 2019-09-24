@@ -28,6 +28,8 @@ const WineTable = props => {
   const description = "description";
   const price = "price";
   const mise = "mise";
+  const color = "color";
+  const status = "status";
   let funfact;
   const onClear = props.onClear;
 
@@ -88,6 +90,9 @@ const WineTable = props => {
             <TableCell align="center">Mise</TableCell>
             <TableCell align="center">Description</TableCell>
             <TableCell align="center">Price</TableCell>
+            <TableCell align="center">Mise</TableCell>
+            <TableCell align="center">Color</TableCell>
+            <TableCell align="center">Status</TableCell>
             <TableCell align="center">Fun Fact</TableCell>
           </TableRow>
         </TableHead>
@@ -102,6 +107,7 @@ const WineTable = props => {
           {props.glasses.map((glass, idx) => (
             <TableRow key={glass._id}>
               <TableCell component="th" scope="row">
+                Name
                 <ButtonBase
                   id={glass._id}
                   onClick={event => handleSelect(event)}
@@ -110,6 +116,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
+                Grapes
                 <ButtonBase
                   component="button"
                   id={glass.grapes}
@@ -146,6 +153,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
+                Year
                 <ButtonBase
                   id={glass.year}
                   value={year}
@@ -155,6 +163,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
+                Place
                 <ButtonBase
                   id={glass.place}
                   value={place}
@@ -164,6 +173,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
+                Area
                 <ButtonBase
                   id={glass.area}
                   value={area}
@@ -173,6 +183,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
+                Country
                 <ButtonBase
                   id={glass.country}
                   value={country}
@@ -182,6 +193,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
+                Appellation
                 <ButtonBase
                   id={glass.appellation}
                   value={appellation}
@@ -191,6 +203,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
+                Mise
                 <ButtonBase
                   id={glass.mise}
                   value={mise}
@@ -200,6 +213,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
+                Description
                 <ButtonBase
                   id={glass.description1}
                   value={description}
@@ -231,7 +245,6 @@ const WineTable = props => {
                 >
                   {glass.description4}
                 </ButtonBase>
-                &nbsp;
                 <ButtonBase
                   id={glass.description5}
                   value={description}
@@ -247,14 +260,77 @@ const WineTable = props => {
                 >
                   {glass.description6}
                 </ButtonBase>
+                &nbsp;
+                <ButtonBase
+                  id={glass.description7}
+                  value={description}
+                  onClick={event => onSelect(event)}
+                >
+                  {glass.description7}
+                </ButtonBase>
+                &nbsp;
+                <ButtonBase
+                  id={glass.description8}
+                  value={description}
+                  onClick={event => onSelect(event)}
+                >
+                  {glass.description8}
+                </ButtonBase>
+                &nbsp;
+                <ButtonBase
+                  id={glass.description9}
+                  value={description}
+                  onClick={event => onSelect(event)}
+                >
+                  {glass.description9}
+                </ButtonBase>
+                &nbsp;
+                <ButtonBase
+                  id={glass.description10}
+                  value={description}
+                  onClick={event => onSelect(event)}
+                >
+                  {glass.description10}
+                </ButtonBase>
               </TableCell>
               <TableCell>
+                Price
                 <ButtonBase
                   id={glass.price}
                   value={price}
                   onClick={event => onSelect(event)}
                 >
                   {glass.price}
+                </ButtonBase>
+              </TableCell>
+              <TableCell>
+                Mise
+                <ButtonBase
+                  id={glass.mise}
+                  value={mise}
+                  onClick={event => onSelect(event)}
+                >
+                  {glass.mise}
+                </ButtonBase>
+              </TableCell>
+              <TableCell>
+                Color
+                <ButtonBase
+                  id={glass.color}
+                  value={color}
+                  onClick={event => onSelect(event)}
+                >
+                  {glass.color}
+                </ButtonBase>
+              </TableCell>
+              <TableCell>
+                Status<p></p>
+                <ButtonBase
+                  id={glass.status}
+                  value={status}
+                  onClick={event => onSelect(event)}
+                >
+                  {glass.status}
                 </ButtonBase>
               </TableCell>
               <TableCell>
