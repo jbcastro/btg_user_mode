@@ -120,6 +120,7 @@ class App extends Component {
           onSort={this.onSort}
           glasses={this.state.glasses}
           unFilteredWines={this.state.unFilteredWines}
+          onSelect={this.onSelect}
         />
         <MobileBlocks
           glasses={this.state.glasses}

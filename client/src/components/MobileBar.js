@@ -6,10 +6,15 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import pascalCase from "pascalcase";
 
 const MobileBar = props => {
   const unFilteredWines = props.unFilteredWines;
   const onClear = props.onClear;
+  const onSelect = props.onSelect;
+  const mise = "mise";
+  const description = "description";
+
   const useStyles = makeStyles(theme => ({
     root: {
       display: "flex",
@@ -25,19 +30,72 @@ const MobileBar = props => {
   }));
   const classes = useStyles();
   //turn mise to own array to do drop down thingy (brain losing it)
-  const miseArray = props.unFilteredWines.map(result =>
-    result.mise.toUpperCase()
-  );
+  function myFunction(item) {
+    const homer = [item];
+    return homer;
+  }
+  const descs1 = unFilteredWines.map(result => {
+    const marge = myFunction(result.description1);
+    const lisa = myFunction(result.description2);
+    myFunction(result.description3);
+    myFunction(result.description4);
+    myFunction(result.description5);
+    myFunction(result.description6);
+    myFunction(result.description7);
+    myFunction(result.description8);
+    myFunction(result.description9);
+    myFunction(result.description10);
 
-  const uniqueSet = new Set(miseArray);
+    return marge + lisa;
+  });
+
+  console.log(descs1);
+  // const des1 = result.description1;
+
+  //   const des2 = result.description2;
+  //   const des3 = result.description3;
+  //   const des4 = result.description4;
+  //   const des5 = result.description5;
+  //   const des6 = result.description6;
+  //   const des7 = result.description7;
+  //   const des8 = result.description8;
+  //   const des9 = result.description9;
+  //   const des10 = result.description10;
+
+  // const des1 = [des11];
+  // console.log(des1);
+  // console.log(des11);
+  // const des2 = [des21];
+  // const des3 = [des31];
+  // const des4 = [des41];
+  // const des5 = [des51];
+  // const des6 = [des61];
+  // const des7 = [des71];
+  // const des8 = [des81];
+  // const des9 = [des91];
+  // const des10 = [des101];
+  // const oy = des1.concat(
+  //   des2,
+  //   des3,
+  //   des4,
+  //   des5,
+  //   des6,
+  //   des7,
+  //   des8,
+  //   des9,
+  //   des10
+  // );
+  // return [oy];
+
+  const descArray = descs1.map(result => {
+    if (result === !null) {
+      return result.toUpperCase();
+    }
+  });
+  console.log(descArray);
+
+  const uniqueSet = new Set(descArray);
   const backToArray = [...uniqueSet];
-  const misez = (
-    <ul>
-      {backToArray.map(result => (
-        <li key={result}>{result}</li>
-      ))}
-    </ul>
-  );
 
   return (
     <div>
@@ -51,19 +109,27 @@ const MobileBar = props => {
 
       <form className={classes.root} autoComplete="off">
         <FormControl className={classes.formControl}>
-          <InputLabel htmlFor="age-simple">Mise</InputLabel>
+          <InputLabel htmlFor="age-simple">Desription</InputLabel>
           <Select
-            // value={values.age}
-            // onChange={handleChange}
+          // value={values.age}
+          // onChange={handleChange}
 
-            inputProps={{
-              name: "age",
-              id: "age-simple"
-            }}
+          // inputProps={{
+          //   name: "age",
+          //   id: "age-simple"
+          // }}
           >
-            <MenuItem value={10}>{misez}</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+            {backToArray.map((result, index) => (
+              <MenuItem
+                key={index}
+                id={result}
+                component={result}
+                value={description}
+                onClick={event => onSelect(event)}
+              >
+                {result}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </form>
