@@ -33,16 +33,6 @@ const WineTable = props => {
   let funfact;
   const onClear = props.onClear;
 
-  const timeStamp1 = props.glasses;
-
-  const timeStamp = timeStamp1.map(result => result.timestamp);
-
-  function timeStampCheck(timeStamp) {
-    if (timeStamp > Date) {
-      console.log("yo");
-    }
-  }
-
   const useStyles = makeStyles(theme => ({
     button: {
       margin: theme.spacing(1)
@@ -52,20 +42,31 @@ const WineTable = props => {
     },
     root: {
       width: "100%",
-      marginTop: theme.spacing(3)
+      marginTop: theme.spacing(3),
+      overflowX: "auto",
+      fontSize: 8
     },
 
-    table: {},
+    table: {
+      minWidth: 100,
+      width: "100%"
+    },
     tableRow: {
       height: "1px",
-      maxWidth: "1px",
-      wordBreak: "break-word"
+      maxWidth: "1px"
     },
     Paper: {
       display: "flex"
     },
     head: {
-      display: "flex-box"
+      display: "flex-box",
+      fontSize: 8
+    },
+    body: {
+      fontSize: 8
+    },
+    TableCell: {
+      size: "small"
     }
   }));
 
@@ -107,7 +108,7 @@ const WineTable = props => {
           {props.glasses.map((glass, idx) => (
             <TableRow key={glass._id}>
               <TableCell component="th" scope="row">
-                Name
+                Name<p></p>
                 <ButtonBase
                   id={glass._id}
                   onClick={event => handleSelect(event)}
@@ -116,7 +117,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
-                Grapes
+                Grapes<p></p>
                 <ButtonBase
                   component="button"
                   id={glass.grapes}
@@ -128,6 +129,7 @@ const WineTable = props => {
               </TableCell>
 
               <TableCell>
+                Indiv<p></p>
                 <ButtonBase
                   id={glass.grape1}
                   value={grape}
@@ -153,7 +155,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
-                Year
+                Year<p></p>
                 <ButtonBase
                   id={glass.year}
                   value={year}
@@ -163,7 +165,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
-                Place
+                Place<p></p>
                 <ButtonBase
                   id={glass.place}
                   value={place}
@@ -173,7 +175,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
-                Area
+                Area<p></p>
                 <ButtonBase
                   id={glass.area}
                   value={area}
@@ -183,7 +185,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
-                Country
+                Country<p></p>
                 <ButtonBase
                   id={glass.country}
                   value={country}
@@ -193,7 +195,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
-                Appellation
+                Appellation<p></p>
                 <ButtonBase
                   id={glass.appellation}
                   value={appellation}
@@ -203,7 +205,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
-                Mise
+                Mise<p></p>
                 <ButtonBase
                   id={glass.mise}
                   value={mise}
@@ -213,7 +215,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
-                Description
+                Description<p></p>
                 <ButtonBase
                   id={glass.description1}
                   value={description}
@@ -294,7 +296,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
-                Price
+                Price<p></p>
                 <ButtonBase
                   id={glass.price}
                   value={price}
@@ -304,7 +306,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
-                Mise
+                Mise<p></p>
                 <ButtonBase
                   id={glass.mise}
                   value={mise}
@@ -314,7 +316,7 @@ const WineTable = props => {
                 </ButtonBase>
               </TableCell>
               <TableCell>
-                Color
+                Color<p></p>
                 <ButtonBase
                   id={glass.color}
                   value={color}

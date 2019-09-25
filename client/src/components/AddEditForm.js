@@ -1,11 +1,10 @@
 import React from "react";
-import clsx from "clsx";
+
 import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import Checkbox from "@material-ui/core/Checkbox";
-import FormHelperText from "@material-ui/core/FormHelperText";
+
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
@@ -14,27 +13,10 @@ const AddEditForm = props => {
   const handleSubmit = props.handleSubmit;
 
   const handleOnClick = props.handleOnClick;
-  const justAdded = props.justAdded;
-  const justRemoved = props.justRemoved;
-  const onChange = props.onChange;
-  const handleToggleClick = props.handleToggleClick;
-  const added = props.curItem.added;
-  function isAdded() {
-    if (added === true) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-  function isRemoved() {
-    if (removed === true) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 
-  const removed = props.curItem.removed;
+  const onChange = props.onChange;
+
+  const onCurItemClear = props.onCurItemClear;
 
   const useStyles = makeStyles(theme => ({
     button: {
@@ -55,9 +37,7 @@ const AddEditForm = props => {
     menu: {
       width: 200
     },
-    button: {
-      margin: theme.spacing(1)
-    },
+
     input: {
       display: "none"
     },
@@ -74,16 +54,6 @@ const AddEditForm = props => {
     }
   }));
 
-  const currencies = [
-    {
-      value: "USD",
-      label: "$"
-    }
-  ];
-  const [values, setValues] = React.useState({
-    color: "",
-    name: "hai"
-  });
   const classes = useStyles();
 
   return (
@@ -120,6 +90,7 @@ const AddEditForm = props => {
           value={props.curItem.grape1 || ""}
           margin="normal"
         />
+
         <TextField
           label="Grape 2"
           type="text"
@@ -278,25 +249,36 @@ const AddEditForm = props => {
           value={props.curItem.description10 || ""}
           margin="normal"
         />
-
         <TextField
+          id="standard-number"
           label="Price"
-          type="text"
+          type="number"
           name="price"
           placeholder="Price"
           onChange={props.onChange}
           value={props.curItem.price || ""}
           margin="normal"
         />
-        <TextField
-          label="Mise"
-          type="text"
-          name="mise"
-          placeholder="Mise"
-          onChange={props.onChange}
-          value={props.curItem.mise || ""}
-          margin="normal"
-        />
+        <FormControl className={classes.formControl}>
+          <InputLabel shrink htmlFor="mise-native-label-placeholder">
+            Mise
+          </InputLabel>
+          <Select
+            value={props.curItem.mise}
+            onChange={onChange}
+            inputProps={{
+              name: "mise",
+              id: "mise-simple"
+            }}
+          >
+            <MenuItem value={"AP"}>AP</MenuItem>
+            <MenuItem value={"Krug Flute"}>Krug Flute</MenuItem>
+            <MenuItem value={"BURG"}>BURG</MenuItem>
+            <MenuItem value={"BDX"}>BDX</MenuItem>
+            <MenuItem value={"Flute"}>Flute</MenuItem>
+            <MenuItem value={"DW"}>DW</MenuItem>
+          </Select>
+        </FormControl>
         <FormControl className={classes.formControl}>
           <InputLabel shrink htmlFor="color-native-label-placeholder">
             Color
@@ -322,7 +304,7 @@ const AddEditForm = props => {
             Status
           </InputLabel>
           <Select
-            value={values.status}
+            value={props.curItem.status}
             onChange={onChange}
             inputProps={{
               name: "status",
@@ -367,6 +349,14 @@ const AddEditForm = props => {
         onClick={() => handleOnClick()}
       >
         delete brah?
+      </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        className={classes.button}
+        onClick={() => onCurItemClear()}
+      >
+        clear
       </Button>
     </div>
   );

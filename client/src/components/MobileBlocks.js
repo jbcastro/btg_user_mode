@@ -56,7 +56,8 @@ const MobileBlocks = props => {
   const handleSelect = props.handleSelect;
   const onSelect = props.onSelect;
   const onClick = props.onClick;
-
+  const glasses = props.glasses;
+  const color = props.color;
   const grapes = "grapes";
   const year = "year";
   const place = "place";
@@ -70,6 +71,17 @@ const MobileBlocks = props => {
   let funfact;
   const onClear = props.onClear;
 
+  // const avatar = glasses.map(result => {
+  //   if (result.color === "red") {
+  //     return "r";
+  //   } else {
+  //     return "Q";
+  //   }
+  // });
+  function myFunction(color) {
+    var str = color.charAt(0);
+    return str.toUpperCase();
+  }
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -90,7 +102,7 @@ const MobileBlocks = props => {
           <CardHeader
             avatar={
               <Avatar aria-label="recipe" className={classes.avatar}>
-                P
+                {myFunction(glass.color)}
               </Avatar>
             }
             action={
@@ -145,7 +157,6 @@ const MobileBlocks = props => {
               </ButtonBase>{" "}
               served in a{" "}
               <ButtonBase
-              
                 id={glass.mise}
                 value={mise}
                 onClick={event => onSelect(event)}

@@ -36,7 +36,7 @@ class App extends Component {
     this.onSelect = this.onSelect.bind(this);
     this.onClick = this.onClick.bind(this);
     this.onClear = this.onClear.bind(this);
-    this.handleToggleClick = this.handleToggleClick.bind(this);
+    this.onCurItemClear = this.onCurItemClear.bind(this);
 
     // this.filterWines = this.filterWines.bind(this);
     // this.handleChange = this.handleChange.bind(this);
@@ -201,16 +201,10 @@ class App extends Component {
     const unFilteredWines1 = this.state.unFilteredWines;
     this.setState({ glasses: unFilteredWines1 });
   };
-  handleToggleClick(event) {
-    // this.setState(prevState => ({
-    //   curItem: {
-    //     ...prevState.curItem,
-    //     added: false
-    //   }
-    // }));
-    // const value = event.target.value;
-    // this.setState({ ...this.state.curItem, added: false });
-  }
+  onCurItemClear = event => {
+    this.setState({ curItem: {} });
+  };
+
   ///render portion
 
   //
@@ -240,7 +234,7 @@ class App extends Component {
           curItem={this.state.curItem}
           onChange={this.onChange}
           handleOnClick={this.handleOnClick}
-          handleToggleClick={this.handleToggleClick}
+          onCurItemClear={this.onCurItemClear}
         />
         <WineTable
           glasses={this.state.glasses}
