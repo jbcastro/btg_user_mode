@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./styles/App.css";
 
 import MobileBlocks from "./MobileBlocks";
-
+import MobileBar from "./MobileBar";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -17,6 +17,7 @@ class App extends Component {
 
     this.onSelect = this.onSelect.bind(this);
     this.onClear = this.onClear.bind(this);
+    this.onSort = this.onSort.bind(this);
 
     // this.filterWines = this.filterWines.bind(this);
     // this.handleChange = this.handleChange.bind(this);
@@ -59,7 +60,7 @@ class App extends Component {
     // }
     const glasses = this.state.glasses;
 
-    var grapes = glasses.filter(result => {
+    const grapes = glasses.filter(result => {
       if (value === "grapes") {
         return result.grapes === id;
       } else if (value === "grape") {
@@ -80,6 +81,8 @@ class App extends Component {
         return result.appellation === id;
       } else if (value === "place") {
         return result.place === id;
+      } else if (value === "mise") {
+        return result.mise === id;
       } else if (value === "description") {
         return (
           result.description1 === id ||
@@ -97,8 +100,10 @@ class App extends Component {
 
   onClear = event => {
     const unFilteredWines1 = this.state.unFilteredWines;
+
     this.setState({ glasses: unFilteredWines1 });
   };
+  onSort = event => {};
 
   ///render portion
 
@@ -110,6 +115,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <MobileBar
+          onClear={this.onClear}
+          onSort={this.onSort}
+          glasses={this.state.glasses}
+          unFilteredWines={this.state.unFilteredWines}
+        />
         <MobileBlocks
           glasses={this.state.glasses}
           wines={this.state.filteredWines}

@@ -15,6 +15,7 @@ import { red } from "@material-ui/core/colors";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ButtonBase from "@material-ui/core/ButtonBase";
+import MobileBar from "./MobileBar";
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -26,8 +27,19 @@ const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: 345
   },
+  cardAdded: {
+    maxWidth: 345,
+    backgroundColor: "#E6E6FA"
+  },
+  cardRemoved: {
+    maxWidth: 345,
+    backgroundColor: "#FFA07A"
+  },
+  cardHidden: {
+    maxWidth: 345
+  },
   ButtonBase: {
-    backgroundColor: red[500]
+    color: "blue"
   },
   media: {
     height: 0,
@@ -43,8 +55,34 @@ const useStyles = makeStyles(theme => ({
   expandOpen: {
     transform: "rotate(180deg)"
   },
-  avatar: {
+  avatarRed: {
     backgroundColor: red[500]
+  },
+  avatarWhite: {
+    backgroundColor: "black"
+  },
+  avatarDessert: {
+    backgroundColor: "yellow",
+    color: "black"
+  },
+  avatarCorovan: {
+    backgroundColor: "green"
+  },
+  avatarSparkling: {
+    backgroundColor: "blue"
+  },
+  clearButton: {
+    position: "fixed",
+    backgroundColor: "white"
+  },
+  isAdded: {
+    backgroundColor: "purple"
+  },
+  isRemoved: {
+    backgroundColor: "green"
+  },
+  isHidden: {
+    backgroundColor: "blue"
   },
   lister: {
     listStyleType: "none"
@@ -54,8 +92,6 @@ const useStyles = makeStyles(theme => ({
 const MobileBlocks = props => {
   const onSelect = props.onSelect;
 
-  const color = props.color;
-  const onClear = props.onClear;
   const grapes = "grapes";
   const year = "year";
   const place = "place";
@@ -64,13 +100,39 @@ const MobileBlocks = props => {
   const appellation = "appellation";
   const grape = "grape";
   const description = "description";
-  const price = "price";
+
   const mise = "mise";
 
-  function myFunction(color) {
+  const upperCaseFirstLetter = color => {
     var str = color.charAt(0);
     return str.toUpperCase();
-  }
+  };
+
+  const checkStatus = status => {
+    if (status === "added") {
+      return classes.cardAdded;
+    } else if (status === "removed") {
+      return classes.cardRemoved;
+    } else if (status === "hidden") {
+      return classes.cardHidden;
+    } else {
+      return classes.card;
+    }
+  };
+  const colorz = color => {
+    if (color === "red") {
+      return classes.avatarRed;
+    } else if (color === "white") {
+      return classes.avatarWhite;
+    } else if (color === "dessert") {
+      return classes.avatarDessert;
+    } else if (color === "corovan") {
+      return classes.avatarCorovan;
+    } else {
+      return classes.avatarSparkling;
+    }
+  };
+
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -85,13 +147,12 @@ const MobileBlocks = props => {
 
   return (
     <div>
-      <ButtonBase onClick={event => onClear(event)}>Clear Filters</ButtonBase>
       {props.glasses.map(glass => (
-        <Card className={classes.card} key={glass._id}>
+        <Card className={checkStatus(glass.status)} key={glass._id} raised>
           <CardHeader
             avatar={
-              <Avatar aria-label="recipe" className={classes.avatar}>
-                {myFunction(glass.color)}
+              <Avatar aria-label="recipe" className={colorz(glass.color)}>
+                {upperCaseFirstLetter(glass.color)}
               </Avatar>
             }
             action={
@@ -107,6 +168,7 @@ const MobileBlocks = props => {
             <Typography variant="body2" color="textSecondary" component="p">
               A{" "}
               <ButtonBase
+                className={classes.ButtonBase}
                 id={glass.year}
                 value={year}
                 onClick={event => onSelect(event)}
@@ -114,6 +176,7 @@ const MobileBlocks = props => {
                 {glass.year}
               </ButtonBase>{" "}
               <ButtonBase
+                className={classes.ButtonBase}
                 component="button"
                 id={glass.grapes}
                 value={grapes}
@@ -123,6 +186,7 @@ const MobileBlocks = props => {
               </ButtonBase>{" "}
               from{" "}
               <ButtonBase
+                className={classes.ButtonBase}
                 id={glass.place}
                 value={place}
                 onClick={event => onSelect(event)}
@@ -130,6 +194,7 @@ const MobileBlocks = props => {
                 {glass.place}
               </ButtonBase>{" "}
               <ButtonBase
+                className={classes.ButtonBase}
                 id={glass.area}
                 value={area}
                 onClick={event => onSelect(event)}
@@ -138,6 +203,7 @@ const MobileBlocks = props => {
               </ButtonBase>{" "}
               in {""}
               <ButtonBase
+                className={classes.ButtonBase}
                 id={glass.country}
                 value={country}
                 onClick={event => onSelect(event)}
@@ -146,20 +212,14 @@ const MobileBlocks = props => {
               </ButtonBase>{" "}
               served in a{" "}
               <ButtonBase
+                className={classes.ButtonBase}
                 id={glass.mise}
                 value={mise}
                 onClick={event => onSelect(event)}
               >
                 {glass.mise}
               </ButtonBase>{" "}
-              for $
-              <ButtonBase
-                id={glass.price}
-                value={price}
-                onClick={event => onSelect(event)}
-              >
-                {glass.price}
-              </ButtonBase>
+              for ${glass.price}
             </Typography>
           </CardContent>
           <CardActions disableSpacing>
@@ -179,6 +239,7 @@ const MobileBlocks = props => {
               <Typography paragraph>
                 grapes:{" "}
                 <ButtonBase
+                  className={classes.ButtonBase}
                   id={glass.grape1}
                   value={grape}
                   onClick={event => onSelect(event)}
@@ -186,6 +247,7 @@ const MobileBlocks = props => {
                   {glass.grape1}
                 </ButtonBase>
                 <ButtonBase
+                  className={classes.ButtonBase}
                   id={glass.grape2}
                   value={grape}
                   onClick={event => onSelect(event)}
@@ -193,6 +255,7 @@ const MobileBlocks = props => {
                   {glass.grape2}
                 </ButtonBase>
                 <ButtonBase
+                  className={classes.ButtonBase}
                   id={glass.grape3}
                   value={grape}
                   onClick={event => onSelect(event)}
@@ -203,6 +266,7 @@ const MobileBlocks = props => {
               <Typography paragraph>
                 description:{" "}
                 <ButtonBase
+                  className={classes.ButtonBase}
                   id={glass.description1}
                   value={description}
                   onClick={event => onSelect(event)}
@@ -210,6 +274,7 @@ const MobileBlocks = props => {
                   {glass.description1}
                 </ButtonBase>
                 <ButtonBase
+                  className={classes.ButtonBase}
                   id={glass.description2}
                   value={description}
                   onClick={event => onSelect(event)}
@@ -217,6 +282,7 @@ const MobileBlocks = props => {
                   {glass.description2}
                 </ButtonBase>
                 <ButtonBase
+                  className={classes.ButtonBase}
                   id={glass.description3}
                   value={description}
                   onClick={event => onSelect(event)}
@@ -224,6 +290,7 @@ const MobileBlocks = props => {
                   {glass.description3}
                 </ButtonBase>
                 <ButtonBase
+                  className={classes.ButtonBase}
                   id={glass.description4}
                   value={description}
                   onClick={event => onSelect(event)}
@@ -231,6 +298,7 @@ const MobileBlocks = props => {
                   {glass.description4}
                 </ButtonBase>
                 <ButtonBase
+                  className={classes.ButtonBase}
                   id={glass.description5}
                   value={description}
                   onClick={event => onSelect(event)}
@@ -238,6 +306,7 @@ const MobileBlocks = props => {
                   {glass.description5}
                 </ButtonBase>
                 <ButtonBase
+                  className={classes.ButtonBase}
                   id={glass.description6}
                   value={description}
                   onClick={event => onSelect(event)}
@@ -248,6 +317,7 @@ const MobileBlocks = props => {
               <Typography paragraph>
                 Appellation:{" "}
                 <ButtonBase
+                  className={classes.ButtonBase}
                   id={glass.appellation}
                   value={appellation}
                   onClick={event => onSelect(event)}
