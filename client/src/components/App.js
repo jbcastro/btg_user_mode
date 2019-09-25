@@ -11,9 +11,6 @@ import MatTable from "./MatTable";
 import MobileBlocks from "./MobileBlocks";
 import { transcode } from "buffer";
 import { tsCallSignatureDeclaration } from "@babel/types";
-// import BlocksTest from "./BlocksTest";
-// import RenderTableData from "./RenderTableData";
-// import RenderTableHeader from "./RenderTableHeader";
 
 class App extends Component {
   constructor(props) {
