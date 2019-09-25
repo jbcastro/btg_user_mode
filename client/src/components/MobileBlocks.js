@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
 import Card from "@material-ui/core/Card";
 import CardHeader from "@material-ui/core/CardHeader";
-import CardMedia from "@material-ui/core/CardMedia";
+
 import CardContent from "@material-ui/core/CardContent";
 import CardActions from "@material-ui/core/CardActions";
 import Collapse from "@material-ui/core/Collapse";
@@ -11,8 +11,7 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
+
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ButtonBase from "@material-ui/core/ButtonBase";
@@ -53,11 +52,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MobileBlocks = props => {
-  const handleSelect = props.handleSelect;
   const onSelect = props.onSelect;
-  const onClick = props.onClick;
-  const glasses = props.glasses;
+
   const color = props.color;
+  const onClear = props.onClear;
   const grapes = "grapes";
   const year = "year";
   const place = "place";
@@ -68,16 +66,7 @@ const MobileBlocks = props => {
   const description = "description";
   const price = "price";
   const mise = "mise";
-  let funfact;
-  const onClear = props.onClear;
 
-  // const avatar = glasses.map(result => {
-  //   if (result.color === "red") {
-  //     return "r";
-  //   } else {
-  //     return "Q";
-  //   }
-  // });
   function myFunction(color) {
     var str = color.charAt(0);
     return str.toUpperCase();
