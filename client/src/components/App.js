@@ -12,7 +12,8 @@ class App extends Component {
       filter: "",
       curItem: {},
       filteredWines: [],
-      unFilteredWines: []
+      unFilteredWines: [],
+      allInfo: []
     };
 
     this.onSelect = this.onSelect.bind(this);
@@ -32,6 +33,88 @@ class App extends Component {
 
         this.setState({ glasses: glassesData });
         this.setState({ unFilteredWines: glassesData });
+
+        function getAllInfo1(item) {
+          var fullName = item.description1;
+          return fullName;
+        }
+        function getAllInfo2(item) {
+          var fullName = item.description2;
+          return fullName;
+        }
+
+        function getAllInfo3(item) {
+          var fullName = item.description3;
+          return fullName;
+        }
+        function getAllInfo4(item) {
+          var fullName = item.description4;
+          return fullName;
+        }
+        function getAllInfo5(item) {
+          var fullName = item.description5;
+          return fullName;
+        }
+        function getAllInfo6(item) {
+          var fullName = item.description6;
+          return fullName;
+        }
+        function getAllInfo7(item) {
+          var fullName = item.description7;
+          return fullName;
+        }
+        function getAllInfo8(item) {
+          var fullName = item.description8;
+          return fullName;
+        }
+        function getAllInfo9(item) {
+          var fullName = item.description9;
+          return fullName;
+        }
+        function getAllInfo10(item) {
+          var fullName = item.description10;
+          return fullName;
+        }
+
+        const descriptionz1 = glassesData.map(getAllInfo1);
+        const descriptionz2 = glassesData.map(getAllInfo2);
+        const descriptionz3 = glassesData.map(getAllInfo3);
+        const descriptionz4 = glassesData.map(getAllInfo4);
+        const descriptionz5 = glassesData.map(getAllInfo5);
+        const descriptionz6 = glassesData.map(getAllInfo6);
+        const descriptionz7 = glassesData.map(getAllInfo7);
+        const descriptionz8 = glassesData.map(getAllInfo8);
+        const descriptionz9 = glassesData.map(getAllInfo9);
+        const descriptionz10 = glassesData.map(getAllInfo10);
+
+        const descriptionz = descriptionz1.concat(
+          descriptionz2,
+          descriptionz3,
+          descriptionz4,
+          descriptionz5,
+          descriptionz6,
+          descriptionz7,
+          descriptionz8,
+          descriptionz9,
+          descriptionz10
+        );
+        const uniqueSet = new Set(descriptionz);
+        const backToArray = [...uniqueSet];
+        console.log(backToArray);
+
+        const list1 = backToArray.filter(value => {
+          return value != null;
+        });
+        console.log(list1);
+
+        const lists = list1.map((value, index) => {
+          return {
+            key: index.toString(),
+            value: value
+          };
+        });
+
+        this.setState({ allInfo: lists });
       })
       .catch(err => console.log(err));
   }
@@ -121,6 +204,7 @@ class App extends Component {
           glasses={this.state.glasses}
           unFilteredWines={this.state.unFilteredWines}
           onSelect={this.onSelect}
+          allInfo={this.state.allInfo}
         />
         <MobileBlocks
           glasses={this.state.glasses}
