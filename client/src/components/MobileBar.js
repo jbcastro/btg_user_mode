@@ -9,6 +9,8 @@ import Select from "@material-ui/core/Select";
 import pascalCase from "pascalcase";
 import ReactSearchBox from "react-search-box";
 import { all } from "q";
+import { array } from "prop-types";
+import { render } from "react-dom";
 
 const MobileBar = props => {
   const unFilteredWines = props.unFilteredWines;
@@ -16,8 +18,7 @@ const MobileBar = props => {
   const onSelect = props.onSelect;
   const mise = "mise";
   const description = "description";
-  const allInfo = props.allInfo;
-
+  let allInfo = props.allInfo;
   console.log(allInfo);
 
   return (

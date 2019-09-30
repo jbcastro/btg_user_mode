@@ -34,87 +34,46 @@ class App extends Component {
         this.setState({ glasses: glassesData });
         this.setState({ unFilteredWines: glassesData });
 
-        function getAllInfo1(item) {
-          var fullName = item.description1;
-          return fullName;
-        }
-        function getAllInfo2(item) {
-          var fullName = item.description2;
-          return fullName;
-        }
-
-        function getAllInfo3(item) {
-          var fullName = item.description3;
-          return fullName;
-        }
-        function getAllInfo4(item) {
-          var fullName = item.description4;
-          return fullName;
-        }
-        function getAllInfo5(item) {
-          var fullName = item.description5;
-          return fullName;
-        }
-        function getAllInfo6(item) {
-          var fullName = item.description6;
-          return fullName;
-        }
-        function getAllInfo7(item) {
-          var fullName = item.description7;
-          return fullName;
-        }
-        function getAllInfo8(item) {
-          var fullName = item.description8;
-          return fullName;
-        }
-        function getAllInfo9(item) {
-          var fullName = item.description9;
-          return fullName;
-        }
-        function getAllInfo10(item) {
-          var fullName = item.description10;
-          return fullName;
-        }
-
-        const descriptionz1 = glassesData.map(getAllInfo1);
-        const descriptionz2 = glassesData.map(getAllInfo2);
-        const descriptionz3 = glassesData.map(getAllInfo3);
-        const descriptionz4 = glassesData.map(getAllInfo4);
-        const descriptionz5 = glassesData.map(getAllInfo5);
-        const descriptionz6 = glassesData.map(getAllInfo6);
-        const descriptionz7 = glassesData.map(getAllInfo7);
-        const descriptionz8 = glassesData.map(getAllInfo8);
-        const descriptionz9 = glassesData.map(getAllInfo9);
-        const descriptionz10 = glassesData.map(getAllInfo10);
-
-        const descriptionz = descriptionz1.concat(
-          descriptionz2,
-          descriptionz3,
-          descriptionz4,
-          descriptionz5,
-          descriptionz6,
-          descriptionz7,
-          descriptionz8,
-          descriptionz9,
-          descriptionz10
-        );
-        const uniqueSet = new Set(descriptionz);
-        const backToArray = [...uniqueSet];
-        console.log(backToArray);
-
-        const list1 = backToArray.filter(value => {
-          return value != null;
+        //create array of searchable data
+        let allSearchableData = glassesData.map(result => {
+          return [
+            result.description1,
+            result.description2,
+            result.description3,
+            result.description4,
+            result.description5,
+            result.description6,
+            result.description7,
+            result.description8,
+            result.description9,
+            result.description10,
+            result.appellation,
+            result.area,
+            result.color,
+            result.counry,
+            result.grape1,
+            result.grape2,
+            result.grape3,
+            result.grapes,
+            result.mise,
+            result.name,
+            result.place,
+            result.year
+          ];
         });
-        console.log(list1);
-
-        const lists = list1.map((value, index) => {
+        //make one array from many
+        let allInfo1 = allSearchableData.flat(Infinity);
+        //filter out non strings
+        let allInfo2 = allInfo1.filter(item => typeof item === "string");
+        //give items keys
+        let allInfo = allInfo2.map((value, index) => {
           return {
             key: index.toString(),
             value: value
           };
         });
 
-        this.setState({ allInfo: lists });
+        this.setState({ allInfo: allInfo });
       })
       .catch(err => console.log(err));
   }
@@ -128,10 +87,6 @@ class App extends Component {
     }
     return body;
   };
-
-  //for adding and updating
-
-  //making whatever is typed in as current item
 
   //filter to just wines that have the features ie certain grapes, area, etc
   onSelect = event => {
