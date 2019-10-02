@@ -103,9 +103,13 @@ const MobileBlocks = props => {
 
   const mise = "mise";
 
-  const upperCaseFirstLetter = color => {
+  const upperCaseFirstLetter = str =>
+    str.replace(/\b[a-z]/g, char => char.toUpperCase());
+
+  const upperCaseFirstLetterForColor = color => {
     var str = color.charAt(0);
     return str.toUpperCase();
+    //check to see if needed in admin mode
   };
 
   const checkStatus = status => {
@@ -152,7 +156,7 @@ const MobileBlocks = props => {
           <CardHeader
             avatar={
               <Avatar aria-label="recipe" className={colorz(glass.color)}>
-                {upperCaseFirstLetter(glass.color)}
+                {upperCaseFirstLetterForColor(glass.color)}
               </Avatar>
             }
             action={
@@ -191,7 +195,7 @@ const MobileBlocks = props => {
                 value={place}
                 onClick={event => onSelect(event)}
               >
-                {glass.place}
+                {upperCaseFirstLetter(glass.place)}
               </ButtonBase>{" "}
               <ButtonBase
                 className={classes.ButtonBase}

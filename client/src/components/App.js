@@ -3,6 +3,7 @@ import "./styles/App.css";
 
 import MobileBlocks from "./MobileBlocks";
 import MobileBar from "./MobileBar";
+import { string } from "prop-types";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -58,15 +59,23 @@ class App extends Component {
             result.mise,
             result.name,
             result.place,
-            result.year
+            result.year,
+            result.vinyard
           ];
         });
         //make one array from many
         let allInfo1 = allSearchableData.flat(Infinity);
         //filter out non strings
         let allInfo2 = allInfo1.filter(item => typeof item === "string");
+        //decapitalize allInfo
+        let allInfo3 = allInfo2.map(str =>
+          str.replace(/\b[a-z]/g, char => char.toUpperCase())
+        );
+        //fitler out duplicates
+        let allInfoSet = new Set(allInfo3);
+        let allInfo4 = [...allInfoSet];
         //give items keys
-        let allInfo = allInfo2.map((value, index) => {
+        let allInfo = allInfo4.map((value, index) => {
           return {
             key: index.toString(),
             value: value
@@ -91,44 +100,50 @@ class App extends Component {
   //filter to just wines that have the features ie certain grapes, area, etc
   onSelect = event => {
     let value = event.target.value;
-    const id = event.target.id;
+    const id1 = event.target.id;
+    let id = id1.toUpperCase();
 
-    // if(value==!null){
-    //   return value.toLowerCase()
-    // }
     const glasses = this.state.glasses;
 
     const grapes = glasses.filter(result => {
       if (value === "grapes") {
-        return result.grapes === id;
+        return result.grapes.toUpperCase() === id;
       } else if (value === "grape") {
         return (
-          result.grape1 === id || result.grape2 === id || result.grape3 === id
+          result.grape1.toUpperCase() === id ||
+          result.grape2.toUpperCase() === id ||
+          result.grape3.toUpperCase() === id
         );
 
         //safgasfg
       } else if (value === "year") {
         return result.year === id;
+      } else if (value === "vinyard") {
+        return result.vinyard.toUpperCase() === id;
       } else if (value === "place") {
-        return result.place === id;
+        return result.place.toUpperCase() === id;
       } else if (value === "area") {
-        return result.area === id;
+        return result.area.toUpperCase() === id;
       } else if (value === "country") {
-        return result.country === id;
+        return result.country.toUpperCase() === id;
       } else if (value === "appellation") {
-        return result.appellation === id;
+        return result.appellation.toUpperCase() === id;
       } else if (value === "place") {
-        return result.place === id;
+        return result.place.toUpperCase() === id;
       } else if (value === "mise") {
         return result.mise === id;
       } else if (value === "description") {
         return (
-          result.description1 === id ||
-          result.description2 === id ||
-          result.description3 === id ||
-          result.description4 === id ||
-          result.description5 === id ||
-          result.description6 === id
+          result.description1.toUpperCase() === id ||
+          result.description2.toUpperCase() === id ||
+          result.description3.toUpperCase() === id ||
+          result.description4.toUpperCase() === id ||
+          result.description5.toUpperCase() === id ||
+          result.description6.toUpperCase() === id ||
+          result.description7.toUpperCase() === id ||
+          result.description8.toUpperCase() === id ||
+          result.description9.toUpperCase() === id ||
+          result.description10.toUpperCase() === id
         );
       }
     });
