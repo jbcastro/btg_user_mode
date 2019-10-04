@@ -3,7 +3,8 @@ import "./styles/App.css";
 
 import MobileBlocks from "./MobileBlocks";
 import MobileBar from "./MobileBar";
-import { string } from "prop-types";
+import MobileBlocksData from "./MobileBlocksData";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -119,6 +120,8 @@ class App extends Component {
       } else if (value === "year") {
         return result.year === id;
       } else if (value === "vinyard") {
+        return result.vinyard === id;
+      } else if (value === "vinyard") {
         return result.vinyard.toUpperCase() === id;
       } else if (value === "place") {
         return result.place.toUpperCase() === id;
@@ -151,11 +154,11 @@ class App extends Component {
     this.setState({ glasses: grapes });
   };
 
-  onClear = event => {
+  onClear() {
     const unFilteredWines1 = this.state.unFilteredWines;
 
     this.setState({ glasses: unFilteredWines1 });
-  };
+  }
   onSort = event => {};
 
   ///render portion
@@ -166,26 +169,52 @@ class App extends Component {
   //
 
   render() {
-    return (
-      <div className="App">
-        <MobileBar
+    const allInfo = this.state.allInfo;
+    if (allInfo.length === 0) {
+      return (
+        <div className="App">
+          {/* <MobileBar
           onClear={this.onClear}
           onSort={this.onSort}
           glasses={this.state.glasses}
           unFilteredWines={this.state.unFilteredWines}
           onSelect={this.onSelect}
           allInfo={this.state.allInfo}
-        />
-        <MobileBlocks
-          glasses={this.state.glasses}
-          wines={this.state.filteredWines}
-          match={this.props.match}
-          onSelect={this.onSelect}
-          onClear={this.onClear}
-          curItem={this.state.curItem}
-        />
-      </div>
-    );
+        /> */}
+          {/* <MobileBlocksData
+            glasses={this.state.glasses}
+            wines={this.state.filteredWines}
+            match={this.props.match}
+            onSelect={this.onSelect}
+            onClear={this.onClear}
+            curItem={this.state.curItem}
+          /> */}
+          {/* <MobileBlocksData glasses={this.state.glasses} /> */}
+        </div>
+      );
+    } else {
+      return (
+        <div className="App">
+          <MobileBar
+            onClear={this.onClear}
+            onSort={this.onSort}
+            glasses={this.state.glasses}
+            unFilteredWines={this.state.unFilteredWines}
+            onSelect={this.onSelect}
+            allInfo={this.state.allInfo}
+          />
+          <MobileBlocksData
+            glasses={this.state.glasses}
+            wines={this.state.filteredWines}
+            match={this.props.match}
+            onSelect={this.onSelect}
+            onClear={this.onClear}
+            curItem={this.state.curItem}
+          />
+          {/* <MobileBlocks onSelect={this.onSelect} /> */}
+        </div>
+      );
+    }
   }
 }
 

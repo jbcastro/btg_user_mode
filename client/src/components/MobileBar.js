@@ -19,7 +19,7 @@ const MobileBar = props => {
   const mise = "mise";
   const description = "description";
   let allInfo = props.allInfo;
-  console.log(allInfo);
+  // console.log(allInfo);
 
   return (
     <div>
