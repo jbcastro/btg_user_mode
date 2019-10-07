@@ -38,22 +38,17 @@ class App extends Component {
 
         //create array of searchable data
         let allSearchableData = glassesData.map(result => {
-          
-          return  [{
-            name: "name",
-           value: result.name
-          }
-        
-        
-        
-        ]
-          
-          
+          return [
+            {
+              name: "name",
+              value: result.name
+            }
+          ];
         });
-        
+
         //make one array from many
         let allInfo1 = allSearchableData.flat(Infinity);
-        console.log(allInfo1)
+        console.log(allInfo1);
         //filter out non strings
         let allInfo2 = allInfo1.filter(item => typeof item.value === "string");
         //decapitalize allInfo
@@ -62,9 +57,9 @@ class App extends Component {
         );
         //fitler out duplicates
         let allInfoSet = new Set(allInfo3);
-        
+
         let allInfo4 = [...allInfoSet];
-        
+
         //give items keys
         let allInfo = allInfo4.map((value, index) => {
           return {
@@ -166,11 +161,8 @@ class App extends Component {
   render() {
     const allInfo = this.state.allInfo;
 
-    if (allInfo.length === 0 ) {
-      return (
-        <div className="App">
-        </div>
-      );
+    if (allInfo.length === 0) {
+      return <div className="App"></div>;
     } else {
       return (
         <div className="App">
