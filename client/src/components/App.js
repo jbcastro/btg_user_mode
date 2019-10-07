@@ -38,43 +38,33 @@ class App extends Component {
 
         //create array of searchable data
         let allSearchableData = glassesData.map(result => {
-          return [
-            result.description1,
-            result.description2,
-            result.description3,
-            result.description4,
-            result.description5,
-            result.description6,
-            result.description7,
-            result.description8,
-            result.description9,
-            result.description10,
-            result.appellation,
-            result.area,
-            result.color,
-            result.counry,
-            result.grape1,
-            result.grape2,
-            result.grape3,
-            result.grapes,
-            result.mise,
-            result.name,
-            result.place,
-            result.year,
-            result.vinyard
-          ];
+          
+          return  [{
+            name: "name",
+           value: result.name
+          }
+        
+        
+        
+        ]
+          
+          
         });
+        
         //make one array from many
         let allInfo1 = allSearchableData.flat(Infinity);
+        console.log(allInfo1)
         //filter out non strings
-        let allInfo2 = allInfo1.filter(item => typeof item === "string");
+        let allInfo2 = allInfo1.filter(item => typeof item.value === "string");
         //decapitalize allInfo
         let allInfo3 = allInfo2.map(str =>
           str.replace(/\b[a-z]/g, char => char.toUpperCase())
         );
         //fitler out duplicates
         let allInfoSet = new Set(allInfo3);
+        
         let allInfo4 = [...allInfoSet];
+        
         //give items keys
         let allInfo = allInfo4.map((value, index) => {
           return {
@@ -176,26 +166,9 @@ class App extends Component {
   render() {
     const allInfo = this.state.allInfo;
 
-    if (allInfo.length === 0 && !this.state.mappedGlasses) {
+    if (allInfo.length === 0 ) {
       return (
         <div className="App">
-          {/* <MobileBar
-          onClear={this.onClear}
-          onSort={this.onSort}
-          glasses={this.state.glasses}
-          unFilteredWines={this.state.unFilteredWines}
-          onSelect={this.onSelect}
-          allInfo={this.state.allInfo}
-        /> */}
-          {/* <MobileBlocksData
-            glasses={this.state.glasses}
-            wines={this.state.filteredWines}
-            match={this.props.match}
-            onSelect={this.onSelect}
-            onClear={this.onClear}
-            curItem={this.state.curItem}
-          /> */}
-          {/* <MobileBlocksData glasses={this.state.glasses} /> */}
         </div>
       );
     } else {

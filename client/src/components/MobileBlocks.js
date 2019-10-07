@@ -86,10 +86,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MobileBlocks = ({ data }) => {
+const MobileBlocks = ({ data, onSelect } ) => {
   // butt = data;
   // const onSelect = props.onSelect;
-  function onSelect() {}
+   
   const grapes = "grapes";
   const year = "year";
   const place = "place";
@@ -155,7 +155,7 @@ const MobileBlocks = ({ data }) => {
   };
 
   return (
-    <div>
+    
       <Card className={checkStatus(data.status)} key={data._id} raised>
         <CardHeader
           avatar={
@@ -332,7 +332,7 @@ const MobileBlocks = ({ data }) => {
           </CardContent>
         </Collapse>
       </Card>
-    </div>
+    
   );
 };
 

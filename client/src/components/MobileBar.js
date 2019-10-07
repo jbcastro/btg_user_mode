@@ -15,7 +15,7 @@ import { render } from "react-dom";
 const MobileBar = props => {
   const unFilteredWines = props.unFilteredWines;
   const onClear = props.onClear;
-  const onSelect = props.onSelect;
+  // const onSelect = props.onSelect;
   const mise = "mise";
   const description = "description";
   let allInfo = props.allInfo;
@@ -23,12 +23,13 @@ const MobileBar = props => {
 
   return (
     <div>
-      <ButtonBase onClick={event => onClear(event)}>Clear Filters</ButtonBase>
+      <ButtonBase onClick={onClear}>Clear Filters</ButtonBase>
 
       <ReactSearchBox
         placeholder="Search"
-        value="len"
+        value={allInfo.value}
         data={allInfo}
+        
         callback={record => console.log(record)}
       />
     </div>
