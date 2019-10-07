@@ -14,8 +14,8 @@ class App extends Component {
       filter: "",
       curItem: {},
       filteredWines: [],
-      unFilteredWines: [],
-      allInfo: []
+      allInfo: [],
+      mappedGlasses: {}
     };
 
     this.onSelect = this.onSelect.bind(this);
@@ -84,6 +84,11 @@ class App extends Component {
         });
 
         this.setState({ allInfo: allInfo });
+        const glasses = this.state.glasses;
+        const mappedGlasses = glasses.map(result => (
+          <li key={result._id}>{result}</li>
+        ));
+        this.setState({ mappedGlasses: mappedGlasses });
       })
       .catch(err => console.log(err));
   }
@@ -170,7 +175,8 @@ class App extends Component {
 
   render() {
     const allInfo = this.state.allInfo;
-    if (allInfo.length === 0) {
+
+    if (allInfo.length === 0 && !this.state.mappedGlasses) {
       return (
         <div className="App">
           {/* <MobileBar
@@ -206,10 +212,10 @@ class App extends Component {
           <MobileBlocksData
             glasses={this.state.glasses}
             wines={this.state.filteredWines}
-            match={this.props.match}
             onSelect={this.onSelect}
             onClear={this.onClear}
             curItem={this.state.curItem}
+            mappedGlasses={this.state.mappedGlasses}
           />
           {/* <MobileBlocks onSelect={this.onSelect} /> */}
         </div>

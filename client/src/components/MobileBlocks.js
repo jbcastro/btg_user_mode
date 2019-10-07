@@ -86,62 +86,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MobileBlocks = ({ data, butt }) => {
+const MobileBlocks = ({ data }) => {
   // butt = data;
-  console.log(butt);
-
-  function onSelect(event, butt) {
-    let value = event.target.value;
-    const id1 = event.target.id;
-    let id = id1.toUpperCase();
-
-    return (butt = butt.filter(result => {
-      if (value === "grapes") {
-        return result.grapes.toUpperCase() === id;
-      } else if (value === "grape") {
-        return (
-          result.grape1.toUpperCase() === id ||
-          result.grape2.toUpperCase() === id ||
-          result.grape3.toUpperCase() === id
-        );
-
-        //safgasfg
-      } else if (value === "year") {
-        return result.year === id;
-      } else if (value === "vinyard") {
-        return result.vinyard === id;
-      } else if (value === "vinyard") {
-        return result.vinyard.toUpperCase() === id;
-      } else if (value === "place") {
-        return result.place.toUpperCase() === id;
-      } else if (value === "area") {
-        return result.area.toUpperCase() === id;
-      } else if (value === "country") {
-        return result.country.toUpperCase() === id;
-      } else if (value === "appellation") {
-        return result.appellation.toUpperCase() === id;
-      } else if (value === "place") {
-        return result.place.toUpperCase() === id;
-      } else if (value === "mise") {
-        return result.mise === id;
-      } else if (value === "description") {
-        return (
-          result.description1.toUpperCase() === id ||
-          result.description2.toUpperCase() === id ||
-          result.description3.toUpperCase() === id ||
-          result.description4.toUpperCase() === id ||
-          result.description5.toUpperCase() === id ||
-          result.description6.toUpperCase() === id ||
-          result.description7.toUpperCase() === id ||
-          result.description8.toUpperCase() === id ||
-          result.description9.toUpperCase() === id ||
-          result.description10.toUpperCase() === id
-        );
-      }
-      console.log(butt);
-    }));
-  }
-
+  // const onSelect = props.onSelect;
+  function onSelect() {}
   const grapes = "grapes";
   const year = "year";
   const place = "place";

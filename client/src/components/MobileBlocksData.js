@@ -4,22 +4,14 @@ import MobileBlocks from "./MobileBlocks";
 const MobileBlocksData = props => {
   const glasses = props.glasses;
   const data = glasses;
-  const butt = data;
-  console.log(butt);
-
-  //   const steve = data.map(item => <MobileBlocks data={item} />);
-  //   function jimmy() {
-  //     data.map(stuff => {
-  //       return stuff;
-  //     });
-  //   }
-  const steve = data.map(item => {
-    return item;
-  });
+  const mappedGlasses1 = props.mappedGlasses;
+  const mappedGlasses = mappedGlasses1;
 
   return (
     <div>
-      <MobileBlocks data={steve} />
+      {data.map(data => (
+        <MobileBlocks data={data} />
+      ))}
     </div>
   );
 };
