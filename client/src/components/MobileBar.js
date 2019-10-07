@@ -27,9 +27,8 @@ const MobileBar = props => {
 
       <ReactSearchBox
         placeholder="Search"
-        value={allInfo.value}
+        value="doe"
         data={allInfo}
-        
         callback={record => console.log(record)}
       />
     </div>

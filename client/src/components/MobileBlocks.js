@@ -86,10 +86,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MobileBlocks = ({ data, onSelect } ) => {
+const MobileBlocks = ({ data, onSelect }) => {
   // butt = data;
   // const onSelect = props.onSelect;
-   
+
   const grapes = "grapes";
   const year = "year";
   const place = "place";
@@ -136,11 +136,12 @@ const MobileBlocks = ({ data, onSelect } ) => {
     }
   };
   //to get the subheader as a button
-  let vinny = vinyard1 => (
+
+  const vinny = vinyard1 => (
     <ButtonBase
       className={classes.ButtonBase}
-      id={vinyard1}
-      value={vinyard}
+      id={vinyard}
+      value={vinyard1}
       onClick={event => onSelect(event)}
     >
       {vinyard1}
@@ -155,184 +156,182 @@ const MobileBlocks = ({ data, onSelect } ) => {
   };
 
   return (
-    
-      <Card className={checkStatus(data.status)} key={data._id} raised>
-        <CardHeader
-          avatar={
-            <Avatar aria-label="recipe" className={colorz(data.color)}>
-              {upperCaseFirstLetterForColor(data.color)}
-            </Avatar>
-          }
-          title={data.name}
-          subheader={vinny(data.vinyard)}
-        />
+    <Card className={checkStatus(data.status)} key={data._id} raised>
+      <CardHeader
+        avatar={
+          <Avatar aria-label="recipe" className={colorz(data.color)}>
+            {upperCaseFirstLetterForColor(data.color)}
+          </Avatar>
+        }
+        title={data.name}
+        subheader={vinny(data.vinyard)}
+      />
 
-        <CardContent>
-          <Typography variant="body2" color="textSecondary" component="p">
-            A{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              id={data.year}
-              value={year}
-              onClick={event => onSelect(event)}
-            >
-              {data.year}
-            </ButtonBase>{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              component="button"
-              id={data.grapes}
-              value={grapes}
-              onClick={event => onSelect(event)}
-            >
-              {data.grapes}
-            </ButtonBase>{" "}
-            from{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              id={data.place}
-              value={place}
-              onClick={event => onSelect(event)}
-            >
-              {upperCaseFirstLetter(data.place)}
-            </ButtonBase>{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              id={data.area}
-              value={area}
-              onClick={event => onSelect(event)}
-            >
-              {data.area}
-            </ButtonBase>{" "}
-            in {""}
-            <ButtonBase
-              className={classes.ButtonBase}
-              id={data.country}
-              value={country}
-              onClick={event => onSelect(event)}
-            >
-              {data.country}
-            </ButtonBase>{" "}
-            served in a{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              id={data.mise}
-              value={mise}
-              onClick={event => onSelect(event)}
-            >
-              {data.mise}
-            </ButtonBase>{" "}
-            for ${data.price}
-          </Typography>
-        </CardContent>
-        <CardActions disableSpacing>
-          <IconButton
-            className={clsx(classes.expand, {
-              [classes.expandOpen]: expanded
-            })}
-            onClick={handleExpandClick}
-            aria-expanded={expanded}
-            aria-label="show more"
+      <CardContent>
+        <Typography variant="body2" color="textSecondary" component="p">
+          A{" "}
+          <ButtonBase
+            className={classes.ButtonBase}
+            value={data.year}
+            id={year}
+            onClick={event => onSelect(event)}
           >
-            <ExpandMoreIcon />
-          </IconButton>
-        </CardActions>
-        <Collapse in={expanded} timeout="auto" unmountOnExit>
-          <CardContent>
-            <Typography paragraph>
-              grapes:{" "}
-              <ButtonBase
-                className={classes.ButtonBase}
-                id={data.grape1}
-                value={grape}
-                onClick={event => onSelect(event)}
-              >
-                {data.grape1}
-              </ButtonBase>
-              <ButtonBase
-                className={classes.ButtonBase}
-                id={data.grape2}
-                value={grape}
-                onClick={event => onSelect(event)}
-              >
-                {data.grape2}
-              </ButtonBase>
-              <ButtonBase
-                className={classes.ButtonBase}
-                id={data.grape3}
-                value={grape}
-                onClick={event => onSelect(event)}
-              >
-                {data.grape3}
-              </ButtonBase>
-            </Typography>
-            <Typography paragraph>
-              description:{" "}
-              <ButtonBase
-                className={classes.ButtonBase}
-                id={data.description1}
-                value={description}
-                onClick={event => onSelect(event)}
-              >
-                {data.description1}
-              </ButtonBase>
-              <ButtonBase
-                className={classes.ButtonBase}
-                id={data.description2}
-                value={description}
-                onClick={event => onSelect(event)}
-              >
-                {data.description2}
-              </ButtonBase>
-              <ButtonBase
-                className={classes.ButtonBase}
-                id={data.description3}
-                value={description}
-                onClick={event => onSelect(event)}
-              >
-                {data.description3}
-              </ButtonBase>
-              <ButtonBase
-                className={classes.ButtonBase}
-                id={data.description4}
-                value={description}
-                onClick={event => onSelect(event)}
-              >
-                {data.description4}
-              </ButtonBase>
-              <ButtonBase
-                className={classes.ButtonBase}
-                id={data.description5}
-                value={description}
-                onClick={event => onSelect(event)}
-              >
-                {data.description5}
-              </ButtonBase>
-              <ButtonBase
-                className={classes.ButtonBase}
-                id={data.description6}
-                value={description}
-                onClick={event => onSelect(event)}
-              >
-                {data.description6}
-              </ButtonBase>
-            </Typography>
-            <Typography paragraph>
-              Appellation:{" "}
-              <ButtonBase
-                className={classes.ButtonBase}
-                id={data.appellation}
-                value={appellation}
-                onClick={event => onSelect(event)}
-              >
-                {data.appellation}
-              </ButtonBase>
-            </Typography>
-            <Typography paragraph>fun fact: {data.funfact}</Typography>
-          </CardContent>
-        </Collapse>
-      </Card>
-    
+            {data.year}
+          </ButtonBase>{" "}
+          <ButtonBase
+            className={classes.ButtonBase}
+            component="button"
+            value={data.grapes}
+            id={grapes}
+            onClick={event => onSelect(event)}
+          >
+            {data.grapes}
+          </ButtonBase>{" "}
+          from{" "}
+          <ButtonBase
+            className={classes.ButtonBase}
+            value={data.place}
+            id={place}
+            onClick={event => onSelect(event)}
+          >
+            {upperCaseFirstLetter(data.place)}
+          </ButtonBase>{" "}
+          <ButtonBase
+            className={classes.ButtonBase}
+            value={data.area}
+            id={area}
+            onClick={event => onSelect(event)}
+          >
+            {data.area}
+          </ButtonBase>{" "}
+          in {""}
+          <ButtonBase
+            className={classes.ButtonBase}
+            value={data.country}
+            id={country}
+            onClick={event => onSelect(event)}
+          >
+            {data.country}
+          </ButtonBase>{" "}
+          served in a{" "}
+          <ButtonBase
+            className={classes.ButtonBase}
+            value={data.mise}
+            id={mise}
+            onClick={event => onSelect(event)}
+          >
+            {data.mise}
+          </ButtonBase>{" "}
+          for ${data.price}
+        </Typography>
+      </CardContent>
+      <CardActions disableSpacing>
+        <IconButton
+          className={clsx(classes.expand, {
+            [classes.expandOpen]: expanded
+          })}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </IconButton>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          <Typography paragraph>
+            grapes:{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.grape1}
+              id={grape}
+              onClick={event => onSelect(event)}
+            >
+              {data.grape1}
+            </ButtonBase>
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.grape2}
+              id={grape}
+              onClick={event => onSelect(event)}
+            >
+              {data.grape2}
+            </ButtonBase>
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.grape3}
+              id={grape}
+              onClick={event => onSelect(event)}
+            >
+              {data.grape3}
+            </ButtonBase>
+          </Typography>
+          <Typography paragraph>
+            description:{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description1}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description1}
+            </ButtonBase>
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description2}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description2}
+            </ButtonBase>
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description3}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description3}
+            </ButtonBase>
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description4}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description4}
+            </ButtonBase>
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description5}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description5}
+            </ButtonBase>
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description6}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description6}
+            </ButtonBase>
+          </Typography>
+          <Typography paragraph>
+            Appellation:{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.appellation}
+              id={appellation}
+              onClick={event => onSelect(event)}
+            >
+              {data.appellation}
+            </ButtonBase>
+          </Typography>
+          <Typography paragraph>fun fact: {data.funfact}</Typography>
+        </CardContent>
+      </Collapse>
+    </Card>
   );
 };
 

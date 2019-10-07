@@ -38,25 +38,143 @@ class App extends Component {
 
         //create array of searchable data
         let allSearchableData = glassesData.map(result => {
+          console.log(result);
           return [
             {
-              name: "name",
-              value: result.name
+              value: result.name,
+              id: "name",
+              key: ""
+            },
+            {
+              value: result.place,
+              id: "place",
+              key: ""
+            },
+            {
+              value: result.added,
+              id: "added",
+              key: ""
+            },
+            {
+              value: result.appellation,
+              id: "appellation",
+              key: ""
+            },
+            {
+              value: result.color,
+              id: "color",
+              key: ""
+            },
+            {
+              value: result.country,
+              id: "country",
+              key: ""
+            },
+            {
+              value: result.description1,
+              id: "description",
+              key: ""
+            },
+            {
+              value: result.description2,
+              id: "description",
+              key: ""
+            },
+            {
+              value: result.description3,
+              id: "description",
+              key: ""
+            },
+            {
+              value: result.description4,
+              id: "description",
+              key: ""
+            },
+            {
+              value: result.description5,
+              id: "description",
+              key: ""
+            },
+            {
+              value: result.description6,
+              id: "description",
+              key: ""
+            },
+            {
+              value: result.description7,
+              id: "description",
+              key: ""
+            },
+            {
+              value: result.description8,
+              id: "description",
+              key: ""
+            },
+            {
+              value: result.description9,
+              id: "description",
+              key: ""
+            },
+            {
+              value: result.description10,
+              id: "description",
+              key: ""
+            },
+            {
+              value: result.grape1,
+              id: "grape",
+              key: ""
+            },
+            {
+              value: result.grape2,
+              id: "grape",
+              key: ""
+            },
+            {
+              value: result.grape3,
+              id: "grape",
+              key: ""
+            },
+            {
+              value: result.grapes,
+              id: "grapes",
+              key: ""
+            },
+            {
+              value: result.mise,
+              id: "mise",
+              key: ""
+            },
+            {
+              value: result.status,
+              id: "status",
+              key: ""
+            },
+            {
+              value: result.vinyard,
+              id: "vinyard",
+              key: ""
+            },
+            {
+              value: result.year,
+              id: "year",
+              key: ""
             }
           ];
         });
 
         //make one array from many
         let allInfo1 = allSearchableData.flat(Infinity);
-        console.log(allInfo1);
+
         //filter out non strings
         let allInfo2 = allInfo1.filter(item => typeof item.value === "string");
+
         //decapitalize allInfo
-        let allInfo3 = allInfo2.map(str =>
-          str.replace(/\b[a-z]/g, char => char.toUpperCase())
-        );
+        // let allInfo3 = allInfo2.map(str =>
+        //   str.replace(/\b[a-z]/g, char => char.toUpperCase())
+        // );
         //fitler out duplicates
-        let allInfoSet = new Set(allInfo3);
+        let allInfoSet = new Set(allInfo2);
 
         let allInfo4 = [...allInfoSet];
 
@@ -64,7 +182,8 @@ class App extends Component {
         let allInfo = allInfo4.map((value, index) => {
           return {
             key: index.toString(),
-            value: value
+            value: value.value,
+            id: value.id
           };
         });
 
@@ -90,58 +209,56 @@ class App extends Component {
 
   //filter to just wines that have the features ie certain grapes, area, etc
   onSelect = event => {
-    let value = event.target.value;
-    const id1 = event.target.id;
-    let id = id1.toUpperCase();
+    let id = event.target.id;
+    let value1 = event.target.value;
+    let value = value1.toUpperCase();
 
     const glasses = this.state.glasses;
 
-    const grapes = glasses.filter(result => {
-      if (value === "grapes") {
-        return result.grapes.toUpperCase() === id;
-      } else if (value === "grape") {
+    const filterWineOnClick = glasses.filter(result => {
+      if (id === "grapes") {
+        return result.grapes.toUpperCase() === value;
+      } else if (id === "grape") {
         return (
-          result.grape1.toUpperCase() === id ||
-          result.grape2.toUpperCase() === id ||
-          result.grape3.toUpperCase() === id
+          result.grape1.toUpperCase() === value ||
+          result.grape2.toUpperCase() === value ||
+          result.grape3.toUpperCase() === value
         );
 
         //safgasfg
-      } else if (value === "year") {
-        return result.year === id;
-      } else if (value === "vinyard") {
-        return result.vinyard === id;
-      } else if (value === "vinyard") {
-        return result.vinyard.toUpperCase() === id;
-      } else if (value === "place") {
-        return result.place.toUpperCase() === id;
-      } else if (value === "area") {
-        return result.area.toUpperCase() === id;
-      } else if (value === "country") {
-        return result.country.toUpperCase() === id;
-      } else if (value === "appellation") {
-        return result.appellation.toUpperCase() === id;
-      } else if (value === "place") {
-        return result.place.toUpperCase() === id;
-      } else if (value === "mise") {
-        return result.mise === id;
-      } else if (value === "description") {
+      } else if (id === "year") {
+        return result.year === value;
+      } else if (id === "vinyard") {
+        return result.vinyard === value;
+      } else if (id === "place") {
+        return result.place.toUpperCase() === value;
+      } else if (id === "area") {
+        return result.area.toUpperCase() === value;
+      } else if (id === "country") {
+        return result.country.toUpperCase() === value;
+      } else if (id === "appellation") {
+        return result.appellation.toUpperCase() === value;
+      } else if (id === "place") {
+        return result.place.toUpperCase() === value;
+      } else if (id === "mise") {
+        return result.mise === value;
+      } else if (id === "description") {
         return (
-          result.description1.toUpperCase() === id ||
-          result.description2.toUpperCase() === id ||
-          result.description3.toUpperCase() === id ||
-          result.description4.toUpperCase() === id ||
-          result.description5.toUpperCase() === id ||
-          result.description6.toUpperCase() === id ||
-          result.description7.toUpperCase() === id ||
-          result.description8.toUpperCase() === id ||
-          result.description9.toUpperCase() === id ||
-          result.description10.toUpperCase() === id
+          result.description1.toUpperCase() === value ||
+          result.description2.toUpperCase() === value ||
+          result.description3.toUpperCase() === value ||
+          result.description4.toUpperCase() === value ||
+          result.description5.toUpperCase() === value ||
+          result.description6.toUpperCase() === value ||
+          result.description7.toUpperCase() === value ||
+          result.description8.toUpperCase() === value ||
+          result.description9.toUpperCase() === value ||
+          result.description10.toUpperCase() === value
         );
       }
     });
 
-    this.setState({ glasses: grapes });
+    this.setState({ glasses: filterWineOnClick });
   };
 
   onClear() {
