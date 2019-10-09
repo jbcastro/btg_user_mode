@@ -295,6 +295,8 @@ class App extends Component {
         //safgasfg
       } else if (id === "year") {
         return filterNulls(result.year) === value;
+      } else if (id === "name") {
+        return filterNulls(result.name) === value;
       } else if (id === "vinyard") {
         return filterNulls(result.vinyard) === value;
       } else if (id === "place") {
