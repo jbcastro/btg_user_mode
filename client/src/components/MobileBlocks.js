@@ -34,6 +34,7 @@ const useStyles = makeStyles(theme => ({
   },
   cardHidden: {
     maxWidth: 345
+    // display: "none"
   },
   ButtonBase: {
     color: "blue"
@@ -68,19 +69,7 @@ const useStyles = makeStyles(theme => ({
   avatarSparkling: {
     backgroundColor: "blue"
   },
-  clearButton: {
-    position: "fixed",
-    backgroundColor: "white"
-  },
-  isAdded: {
-    backgroundColor: "purple"
-  },
-  isRemoved: {
-    backgroundColor: "green"
-  },
-  isHidden: {
-    backgroundColor: "blue"
-  },
+
   lister: {
     listStyleType: "none"
   }
@@ -136,17 +125,20 @@ const MobileBlocks = ({ data, onSelect }) => {
     }
   };
   //to get the subheader as a button
-
-  const vinny = vinyard1 => (
-    <ButtonBase
-      className={classes.ButtonBase}
-      id={vinyard}
-      value={vinyard1}
-      onClick={event => onSelect(event)}
-    >
-      {vinyard1}
-    </ButtonBase>
-  );
+  let vinyard2;
+  function vinny(vinyard1) {
+    vinyard2 = vinyard1.toUpperCase();
+    return (
+      <ButtonBase
+        className={classes.ButtonBase}
+        id={vinyard}
+        value={vinyard2}
+        onClick={event => onSelect(event)}
+      >
+        {vinyard1}
+      </ButtonBase>
+    );
+  }
 
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);

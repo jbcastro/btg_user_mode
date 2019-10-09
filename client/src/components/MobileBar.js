@@ -1,69 +1,38 @@
 import React from "react";
-import ButtonBase from "@material-ui/core/ButtonBase";
-import { makeStyles } from "@material-ui/core/styles";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
-import pascalCase from "pascalcase";
 import ReactSearchBox from "react-search-box";
-import { all } from "q";
-import { array } from "prop-types";
-import { render } from "react-dom";
-
+import { makeStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+const useStyles = makeStyles(theme => ({
+  button: {
+    margin: theme.spacing(1)
+  },
+  input: {
+    display: "none"
+  }
+}));
 const MobileBar = props => {
-  const unFilteredWines = props.unFilteredWines;
+  const classes = useStyles();
   const onClear = props.onClear;
-  // const onSelect = props.onSelect;
-  const mise = "mise";
-  const description = "description";
-  let allInfo = props.allInfo;
-  // console.log(allInfo);
+  const onSearchSelect = props.onSearchSelect;
 
   return (
-    <div>
-      <ButtonBase onClick={onClear}>Clear Filters</ButtonBase>
+    <div className="MobileBar">
+      <Button
+        variant="contained"
+        color="secondary"
+        className={classes.button}
+        onClick={onClear}
+      >
+        Clear Filters
+      </Button>
 
       <ReactSearchBox
         placeholder="Search"
-        value="doe"
-        data={allInfo}
-        callback={record => console.log(record)}
+        value="Doe"
+        data={props.allInfo}
+        onSelect={event => onSearchSelect(event)}
       />
     </div>
   );
 };
 export default MobileBar;
-
-// // const sheep = Array.from(new Set(miseArray));
-// // console.log(sheep);
-
-// // function miseLoop(miseArray) {
-// //   miseArray.forEach();
-// // }
-
-// const miseArray = [props.unFilteredWines.map(result => result.mise)];
-// // console.log(miseArray);
-// // let uniqueSet = [...new Set(miseArray)];
-// // console.log(uniqueSet);
-// const miseLoop = miseArray.forEach(result => {
-//   return result;
-// });
-
-// function removeDups(miseLoop) {
-//   let unique = {};
-//   miseLoop.forEach(function(i) {
-//     if (!unique[i]) {
-//       unique[i] = true;
-//     }
-//   });
-
-//   return Object.keys(unique);
-// }
-// const run = removeDups(miseLoop);
-// // console.log(run);
-// // // const backToArray = [...uniqueSet];
-// // // console.log(backToArray);
-
-// const glasses = props.glasses;

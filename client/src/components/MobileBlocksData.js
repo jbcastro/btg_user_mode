@@ -1,23 +1,16 @@
 import React from "react";
 import MobileBlocks from "./MobileBlocks";
 
+const MobileBlocksData = ({ onSelect, glasses }) => {
+  const data = glasses;
 
-const MobileBlocksData = ({onSelect, glasses}) => {
-  
-  
-  const data = glasses
-  
-  const cells = data.map(data=>{
-    return(
-    <MobileBlocks data={data} key={data._id}
-    onSelect={onSelect}/>
-    )
-  })
+  const cells = data.map(data => {
+    return <MobileBlocks data={data} key={data._id} onSelect={onSelect} />;
+  });
 
-return <div>{cells}</div>
-  
-}
-export default MobileBlocksData
+  return <div className="MobileBlock">{cells}</div>;
+};
+export default MobileBlocksData;
 //   const mappedGlasses1 = props.mappedGlasses;
 //   const mappedGlasses = mappedGlasses1;
 //   const onSelect = props.onSelect
@@ -26,8 +19,8 @@ export default MobileBlocksData
 //     <div>
 //       {data.map((data ) => (
 
-//         <MobileBlocks data={data} 
-//         key={data._id} 
+//         <MobileBlocks data={data}
+//         key={data._id}
 //         />
 //       ))}
 //     </div>

@@ -21,6 +21,7 @@ class App extends Component {
     this.onSelect = this.onSelect.bind(this);
     this.onClear = this.onClear.bind(this);
     this.onSort = this.onSort.bind(this);
+    this.onSearchSelect = this.onSearchSelect.bind(this);
 
     // this.filterWines = this.filterWines.bind(this);
     // this.handleChange = this.handleChange.bind(this);
@@ -163,23 +164,22 @@ class App extends Component {
           ];
         });
 
+        const allInfo0 = allSearchableData.flat(Infinity);
+
         //make one array from many
-        let allInfo1 = allSearchableData.flat(Infinity);
 
         //filter out non strings
-        let allInfo2 = allInfo1.filter(item => typeof item.value === "string");
-
-        //decapitalize allInfo
-        // let allInfo3 = allInfo2.map(str =>
-        //   str.replace(/\b[a-z]/g, char => char.toUpperCase())
-        // );
-        //fitler out duplicates
-        let allInfoSet = new Set(allInfo2);
-
-        let allInfo4 = [...allInfoSet];
-
+        const allInfo1 = allInfo0.filter(item => {
+          return typeof item.value === "string";
+        });
+        const allInfo2 = allInfo1.filter(
+          (thing, index, self) =>
+            index ===
+            self.findIndex(t => t.value === thing.value && t.id === thing.id)
+        );
+        console.log(allInfo2);
         //give items keys
-        let allInfo = allInfo4.map((value, index) => {
+        const allInfo = allInfo2.map((value, index) => {
           return {
             key: index.toString(),
             value: value.value,
@@ -207,7 +207,8 @@ class App extends Component {
     return body;
   };
 
-  //filter to just wines that have the features ie certain grapes, area, etc
+  //filter to just wines that have the features ie certain grapes,
+  // area, etc
   onSelect = event => {
     let id = event.target.id;
     let value1 = event.target.value;
@@ -215,45 +216,111 @@ class App extends Component {
 
     const glasses = this.state.glasses;
 
+    function filterNulls(item) {
+      if (typeof item === "string") {
+        return item.toUpperCase();
+      }
+    }
+
     const filterWineOnClick = glasses.filter(result => {
       if (id === "grapes") {
-        return result.grapes.toUpperCase() === value;
+        return filterNulls(result.grapes) === value;
       } else if (id === "grape") {
         return (
-          result.grape1.toUpperCase() === value ||
-          result.grape2.toUpperCase() === value ||
-          result.grape3.toUpperCase() === value
+          filterNulls(result.grape1) === value ||
+          filterNulls(result.grape2) === value ||
+          filterNulls(result.grape3) === value
         );
 
         //safgasfg
       } else if (id === "year") {
-        return result.year === value;
+        return filterNulls(result.year) === value;
       } else if (id === "vinyard") {
-        return result.vinyard === value;
+        return filterNulls(result.vinyard) === value;
       } else if (id === "place") {
-        return result.place.toUpperCase() === value;
+        return filterNulls(result.place) === value;
       } else if (id === "area") {
-        return result.area.toUpperCase() === value;
+        return filterNulls(result.area) === value;
       } else if (id === "country") {
-        return result.country.toUpperCase() === value;
+        return filterNulls(result.country) === value;
       } else if (id === "appellation") {
-        return result.appellation.toUpperCase() === value;
+        return filterNulls(result.appellation) === value;
       } else if (id === "place") {
-        return result.place.toUpperCase() === value;
+        return filterNulls(result.place) === value;
       } else if (id === "mise") {
-        return result.mise === value;
-      } else if (id === "description") {
+        return filterNulls(result.mise) === value;
+      } else {
         return (
-          result.description1.toUpperCase() === value ||
-          result.description2.toUpperCase() === value ||
-          result.description3.toUpperCase() === value ||
-          result.description4.toUpperCase() === value ||
-          result.description5.toUpperCase() === value ||
-          result.description6.toUpperCase() === value ||
-          result.description7.toUpperCase() === value ||
-          result.description8.toUpperCase() === value ||
-          result.description9.toUpperCase() === value ||
-          result.description10.toUpperCase() === value
+          filterNulls(result.description1) === value ||
+          filterNulls(result.description2) === value ||
+          filterNulls(result.description3) === value ||
+          filterNulls(result.description4) === value ||
+          filterNulls(result.description5) === value ||
+          filterNulls(result.description6) === value ||
+          filterNulls(result.description7) === value ||
+          filterNulls(result.description8) === value ||
+          filterNulls(result.description9) === value ||
+          filterNulls(result.description10) === value
+        );
+      }
+    });
+
+    this.setState({ glasses: filterWineOnClick });
+  };
+
+  //for selecting items on search v
+  onSearchSelect = event => {
+    let id = event.id;
+    let value1 = event.value;
+    let value = value1.toUpperCase();
+
+    const glasses = this.state.glasses;
+
+    function filterNulls(item) {
+      if (typeof item === "string") {
+        return item.toUpperCase();
+      }
+    }
+
+    const filterWineOnClick = glasses.filter(result => {
+      if (id === "grapes") {
+        return filterNulls(result.grapes) === value;
+      } else if (id === "grape") {
+        return (
+          filterNulls(result.grape1) === value ||
+          filterNulls(result.grape2) === value ||
+          filterNulls(result.grape3) === value
+        );
+
+        //safgasfg
+      } else if (id === "year") {
+        return filterNulls(result.year) === value;
+      } else if (id === "vinyard") {
+        return filterNulls(result.vinyard) === value;
+      } else if (id === "place") {
+        return filterNulls(result.place) === value;
+      } else if (id === "area") {
+        return filterNulls(result.area) === value;
+      } else if (id === "country") {
+        return filterNulls(result.country) === value;
+      } else if (id === "appellation") {
+        return filterNulls(result.appellation) === value;
+      } else if (id === "place") {
+        return filterNulls(result.place) === value;
+      } else if (id === "mise") {
+        return filterNulls(result.mise) === value;
+      } else {
+        return (
+          filterNulls(result.description1) === value ||
+          filterNulls(result.description2) === value ||
+          filterNulls(result.description3) === value ||
+          filterNulls(result.description4) === value ||
+          filterNulls(result.description5) === value ||
+          filterNulls(result.description6) === value ||
+          filterNulls(result.description7) === value ||
+          filterNulls(result.description8) === value ||
+          filterNulls(result.description9) === value ||
+          filterNulls(result.description10) === value
         );
       }
     });
@@ -288,7 +355,7 @@ class App extends Component {
             onSort={this.onSort}
             glasses={this.state.glasses}
             unFilteredWines={this.state.unFilteredWines}
-            onSelect={this.onSelect}
+            onSearchSelect={this.onSearchSelect}
             allInfo={this.state.allInfo}
           />
           <MobileBlocksData
