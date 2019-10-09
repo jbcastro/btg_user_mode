@@ -1,30 +1,25 @@
 import React, { Component } from "react";
 import "./styles/App.css";
-
-import MobileBlocks from "./MobileBlocks";
 import MobileBar from "./MobileBar";
 import MobileBlocksData from "./MobileBlocksData";
+import TemporaryDrawer from "./Drawer";
+import CircularDeterminate from "./CircularDeterminate";
+import AppBarSearch from "./AppBarSearch";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       glasses: [],
-      glass: {},
-      filter: "",
-      curItem: {},
+
       filteredWines: [],
-      allInfo: [],
-      mappedGlasses: {}
+      allInfo: []
     };
 
     this.onSelect = this.onSelect.bind(this);
     this.onClear = this.onClear.bind(this);
     this.onSort = this.onSort.bind(this);
     this.onSearchSelect = this.onSearchSelect.bind(this);
-
-    // this.filterWines = this.filterWines.bind(this);
-    // this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -33,13 +28,14 @@ class App extends Component {
 
       .then(res => {
         const glassesData = res.express;
-
+        glassesData.sort(
+          (a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated)
+        );
         this.setState({ glasses: glassesData });
         this.setState({ unFilteredWines: glassesData });
 
         //create array of searchable data
         let allSearchableData = glassesData.map(result => {
-          console.log(result);
           return [
             {
               value: result.name,
@@ -177,9 +173,12 @@ class App extends Component {
             index ===
             self.findIndex(t => t.value === thing.value && t.id === thing.id)
         );
-        console.log(allInfo2);
+        //filter out strings that have no characters
+        const allInfo3 = allInfo2.filter(result => {
+          return result.value.length > 0;
+        });
         //give items keys
-        const allInfo = allInfo2.map((value, index) => {
+        const allInfo = allInfo3.map((value, index) => {
           return {
             key: index.toString(),
             value: value.value,
@@ -196,7 +195,8 @@ class App extends Component {
       })
       .catch(err => console.log(err));
   }
-  // Fetches our GET route from the Express server. (Note the route we are fetching matches the GET route from server.js
+  // Fetches our GET route from the Express server.
+  //(Note the route we are fetching matches the GET route from server.js
   callBackendAPI = async () => {
     const response = await fetch("/express_backend");
     const body = await response.json();
@@ -210,7 +210,7 @@ class App extends Component {
   //filter to just wines that have the features ie certain grapes,
   // area, etc
   onSelect = event => {
-    let id = event.target.id;
+    const id = event.target.id;
     let value1 = event.target.value;
     let value = value1.toUpperCase();
 
@@ -221,7 +221,6 @@ class App extends Component {
         return item.toUpperCase();
       }
     }
-
     const filterWineOnClick = glasses.filter(result => {
       if (id === "grapes") {
         return filterNulls(result.grapes) === value;
@@ -335,7 +334,13 @@ class App extends Component {
 
     this.setState({ glasses: unFilteredWines1 });
   }
-  onSort = event => {};
+  onSort() {
+    const glasses = this.state.glasses;
+    const steve = glasses.sort(
+      (a, b) => new Date(a.lastUpdated) - new Date(b.lastUpdated)
+    );
+    this.setState({ glasses: steve });
+  }
 
   ///render portion
 
@@ -348,18 +353,24 @@ class App extends Component {
     const allInfo = this.state.allInfo;
 
     if (allInfo.length === 0) {
-      return <div className="App"></div>;
+      return (
+        <div className="App">
+          <CircularDeterminate />
+        </div>
+      );
     } else {
       return (
         <div className="App">
-          <MobileBar
+          {/* <MobileBar
             onClear={this.onClear}
             onSort={this.onSort}
             glasses={this.state.glasses}
             unFilteredWines={this.state.unFilteredWines}
             onSearchSelect={this.onSearchSelect}
             allInfo={this.state.allInfo}
-          />
+          /> */}
+          {/* <TemporaryDrawer onSort={this.onSort} /> */}
+          <AppBarSearch />
           <MobileBlocksData
             glasses={this.state.glasses}
             wines={this.state.filteredWines}
@@ -368,7 +379,6 @@ class App extends Component {
             curItem={this.state.curItem}
             mappedGlasses={this.state.mappedGlasses}
           />
-          {/* <MobileBlocks onSelect={this.onSelect} /> */}
         </div>
       );
     }
