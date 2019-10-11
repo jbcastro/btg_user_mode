@@ -5,6 +5,7 @@ import MobileBlocksData from "./MobileBlocksData";
 import TemporaryDrawer from "./Drawer";
 import CircularDeterminate from "./CircularDeterminate";
 import AppBarSearch from "./AppBarSearch";
+import { tsImportEqualsDeclaration } from "@babel/types";
 
 class App extends Component {
   constructor(props) {
@@ -370,7 +371,8 @@ class App extends Component {
             allInfo={this.state.allInfo}
           /> */}
           {/* <TemporaryDrawer onSort={this.onSort} /> */}
-          <AppBarSearch />
+          <AppBarSearch
+          allInfo={this.state.allInfo} />
           <MobileBlocksData
             glasses={this.state.glasses}
             wines={this.state.filteredWines}

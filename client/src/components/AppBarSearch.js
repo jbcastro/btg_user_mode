@@ -83,7 +83,7 @@ const AppBarSearch = props => {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
+const allInfo = props.allInfo
   const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
   };
@@ -153,7 +153,7 @@ const AppBarSearch = props => {
                 root: classes.inputRoot,
                 input: classes.inputInput
               }}
-              inputProps={{}}
+              inputProps={{allInfo}}
             />
           </div>
 

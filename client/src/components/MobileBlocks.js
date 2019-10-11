@@ -148,6 +148,7 @@ const MobileBlocks = ({ data, onSelect }) => {
   };
 
   return (
+    
     <Card className={checkStatus(data.status)} key={data._id} raised>
       <CardHeader
         avatar={
