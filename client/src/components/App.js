@@ -275,6 +275,7 @@ class App extends Component {
     let value = value1.toUpperCase();
 
     const glasses = this.state.glasses;
+    const unFilteredWines = this.state.unFilteredWines
 
     function filterNulls(item) {
       if (typeof item === "string") {
@@ -282,7 +283,7 @@ class App extends Component {
       }
     }
 
-    const filterWineOnClick = glasses.filter(result => {
+    const filterWineOnClick = unFilteredWines.filter(result => {
       if (id === "grapes") {
         return filterNulls(result.grapes) === value;
       } else if (id === "grape") {
@@ -362,17 +363,17 @@ class App extends Component {
     } else {
       return (
         <div className="App">
-          {/* <MobileBar
+          <MobileBar
             onClear={this.onClear}
             onSort={this.onSort}
             glasses={this.state.glasses}
             unFilteredWines={this.state.unFilteredWines}
             onSearchSelect={this.onSearchSelect}
             allInfo={this.state.allInfo}
-          /> */}
+          />
           {/* <TemporaryDrawer onSort={this.onSort} /> */}
-          <AppBarSearch
-          allInfo={this.state.allInfo} />
+          {/* <AppBarSearch
+          allInfo={this.state.allInfo} /> */}
           <MobileBlocksData
             glasses={this.state.glasses}
             wines={this.state.filteredWines}
