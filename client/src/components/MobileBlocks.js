@@ -12,6 +12,8 @@ import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ButtonBase from "@material-ui/core/ButtonBase";
+import CardMedia from "@material-ui/core/CardMedia";
+
 // import MobileBar from "./MobileBar";
 
 const useStyles = makeStyles(theme => ({
@@ -148,7 +150,6 @@ const MobileBlocks = ({ data, onSelect }) => {
   };
 
   return (
-    
     <Card className={checkStatus(data.status)} key={data._id} raised>
       <CardHeader
         avatar={
@@ -158,6 +159,11 @@ const MobileBlocks = ({ data, onSelect }) => {
         }
         title={data.name}
         subheader={vinny(data.vinyard)}
+      />
+      <CardMedia
+        className={classes.media}
+        image={`https://josephbeckcastro.com/site4/images/${data.picture}.jpg`}
+        title={data.name}
       />
 
       <CardContent>

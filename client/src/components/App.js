@@ -29,9 +29,9 @@ class App extends Component {
 
       .then(res => {
         const glassesData = res.express;
-        glassesData.sort(
-          (a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated)
-        );
+        // glassesData.sort(
+        //   (a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated)
+        // );
         this.setState({ glasses: glassesData });
         this.setState({ unFilteredWines: glassesData });
 
@@ -275,7 +275,7 @@ class App extends Component {
     let value = value1.toUpperCase();
 
     const glasses = this.state.glasses;
-    const unFilteredWines = this.state.unFilteredWines
+    const unFilteredWines = this.state.unFilteredWines;
 
     function filterNulls(item) {
       if (typeof item === "string") {
