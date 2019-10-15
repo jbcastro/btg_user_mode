@@ -24,3 +24,6 @@ yarn-error.log*
 
 #ignore wine.js
 connection.js
+
+/node_modules
+package-lock.json
