@@ -6,6 +6,7 @@ import TemporaryDrawer from "./Drawer";
 import CircularDeterminate from "./CircularDeterminate";
 import AppBarSearch from "./AppBarSearch";
 import { tsImportEqualsDeclaration } from "@babel/types";
+import data from "./data";
 
 class App extends Component {
   constructor(props) {
@@ -196,6 +197,17 @@ class App extends Component {
       })
       .catch(err => console.log(err));
   }
+  // Fetches our GET route from the Express server.
+  //(Note the route we are fetching matches the GET route from server.js
+  callBackendAPI = async () => {
+    const response = await fetch("/express_backend");
+    const body = await response.json();
+
+    if (response.status !== 200) {
+      throw Error(body.message);
+    }
+    return body;
+  };
   // Fetches our GET route from the Express server.
   //(Note the route we are fetching matches the GET route from server.js
   callBackendAPI = async () => {
