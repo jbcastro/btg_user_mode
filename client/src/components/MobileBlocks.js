@@ -129,17 +129,19 @@ const MobileBlocks = ({ data, onSelect }) => {
   //to get the subheader as a button
   let vinyard2;
   function vinny(vinyard1) {
-    vinyard2 = vinyard1.toUpperCase();
-    return (
-      <ButtonBase
-        className={classes.ButtonBase}
-        id={vinyard}
-        value={vinyard2}
-        onClick={event => onSelect(event)}
-      >
-        {vinyard1}
-      </ButtonBase>
-    );
+    if (vinyard1 === "string") {
+      vinyard2 = vinyard1.toUpperCase();
+      return (
+        <ButtonBase
+          className={classes.ButtonBase}
+          id={vinyard}
+          value={vinyard2}
+          onClick={event => onSelect(event)}
+        >
+          {vinyard1}
+        </ButtonBase>
+      );
+    }
   }
 
   const classes = useStyles();
@@ -160,11 +162,12 @@ const MobileBlocks = ({ data, onSelect }) => {
         title={data.name}
         subheader={vinny(data.vinyard)}
       />
-      <CardMedia
+      {/* picture info here */}
+      {/* <CardMedia
         className={classes.media}
         image={`https://josephbeckcastro.com/site4/images/${data.picture}.jpg`}
         title={data.name}
-      />
+      /> */}
 
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
@@ -247,7 +250,7 @@ const MobileBlocks = ({ data, onSelect }) => {
               onClick={event => onSelect(event)}
             >
               {data.grape1}
-            </ButtonBase>
+            </ButtonBase>{" "}
             <ButtonBase
               className={classes.ButtonBase}
               value={data.grape2}
@@ -255,7 +258,7 @@ const MobileBlocks = ({ data, onSelect }) => {
               onClick={event => onSelect(event)}
             >
               {data.grape2}
-            </ButtonBase>
+            </ButtonBase>{" "}
             <ButtonBase
               className={classes.ButtonBase}
               value={data.grape3}
@@ -263,7 +266,15 @@ const MobileBlocks = ({ data, onSelect }) => {
               onClick={event => onSelect(event)}
             >
               {data.grape3}
-            </ButtonBase>
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.grape4}
+              id={grape}
+              onClick={event => onSelect(event)}
+            >
+              {data.grape4}
+            </ButtonBase>{" "}
           </Typography>
           <Typography paragraph>
             description:{" "}
@@ -274,7 +285,7 @@ const MobileBlocks = ({ data, onSelect }) => {
               onClick={event => onSelect(event)}
             >
               {data.description1}
-            </ButtonBase>
+            </ButtonBase>{" "}
             <ButtonBase
               className={classes.ButtonBase}
               value={data.description2}
@@ -282,7 +293,7 @@ const MobileBlocks = ({ data, onSelect }) => {
               onClick={event => onSelect(event)}
             >
               {data.description2}
-            </ButtonBase>
+            </ButtonBase>{" "}
             <ButtonBase
               className={classes.ButtonBase}
               value={data.description3}
@@ -290,7 +301,7 @@ const MobileBlocks = ({ data, onSelect }) => {
               onClick={event => onSelect(event)}
             >
               {data.description3}
-            </ButtonBase>
+            </ButtonBase>{" "}
             <ButtonBase
               className={classes.ButtonBase}
               value={data.description4}
@@ -298,7 +309,7 @@ const MobileBlocks = ({ data, onSelect }) => {
               onClick={event => onSelect(event)}
             >
               {data.description4}
-            </ButtonBase>
+            </ButtonBase>{" "}
             <ButtonBase
               className={classes.ButtonBase}
               value={data.description5}
@@ -306,7 +317,7 @@ const MobileBlocks = ({ data, onSelect }) => {
               onClick={event => onSelect(event)}
             >
               {data.description5}
-            </ButtonBase>
+            </ButtonBase>{" "}
             <ButtonBase
               className={classes.ButtonBase}
               value={data.description6}
@@ -314,7 +325,71 @@ const MobileBlocks = ({ data, onSelect }) => {
               onClick={event => onSelect(event)}
             >
               {data.description6}
-            </ButtonBase>
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description7}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description7}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description8}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description8}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description9}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description9}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description10}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description10}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description11}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description11}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description12}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description12}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description13}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description13}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description14}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description11}
+            </ButtonBase>{" "}
           </Typography>
           <Typography paragraph>
             Appellation:{" "}
@@ -327,7 +402,7 @@ const MobileBlocks = ({ data, onSelect }) => {
               {data.appellation}
             </ButtonBase>
           </Typography>
-          <Typography paragraph>fun fact: {data.funfact}</Typography>
+          <Typography paragraph>Fun Fact: {data.funfact}</Typography>
         </CardContent>
       </Collapse>
     </Card>

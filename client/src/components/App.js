@@ -6,15 +6,16 @@ import TemporaryDrawer from "./Drawer";
 import CircularDeterminate from "./CircularDeterminate";
 import AppBarSearch from "./AppBarSearch";
 import { tsImportEqualsDeclaration } from "@babel/types";
+import dataClasses from "../data";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      glasses: [],
-
-      filteredWines: [],
-      allInfo: []
+      glasses: dataClasses,
+      filteredWines: {},
+      allInfo: [],
+      unFilteredWines: dataClasses
     };
 
     this.onSelect = this.onSelect.bind(this);
@@ -25,188 +26,187 @@ class App extends Component {
 
   componentDidMount() {
     // Call our fetch function below once the component mounts
-    this.callBackendAPI()
+    // this.callBackendAPI();
+    // const dataClasses1 = dataClasses;
+    // this.setState({ glasses: dataClasses1 });
+    // this.setState({ unFilteredWines: dataClasses1 });
+    // glassesData.sort(
+    //   (a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated)
+    // );
 
-      .then(res => {
-        const glassesData = res.express;
-        // glassesData.sort(
-        //   (a, b) => new Date(b.lastUpdated) - new Date(a.lastUpdated)
-        // );
-        this.setState({ glasses: glassesData });
-        this.setState({ unFilteredWines: glassesData });
+    // componentWillMount(){
+    const unFilteredWines = this.state.unFilteredWines;
 
-        //create array of searchable data
-        let allSearchableData = glassesData.map(result => {
-          return [
-            {
-              value: result.name,
-              id: "name",
-              key: ""
-            },
-            {
-              value: result.place,
-              id: "place",
-              key: ""
-            },
-            {
-              value: result.added,
-              id: "added",
-              key: ""
-            },
-            {
-              value: result.appellation,
-              id: "appellation",
-              key: ""
-            },
-            {
-              value: result.color,
-              id: "color",
-              key: ""
-            },
-            {
-              value: result.country,
-              id: "country",
-              key: ""
-            },
-            {
-              value: result.description1,
-              id: "description",
-              key: ""
-            },
-            {
-              value: result.description2,
-              id: "description",
-              key: ""
-            },
-            {
-              value: result.description3,
-              id: "description",
-              key: ""
-            },
-            {
-              value: result.description4,
-              id: "description",
-              key: ""
-            },
-            {
-              value: result.description5,
-              id: "description",
-              key: ""
-            },
-            {
-              value: result.description6,
-              id: "description",
-              key: ""
-            },
-            {
-              value: result.description7,
-              id: "description",
-              key: ""
-            },
-            {
-              value: result.description8,
-              id: "description",
-              key: ""
-            },
-            {
-              value: result.description9,
-              id: "description",
-              key: ""
-            },
-            {
-              value: result.description10,
-              id: "description",
-              key: ""
-            },
-            {
-              value: result.grape1,
-              id: "grape",
-              key: ""
-            },
-            {
-              value: result.grape2,
-              id: "grape",
-              key: ""
-            },
-            {
-              value: result.grape3,
-              id: "grape",
-              key: ""
-            },
-            {
-              value: result.grapes,
-              id: "grapes",
-              key: ""
-            },
-            {
-              value: result.mise,
-              id: "mise",
-              key: ""
-            },
-            {
-              value: result.status,
-              id: "status",
-              key: ""
-            },
-            {
-              value: result.vinyard,
-              id: "vinyard",
-              key: ""
-            },
-            {
-              value: result.year,
-              id: "year",
-              key: ""
-            }
-          ];
-        });
+    //create array of searchable data
+    let allSearchableData = unFilteredWines.map(result => {
+      return [
+        {
+          value: result.name,
+          id: "name",
+          key: ""
+        },
+        {
+          value: result.place,
+          id: "place",
+          key: ""
+        },
+        {
+          value: result.added,
+          id: "added",
+          key: ""
+        },
+        {
+          value: result.appellation,
+          id: "appellation",
+          key: ""
+        },
+        {
+          value: result.color,
+          id: "color",
+          key: ""
+        },
+        {
+          value: result.country,
+          id: "country",
+          key: ""
+        },
+        {
+          value: result.description1,
+          id: "description",
+          key: ""
+        },
+        {
+          value: result.description2,
+          id: "description",
+          key: ""
+        },
+        {
+          value: result.description3,
+          id: "description",
+          key: ""
+        },
+        {
+          value: result.description4,
+          id: "description",
+          key: ""
+        },
+        {
+          value: result.description5,
+          id: "description",
+          key: ""
+        },
+        {
+          value: result.description6,
+          id: "description",
+          key: ""
+        },
+        {
+          value: result.description7,
+          id: "description",
+          key: ""
+        },
+        {
+          value: result.description8,
+          id: "description",
+          key: ""
+        },
+        {
+          value: result.description9,
+          id: "description",
+          key: ""
+        },
+        {
+          value: result.description10,
+          id: "description",
+          key: ""
+        },
+        {
+          value: result.grape1,
+          id: "grape",
+          key: ""
+        },
+        {
+          value: result.grape2,
+          id: "grape",
+          key: ""
+        },
+        {
+          value: result.grape3,
+          id: "grape",
+          key: ""
+        },
+        {
+          value: result.grapes,
+          id: "grapes",
+          key: ""
+        },
+        {
+          value: result.mise,
+          id: "mise",
+          key: ""
+        },
+        {
+          value: result.status,
+          id: "status",
+          key: ""
+        },
+        {
+          value: result.vinyard,
+          id: "vinyard",
+          key: ""
+        },
+        {
+          value: result.year,
+          id: "year",
+          key: ""
+        }
+      ];
+    });
 
-        const allInfo0 = allSearchableData.flat(Infinity);
+    const allInfo0 = allSearchableData.flat(Infinity);
 
-        //make one array from many
+    //make one array from many
 
-        //filter out non strings
-        const allInfo1 = allInfo0.filter(item => {
-          return typeof item.value === "string";
-        });
-        const allInfo2 = allInfo1.filter(
-          (thing, index, self) =>
-            index ===
-            self.findIndex(t => t.value === thing.value && t.id === thing.id)
-        );
-        //filter out strings that have no characters
-        const allInfo3 = allInfo2.filter(result => {
-          return result.value.length > 0;
-        });
-        //give items keys
-        const allInfo = allInfo3.map((value, index) => {
-          return {
-            key: index.toString(),
-            value: value.value,
-            id: value.id
-          };
-        });
+    //filter out non strings
+    const allInfo1 = allInfo0.filter(item => {
+      return typeof item.value === "string";
+    });
+    const allInfo2 = allInfo1.filter(
+      (thing, index, self) =>
+        index ===
+        self.findIndex(t => t.value === thing.value && t.id === thing.id)
+    );
+    //filter out strings that have no characters
+    const allInfo3 = allInfo2.filter(result => {
+      return result.value.length > 0;
+    });
+    //give items keys
+    const allInfo = allInfo3.map((value, index) => {
+      return {
+        key: index.toString(),
+        value: value.value,
+        id: value.id
+      };
+    });
 
-        this.setState({ allInfo: allInfo });
-        const glasses = this.state.glasses;
-        const mappedGlasses = glasses.map(result => (
-          <li key={result._id}>{result}</li>
-        ));
-        this.setState({ mappedGlasses: mappedGlasses });
-      })
-      .catch(err => console.log(err));
+    this.setState({ allInfo: allInfo });
+    const glasses = this.state.glasses;
+    const mappedGlasses = glasses.map(result => (
+      <li key={result._id}>{result}</li>
+    ));
+    this.setState({ mappedGlasses: mappedGlasses });
   }
   // Fetches our GET route from the Express server.
   //(Note the route we are fetching matches the GET route from server.js
-  callBackendAPI = async () => {
-    const response = await fetch("/express_backend");
-    const body = await response.json();
+  // callBackendAPI = async () => {
+  //   const response = await fetch("/express_backend");
+  //   const body = await response.json();
 
-    if (response.status !== 200) {
-      throw Error(body.message);
-    }
-    return body;
-  };
+  //   if (response.status !== 200) {
+  //     throw Error(body.message);
+  //   }
+  //   return body;
+  // };
 
   //filter to just wines that have the features ie certain grapes,
   // area, etc
