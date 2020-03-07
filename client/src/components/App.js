@@ -208,17 +208,6 @@ class App extends Component {
     }
     return body;
   };
-  // Fetches our GET route from the Express server.
-  //(Note the route we are fetching matches the GET route from server.js
-  callBackendAPI = async () => {
-    const response = await fetch("/express_backend");
-    const body = await response.json();
-
-    if (response.status !== 200) {
-      throw Error(body.message);
-    }
-    return body;
-  };
 
   //filter to just wines that have the features ie certain grapes,
   // area, etc
@@ -226,7 +215,8 @@ class App extends Component {
     const id = event.target.id;
     let value1 = event.target.value;
     let value = value1.toUpperCase();
-
+    console.log(id);
+    console.log(value);
     const glasses = this.state.glasses;
 
     function filterNulls(item) {
@@ -234,15 +224,18 @@ class App extends Component {
         return item.toUpperCase();
       }
     }
+
+    //   const filterWineOnClick = glasses.filter(result => {
+    //     return result.id == value;
+    //   });
+    //   console.log(filterWineOnClick);
+    //   this.setState({ glasses: filterWineOnClick });
+    // };
     const filterWineOnClick = glasses.filter(result => {
       if (id === "grapes") {
         return filterNulls(result.grapes) === value;
       } else if (id === "grape") {
-        return (
-          filterNulls(result.grape1) === value ||
-          filterNulls(result.grape2) === value ||
-          filterNulls(result.grape3) === value
-        );
+        return filterNulls(result.grape) === value;
 
         //safgasfg
       } else if (id === "year") {

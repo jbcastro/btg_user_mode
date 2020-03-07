@@ -11,9 +11,9 @@
     "material-table": "^1.50.0",
     "material-ui-icons": "^1.0.0-beta.36",
     "pascalcase": "^1.0.0",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-scripts": "3.0.1",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "react-scripts": "^3.3.0",
     "react-search-box": "^2.0.1"
   },
   "scripts": {

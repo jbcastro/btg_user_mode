@@ -245,7 +245,19 @@ const MobileBlocks = ({ data, onSelect }) => {
         <CardContent>
           <Typography paragraph>
             Grapes:{" "}
-            <ButtonBase
+            {data.grape.map((result, index) => (
+              <li key={index}>
+                <ButtonBase
+                  className={classes.ButtonBase}
+                  id={grape}
+                  value={result}
+                  onClick={event => onSelect(event)}
+                >
+                  {result}
+                </ButtonBase>
+              </li>
+            ))}
+            {/* <ButtonBase
               className={classes.ButtonBase}
               value={data.grape1}
               id={grape}
@@ -279,7 +291,7 @@ const MobileBlocks = ({ data, onSelect }) => {
               onClick={event => onSelect(event)}
             >
               {data.grape4}
-            </ButtonBase>
+            </ButtonBase> */}
           </Typography>
           <Typography paragraph>
             description:{" "}
