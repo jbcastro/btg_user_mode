@@ -2,26 +2,25 @@ import React, { Component } from "react";
 import "./styles/App.css";
 import MobileBar from "./MobileBar";
 import MobileBlocksData from "./MobileBlocksData";
-import TemporaryDrawer from "./Drawer";
 import CircularDeterminate from "./CircularDeterminate";
-import AppBarSearch from "./AppBarSearch";
-import { tsImportEqualsDeclaration } from "@babel/types";
-import data from "./data";
-
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       glasses: [],
-
       filteredWines: [],
-      allInfo: []
+      allInfo: [],
+      hideRemoved: false,
+      unFilteredWines: [],
+      filterTerms: []
     };
 
     this.onSelect = this.onSelect.bind(this);
+    this.onCoravinSearch = this.onCoravinSearch.bind(this);
+    this.onSearchSelect = this.onSearchSelect.bind(this);
     this.onClear = this.onClear.bind(this);
     this.onSort = this.onSort.bind(this);
-    this.onSearchSelect = this.onSearchSelect.bind(this);
+    this.hideRemovedClick = this.hideRemovedClick.bind(this);
   }
 
   componentDidMount() {
@@ -212,65 +211,52 @@ class App extends Component {
   //filter to just wines that have the features ie certain grapes,
   // area, etc
   onSelect = event => {
-    const id = event.target.id;
+    let id = event.target.id;
     let value1 = event.target.value;
     let value = value1.toUpperCase();
     console.log(id);
     console.log(value);
     const glasses = this.state.glasses;
-
+    let filterTerms = this.state.filterTerms;
     function filterNulls(item) {
       if (typeof item === "string") {
         return item.toUpperCase();
       }
     }
+    // let i;
+    // for (i = 0; i < filterTerms.length; i++) {
+    //   if (i === value) {
+    //     return;
+    //   } else {
+    //     filterTerms.push(value);
+    //   }
+    // }
 
-    //   const filterWineOnClick = glasses.filter(result => {
-    //     return result.id == value;
-    //   });
-    //   console.log(filterWineOnClick);
-    //   this.setState({ glasses: filterWineOnClick });
-    // };
-    const filterWineOnClick = glasses.filter(result => {
-      if (id === "grapes") {
-        return filterNulls(result.grapes) === value;
-      } else if (id === "grape") {
-        return filterNulls(result.grape) === value;
+    filterTerms.push(value);
+    const uniqueTerms = new Set(filterTerms);
+    const termsToArray = [...uniqueTerms];
+    console.log(filterTerms);
 
-        //safgasfg
-      } else if (id === "year") {
-        return filterNulls(result.year) === value;
-      } else if (id === "vinyard") {
-        return filterNulls(result.vinyard) === value;
-      } else if (id === "place") {
-        return filterNulls(result.place) === value;
-      } else if (id === "area") {
-        return filterNulls(result.area) === value;
-      } else if (id === "country") {
-        return filterNulls(result.country) === value;
-      } else if (id === "appellation") {
-        return filterNulls(result.appellation) === value;
-      } else if (id === "place") {
-        return filterNulls(result.place) === value;
-      } else if (id === "mise") {
-        return filterNulls(result.mise) === value;
+    const filterWineOnClick = glasses.filter(
+      result => filterNulls(result[id]) === value
+    );
+    this.setState({ glasses: filterWineOnClick });
+    this.setState({ filterTerms: termsToArray });
+  };
+  onCoravinSearch = event => {
+    let value = event.target.value;
+    const glasses = this.state.glasses;
+    console.log(value);
+
+    const filterCoravin = glasses.filter(result => {
+      if (value == "true") {
+        return result.coravin === true;
       } else {
-        return (
-          filterNulls(result.description1) === value ||
-          filterNulls(result.description2) === value ||
-          filterNulls(result.description3) === value ||
-          filterNulls(result.description4) === value ||
-          filterNulls(result.description5) === value ||
-          filterNulls(result.description6) === value ||
-          filterNulls(result.description7) === value ||
-          filterNulls(result.description8) === value ||
-          filterNulls(result.description9) === value ||
-          filterNulls(result.description10) === value
-        );
+        return result.coravin === false;
       }
     });
-
-    this.setState({ glasses: filterWineOnClick });
+    console.log(filterCoravin);
+    this.setState({ glasses: filterCoravin });
   };
 
   //for selecting items on search v
@@ -340,14 +326,26 @@ class App extends Component {
     const unFilteredWines1 = this.state.unFilteredWines;
 
     this.setState({ glasses: unFilteredWines1 });
+    this.setState({ filterTerms: [] });
   }
   onSort() {
-    const glasses = this.state.glasses;
-    const steve = glasses.sort(
-      (a, b) => new Date(a.lastUpdated) - new Date(b.lastUpdated)
-    );
-    this.setState({ glasses: steve });
+    const glasses = this.state.unFilteredWines;
+    const sorted = glasses.sort(function(a, b) {
+      var colorA = a.color.toUpperCase();
+      var colorB = b.color.toUpperCase();
+      if (colorA < colorB) {
+        return -1;
+      }
+      if (colorA > colorB) {
+        return 1;
+      }
+      return 0;
+    });
+    this.setState({ glasses: sorted });
   }
+  hideRemovedClick = event => {
+    this.setState(state => ({ hideRemoved: !this.state.hideRemoved }));
+  };
 
   ///render portion
 
@@ -375,6 +373,8 @@ class App extends Component {
             unFilteredWines={this.state.unFilteredWines}
             onSearchSelect={this.onSearchSelect}
             allInfo={this.state.allInfo}
+            hideRemovedClick={this.hideRemovedClick}
+            filterTerms={this.state.filterTerms}
           />
           {/* <TemporaryDrawer onSort={this.onSort} /> */}
           {/* <AppBarSearch
@@ -386,6 +386,8 @@ class App extends Component {
             onClear={this.onClear}
             curItem={this.state.curItem}
             mappedGlasses={this.state.mappedGlasses}
+            hideRemoved={this.state.hideRemoved}
+            onCoravinSearch={this.onCoravinSearch}
           />
         </div>
       );

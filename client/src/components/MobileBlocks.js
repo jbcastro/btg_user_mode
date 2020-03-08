@@ -25,22 +25,39 @@ const useStyles = makeStyles(theme => ({
     display: "none"
   },
   card: {
-    maxWidth: 345
+    maxWidth: 345,
+    display: "inline-block",
+    minHeight: 436,
+    overflow: "hidden"
   },
   cardAdded: {
     maxWidth: 345,
-    backgroundColor: "#E6E6FA"
+    backgroundColor: "#E6E6FA",
+    display: "inline-block",
+    minHeight: 436,
+    overflow: "hidden"
   },
   cardRemoved: {
     maxWidth: 345,
-    backgroundColor: "#FFA07A"
+    backgroundColor: "#FFA07A",
+    display: "inline-block",
+    minHeight: 436,
+    overflow: "hidden"
   },
+
   cardHidden: {
     maxWidth: 345,
-    backgroundColor: "yellow"
+    backgroundColor: "yellow",
+    display: "inline-block",
+    minHeight: 436,
+    overflow: "hidden",
+    display: "none"
   },
   ButtonBase: {
     color: "blue"
+  },
+  AvatarButton: {
+    fontSize: "1em"
   },
   media: {
     height: 0,
@@ -49,6 +66,7 @@ const useStyles = makeStyles(theme => ({
   expand: {
     transform: "rotate(0deg)",
     marginLeft: "auto",
+
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest
     })
@@ -78,10 +96,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const MobileBlocks = ({ data, onSelect }) => {
-  // butt = data;
-  // const onSelect = props.onSelect;
-
+const MobileBlocks = ({ data, onSelect, hideRemoved, onCoravinSearch }) => {
   const grapes = "grapes";
   const year = "year";
   const place = "place";
@@ -91,8 +106,9 @@ const MobileBlocks = ({ data, onSelect }) => {
   const grape = "grape";
   const description = "description";
   const vinyard = "vinyard";
-
+  const color = "color";
   const mise = "mise";
+  const coravin = "coravin";
 
   const upperCaseFirstLetter = str =>
     str.replace(/\b[a-z]/g, char => char.toUpperCase());
@@ -106,8 +122,10 @@ const MobileBlocks = ({ data, onSelect }) => {
   const checkStatus = status => {
     if (status === "added") {
       return classes.cardAdded;
-    } else if (status === "removed") {
+    } else if (status === "removed" && !hideRemoved) {
       return classes.cardRemoved;
+    } else if (status === "removed" && hideRemoved) {
+      return classes.cardHidden;
     } else if (status === "hidden") {
       return classes.cardHidden;
     } else {
@@ -137,12 +155,19 @@ const MobileBlocks = ({ data, onSelect }) => {
       <ButtonBase
         className={classes.ButtonBase}
         id={vinyard}
-        value={vinyard2}
+        value={vinyard1}
         onClick={event => onSelect(event)}
       >
         {vinyard1}
       </ButtonBase>
     );
+  }
+  function coravinCheck(coravin) {
+    if (coravin === true) {
+      return "coravin";
+    } else {
+      return "non-coravin";
+    }
   }
 
   const classes = useStyles();
@@ -157,7 +182,14 @@ const MobileBlocks = ({ data, onSelect }) => {
       <CardHeader
         avatar={
           <Avatar aria-label="recipe" className={colorz(data.color)}>
-            {upperCaseFirstLetterForColor(data.color)}
+            <ButtonBase
+              value={data.color}
+              id={color}
+              onClick={event => onSelect(event)}
+              className={classes.AvatarButton}
+            >
+              {upperCaseFirstLetterForColor(data.color)}
+            </ButtonBase>
           </Avatar>
         }
         title={data.name}
@@ -173,7 +205,15 @@ const MobileBlocks = ({ data, onSelect }) => {
 
       <CardContent>
         <Typography variant="body2" color="textSecondary" component="p">
-          A{" "}
+          A {""}
+          <ButtonBase
+            className={classes.ButtonBase}
+            id={coravin}
+            onClick={event => onCoravinSearch(event)}
+            value={data.coravin}
+          >
+            {coravinCheck(data.coravin)}
+          </ButtonBase>{" "}
           <ButtonBase
             className={classes.ButtonBase}
             value={data.year}
@@ -198,7 +238,7 @@ const MobileBlocks = ({ data, onSelect }) => {
             id={place}
             onClick={event => onSelect(event)}
           >
-            {upperCaseFirstLetter(data.place)}
+            {data.place}
           </ButtonBase>{" "}
           <ButtonBase
             className={classes.ButtonBase}
@@ -257,157 +297,23 @@ const MobileBlocks = ({ data, onSelect }) => {
                 </ButtonBase>
               </li>
             ))}
-            {/* <ButtonBase
-              className={classes.ButtonBase}
-              value={data.grape1}
-              id={grape}
-              onClick={event => onSelect(event)}
-            >
-              {data.grape1}
-            </ButtonBase>
-            {"  "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              value={data.grape2}
-              id={grape}
-              onClick={event => onSelect(event)}
-            >
-              {data.grape2}
-            </ButtonBase>
-            {"  "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              value={data.grape3}
-              id={grape}
-              onClick={event => onSelect(event)}
-            >
-              {data.grape3}
-            </ButtonBase>
-            {"  "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              value={data.grape4}
-              id={grape}
-              onClick={event => onSelect(event)}
-            >
-              {data.grape4}
-            </ButtonBase> */}
           </Typography>
           <Typography paragraph>
-            description:{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              value={data.description1}
-              id={description}
-              onClick={event => onSelect(event)}
-            >
-              {data.description1}
-            </ButtonBase>{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              value={data.description2}
-              id={description}
-              onClick={event => onSelect(event)}
-            >
-              {data.description2}
-            </ButtonBase>{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              value={data.description3}
-              id={description}
-              onClick={event => onSelect(event)}
-            >
-              {data.description3}
-            </ButtonBase>{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              value={data.description4}
-              id={description}
-              onClick={event => onSelect(event)}
-            >
-              {data.description4}
-            </ButtonBase>{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              value={data.description5}
-              id={description}
-              onClick={event => onSelect(event)}
-            >
-              {data.description5}
-            </ButtonBase>{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              value={data.description6}
-              id={description}
-              onClick={event => onSelect(event)}
-            >
-              {data.description6}
-            </ButtonBase>{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              value={data.description7}
-              id={description}
-              onClick={event => onSelect(event)}
-            >
-              {data.description7}
-            </ButtonBase>{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              value={data.description8}
-              id={description}
-              onClick={event => onSelect(event)}
-            >
-              {data.description8}
-            </ButtonBase>{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              value={data.description9}
-              id={description}
-              onClick={event => onSelect(event)}
-            >
-              {data.description9}
-            </ButtonBase>{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              value={data.description10}
-              id={description}
-              onClick={event => onSelect(event)}
-            >
-              {data.description10}
-            </ButtonBase>{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              value={data.description11}
-              id={description}
-              onClick={event => onSelect(event)}
-            >
-              {data.description11}
-            </ButtonBase>{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              value={data.description12}
-              id={description}
-              onClick={event => onSelect(event)}
-            >
-              {data.description12}
-            </ButtonBase>{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              value={data.description13}
-              id={description}
-              onClick={event => onSelect(event)}
-            >
-              {data.description13}
-            </ButtonBase>{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
-              value={data.description14}
-              id={description}
-              onClick={event => onSelect(event)}
-            >
-              {data.description14}
-            </ButtonBase>
+            Descriptions:{" "}
+            {data.description.map((result, index) => (
+              <li key={index}>
+                <ButtonBase
+                  className={classes.ButtonBase}
+                  id={description}
+                  value={result}
+                  onClick={event => onSelect(event)}
+                >
+                  {result}
+                </ButtonBase>
+              </li>
+            ))}
           </Typography>
+
           <Typography paragraph>
             Appellation:{" "}
             <ButtonBase
@@ -419,7 +325,7 @@ const MobileBlocks = ({ data, onSelect }) => {
               {data.appellation}
             </ButtonBase>
           </Typography>
-          <Typography paragraph>fun fact: {data.funfact}</Typography>
+          <Typography paragraph>Fun Fact: {data.funfact}</Typography>
         </CardContent>
       </Collapse>
     </Card>
