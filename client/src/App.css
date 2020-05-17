@@ -5,12 +5,18 @@
 }
 .MobileBar {
   width: 100%;
-
   position: fixed;
-
   display: block;
   opacity: 1;
   background-color: white;
+  z-index: 1000;
+}
+.TempDrawer {
+  width: 10%;
+  position: fixed;
+  display: block;
+  opacity: 1;
+  background-color: red;
   z-index: 1000;
 }
 .MobileBlock {

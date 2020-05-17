@@ -5,11 +5,13 @@ const MobileBlocksData = ({
   onSelect,
   glasses,
   hideRemoved,
-  onCoravinSearch
+  onCoravinSearch,
+  unHideHiddenClick,
+  unHideHidden,
 }) => {
   const data = glasses;
 
-  const cells = data.map(data => {
+  const cells = data.map((data) => {
     return (
       <MobileBlocks
         data={data}
@@ -17,6 +19,8 @@ const MobileBlocksData = ({
         onSelect={onSelect}
         hideRemoved={hideRemoved}
         onCoravinSearch={onCoravinSearch}
+        unHideHiddenClick={unHideHiddenClick}
+        unHideHidden={unHideHidden}
       />
     );
   });

@@ -17,32 +17,32 @@ import { string } from "prop-types";
 
 // import MobileBar from "./MobileBar";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   button: {
-    margin: theme.spacing(1)
+    margin: theme.spacing(1),
   },
   input: {
-    display: "none"
+    display: "none",
   },
   card: {
     maxWidth: 345,
     display: "inline-block",
     minHeight: 436,
-    overflow: "hidden"
+    overflow: "hidden",
   },
   cardAdded: {
     maxWidth: 345,
     backgroundColor: "#E6E6FA",
     display: "inline-block",
     minHeight: 436,
-    overflow: "hidden"
+    overflow: "hidden",
   },
   cardRemoved: {
     maxWidth: 345,
     backgroundColor: "#FFA07A",
     display: "inline-block",
     minHeight: 436,
-    overflow: "hidden"
+    overflow: "hidden",
   },
 
   cardHidden: {
@@ -51,52 +51,66 @@ const useStyles = makeStyles(theme => ({
     display: "inline-block",
     minHeight: 436,
     overflow: "hidden",
-    display: "none"
+    display: "none",
+  },
+  cardUnHidden: {
+    maxWidth: 345,
+    backgroundColor: "yellow",
+    display: "inline-block",
+    minHeight: 436,
+    overflow: "hidden",
   },
   ButtonBase: {
-    color: "blue"
+    color: "blue",
   },
   AvatarButton: {
-    fontSize: "1em"
+    fontSize: "1em",
   },
   media: {
     height: 0,
-    paddingTop: "56.25%" // 16:9
+    paddingTop: "56.25%", // 16:9
   },
   expand: {
     transform: "rotate(0deg)",
     marginLeft: "auto",
 
     transition: theme.transitions.create("transform", {
-      duration: theme.transitions.duration.shortest
-    })
+      duration: theme.transitions.duration.shortest,
+    }),
   },
   expandOpen: {
-    transform: "rotate(180deg)"
+    transform: "rotate(180deg)",
   },
   avatarRed: {
-    backgroundColor: red[500]
+    backgroundColor: red[500],
   },
   avatarWhite: {
-    backgroundColor: "black"
+    backgroundColor: "black",
   },
   avatarDessert: {
     backgroundColor: "yellow",
-    color: "black"
+    color: "black",
   },
   avatarCorovan: {
-    backgroundColor: "green"
+    backgroundColor: "green",
   },
   avatarSparkling: {
-    backgroundColor: "blue"
+    backgroundColor: "blue",
   },
 
   lister: {
-    listStyleType: "none"
-  }
+    listStyleType: "none",
+  },
 }));
 
-const MobileBlocks = ({ data, onSelect, hideRemoved, onCoravinSearch }) => {
+const MobileBlocks = ({
+  data,
+  onSelect,
+  hideRemoved,
+  onCoravinSearch,
+  unHideHiddenClick,
+  unHideHidden,
+}) => {
   const grapes = "grapes";
   const year = "year";
   const place = "place";
@@ -110,29 +124,31 @@ const MobileBlocks = ({ data, onSelect, hideRemoved, onCoravinSearch }) => {
   const mise = "mise";
   const coravin = "coravin";
 
-  const upperCaseFirstLetter = str =>
-    str.replace(/\b[a-z]/g, char => char.toUpperCase());
+  const upperCaseFirstLetter = (str) =>
+    str.replace(/\b[a-z]/g, (char) => char.toUpperCase());
 
-  const upperCaseFirstLetterForColor = color => {
+  const upperCaseFirstLetterForColor = (color) => {
     var str = color.charAt(0);
     return str.toUpperCase();
     //check to see if needed in admin mode
   };
 
-  const checkStatus = status => {
+  const checkStatus = (status) => {
     if (status === "added") {
       return classes.cardAdded;
     } else if (status === "removed" && !hideRemoved) {
       return classes.cardRemoved;
     } else if (status === "removed" && hideRemoved) {
       return classes.cardHidden;
-    } else if (status === "hidden") {
+    } else if (status === "hidden" && !unHideHidden) {
       return classes.cardHidden;
+    } else if (status === "hidden" && unHideHidden) {
+      return classes.cardUnHidden;
     } else {
       return classes.card;
     }
   };
-  const colorz = color => {
+  const colorz = (color) => {
     if (color === "red") {
       return classes.avatarRed;
     } else if (color === "white") {
@@ -145,6 +161,7 @@ const MobileBlocks = ({ data, onSelect, hideRemoved, onCoravinSearch }) => {
       return classes.avatarSparkling;
     }
   };
+
   //to get the subheader as a button
   let vinyard2;
   function vinny(vinyard1) {
@@ -156,7 +173,7 @@ const MobileBlocks = ({ data, onSelect, hideRemoved, onCoravinSearch }) => {
         className={classes.ButtonBase}
         id={vinyard}
         value={vinyard1}
-        onClick={event => onSelect(event)}
+        onClick={(event) => onSelect(event)}
       >
         {vinyard1}
       </ButtonBase>
@@ -185,7 +202,7 @@ const MobileBlocks = ({ data, onSelect, hideRemoved, onCoravinSearch }) => {
             <ButtonBase
               value={data.color}
               id={color}
-              onClick={event => onSelect(event)}
+              onClick={(event) => onSelect(event)}
               className={classes.AvatarButton}
             >
               {upperCaseFirstLetterForColor(data.color)}
@@ -209,7 +226,7 @@ const MobileBlocks = ({ data, onSelect, hideRemoved, onCoravinSearch }) => {
           <ButtonBase
             className={classes.ButtonBase}
             id={coravin}
-            onClick={event => onCoravinSearch(event)}
+            onClick={(event) => onSelect(event)}
             value={data.coravin}
           >
             {coravinCheck(data.coravin)}
@@ -218,7 +235,7 @@ const MobileBlocks = ({ data, onSelect, hideRemoved, onCoravinSearch }) => {
             className={classes.ButtonBase}
             value={data.year}
             id={year}
-            onClick={event => onSelect(event)}
+            onClick={(event) => onSelect(event)}
           >
             {data.year}
           </ButtonBase>{" "}
@@ -227,7 +244,7 @@ const MobileBlocks = ({ data, onSelect, hideRemoved, onCoravinSearch }) => {
             component="button"
             value={data.grapes}
             id={grapes}
-            onClick={event => onSelect(event)}
+            onClick={(event) => onSelect(event)}
           >
             {data.grapes}
           </ButtonBase>{" "}
@@ -236,7 +253,7 @@ const MobileBlocks = ({ data, onSelect, hideRemoved, onCoravinSearch }) => {
             className={classes.ButtonBase}
             value={data.place}
             id={place}
-            onClick={event => onSelect(event)}
+            onClick={(event) => onSelect(event)}
           >
             {data.place}
           </ButtonBase>{" "}
@@ -244,7 +261,7 @@ const MobileBlocks = ({ data, onSelect, hideRemoved, onCoravinSearch }) => {
             className={classes.ButtonBase}
             value={data.area}
             id={area}
-            onClick={event => onSelect(event)}
+            onClick={(event) => onSelect(event)}
           >
             {data.area}
           </ButtonBase>{" "}
@@ -253,7 +270,7 @@ const MobileBlocks = ({ data, onSelect, hideRemoved, onCoravinSearch }) => {
             className={classes.ButtonBase}
             value={data.country}
             id={country}
-            onClick={event => onSelect(event)}
+            onClick={(event) => onSelect(event)}
           >
             {data.country}
           </ButtonBase>{" "}
@@ -262,7 +279,7 @@ const MobileBlocks = ({ data, onSelect, hideRemoved, onCoravinSearch }) => {
             className={classes.ButtonBase}
             value={data.mise}
             id={mise}
-            onClick={event => onSelect(event)}
+            onClick={(event) => onSelect(event)}
           >
             {data.mise}
           </ButtonBase>{" "}
@@ -272,7 +289,7 @@ const MobileBlocks = ({ data, onSelect, hideRemoved, onCoravinSearch }) => {
       <CardActions disableSpacing>
         <IconButton
           className={clsx(classes.expand, {
-            [classes.expandOpen]: expanded
+            [classes.expandOpen]: expanded,
           })}
           onClick={handleExpandClick}
           aria-expanded={expanded}
@@ -291,7 +308,7 @@ const MobileBlocks = ({ data, onSelect, hideRemoved, onCoravinSearch }) => {
                   className={classes.ButtonBase}
                   id={grape}
                   value={result}
-                  onClick={event => onSelect(event)}
+                  onClick={(event) => onSelect(event)}
                 >
                   {result}
                 </ButtonBase>
@@ -306,7 +323,7 @@ const MobileBlocks = ({ data, onSelect, hideRemoved, onCoravinSearch }) => {
                   className={classes.ButtonBase}
                   id={description}
                   value={result}
-                  onClick={event => onSelect(event)}
+                  onClick={(event) => onSelect(event)}
                 >
                   {result}
                 </ButtonBase>
@@ -320,7 +337,7 @@ const MobileBlocks = ({ data, onSelect, hideRemoved, onCoravinSearch }) => {
               className={classes.ButtonBase}
               value={data.appellation}
               id={appellation}
-              onClick={event => onSelect(event)}
+              onClick={(event) => onSelect(event)}
             >
               {data.appellation}
             </ButtonBase>
