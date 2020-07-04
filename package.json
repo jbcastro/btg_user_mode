@@ -12,6 +12,7 @@
     "mongodb": "^3.5.6",
     "mongoose": "^5.9.9",
     "react": "^16.13.1",
+    "react-chips": "^0.8.0",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
     "yarn": "^1.22.4"

@@ -6,6 +6,7 @@ import CircularDeterminate from "./CircularDeterminate";
 import { MongoNetworkError } from "mongodb";
 import { Drawer } from "@material-ui/core";
 import TempDrawer from "./TempDrawer";
+import CheckBoxes from "./CheckBoxes";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +19,17 @@ class App extends Component {
       unFilteredWines: [],
       filterTerms: [],
       filterTermsWithId: [],
+      colorSort: true,
+      statusSort: true,
+      yearSort: true,
+      priceSort: true,
+      unMutable: [],
+      checkStates: {
+        zero: false,
+        twentyone: false,
+        thirtyone: false,
+        fortyone: false,
+      },
     };
 
     this.onSelect = this.onSelect.bind(this);
@@ -27,6 +39,8 @@ class App extends Component {
     this.onClear = this.onClear.bind(this);
     this.onSort = this.onSort.bind(this);
     this.hideRemovedClick = this.hideRemovedClick.bind(this);
+    this.priceCheck = this.priceCheck.bind(this);
+    this.priceChange = this.priceChange.bind(this);
   }
 
   componentDidMount() {
@@ -44,6 +58,7 @@ class App extends Component {
         glassesData.sort((a, b) => order[a.status] - order[b.status]);
         this.setState({ glasses: glassesData });
         this.setState({ unFilteredWines: glassesData });
+        this.setState({ unMutable: glassesData });
 
         let allSearchableData = glassesData.map((result) => {
           return [
@@ -118,7 +133,7 @@ class App extends Component {
         const allInfo0 = allSearchableData.flat(Infinity);
         allInfo0.map((item) => {
           if (item.id == "description") {
-            descAndGrape.unshift(
+            descAndGrape.push(
               item.value.map((result) => [
                 {
                   value: result,
@@ -131,7 +146,7 @@ class App extends Component {
         });
         allInfo0.map((item) => {
           if (item.id == "grape") {
-            descAndGrape.unshift(
+            descAndGrape.push(
               item.value.map((result) => [
                 {
                   value: result,
@@ -167,6 +182,18 @@ class App extends Component {
             value: value.value,
             id: value.id,
           };
+        });
+        //sorts allinfo so when searching it shows up alphabetically
+        allInfo.sort(function (a, b) {
+          var valueA = a.value.toUpperCase();
+          var valueB = b.value.toUpperCase();
+          if (valueA < valueB) {
+            return -1;
+          }
+          if (valueA > valueB) {
+            return 1;
+          }
+          return 0;
         });
 
         this.setState({ allInfo: allInfo });
@@ -231,11 +258,10 @@ class App extends Component {
         let grapeList = e.grape.map(capitilize);
         for (let i = 0; i < grapeList.length; i++) {
           if (grapeList[i] === value) {
-            filterWineOnClick.unshift(e);
+            filterWineOnClick.push(e);
           }
         }
       });
-      console.log("grape" + filterWineOnClick);
     } else if (id == "description") {
       let glassesList = glasses;
 
@@ -243,11 +269,10 @@ class App extends Component {
         let grapeList = e.description.map(capitilize);
         for (let i = 0; i < grapeList.length; i++) {
           if (grapeList[i] === value) {
-            filterWineOnClick.unshift(e);
+            filterWineOnClick.push(e);
           }
         }
       });
-      console.log("desc" + filterWineOnClick);
     } else if (id == "coravin") {
       let glassesList = glasses;
       if (value === "TRUE") {
@@ -270,9 +295,11 @@ class App extends Component {
     );
 
     this.setState({ filterTerms: termsToArray });
-    this.setState({ glasses: filterWineOnClick });
+    // this.setState({ glasses: filterWineOnClick });
     this.setState({ filterTermsWithId: termsToArray1 });
     this.setState({ filteredWines: difference });
+    this.setState({ unMutable: filterWineOnClick });
+    this.priceChange(filterWineOnClick);
   };
   ///
 
@@ -306,9 +333,9 @@ class App extends Component {
         return item.toUpperCase();
       }
     }
-
     let filterWineOnClick = [];
     let newTermArrayLength = newTermArray.length;
+    let glassesList = unFilteredWines;
 
     if (newTermArrayLength == 0) {
       filterWineOnClick = unFilteredWines;
@@ -321,55 +348,63 @@ class App extends Component {
       newIdArray.forEach(function (item) {
         let id = item.id;
         let value = item.value;
-        if (id == "grape") {
-          let glassesList = unFilteredWines;
+        let newArrayThatWillBeGlassesList = [];
 
+        if (id == "grape") {
           glassesList.forEach(function (e) {
+            // console.log(wineId);
             let grapeList = e.grape.map(capitilize);
             for (let i = 0; i < grapeList.length; i++) {
               if (grapeList[i] === value) {
-                filterWineOnClick.unshift(e);
+                newArrayThatWillBeGlassesList.push(e);
               }
             }
           });
-          console.log("grape" + filterWineOnClick);
+          const differenceBetweenNewArrayAndGlasses = glassesList.filter((x) =>
+            newArrayThatWillBeGlassesList.includes(x)
+          );
+          glassesList = differenceBetweenNewArrayAndGlasses;
         } else if (id == "description") {
-          let glassesList = unFilteredWines;
-
           glassesList.forEach(function (e) {
             let grapeList = e.description.map(capitilize);
             for (let i = 0; i < grapeList.length; i++) {
               if (grapeList[i] === value) {
-                filterWineOnClick.unshift(e);
+                newArrayThatWillBeGlassesList.push(e);
               }
             }
           });
-          console.log("desc" + filterWineOnClick);
+          const differenceBetweenNewArrayAndGlasses = glassesList.filter((x) =>
+            newArrayThatWillBeGlassesList.includes(x)
+          );
+          glassesList = differenceBetweenNewArrayAndGlasses;
         } else if (id == "coravin") {
-          let glassesList = unFilteredWines;
           if (value === "TRUE") {
             filterWineOnClick = glassesList.filter(
               (result) => result.coravin == true
             );
+            glassesList = filterWineOnClick;
           } else {
             filterWineOnClick = glassesList.filter(
               (result) => result.coravin !== true
             );
           }
+          glassesList = filterWineOnClick;
         } else {
-          let glassesList = unFilteredWines;
           filterWineOnClick = glassesList.filter(
             (result) => filterNulls(result[id]) == value
           );
+          glassesList = filterWineOnClick;
         }
       });
-      let difference = unFilteredWines.filter(
-        (x) => !filterWineOnClick.includes(x)
-      );
-
-      this.setState({ glasses: filterWineOnClick });
-      this.setState({ filteredWines: difference });
     }
+    let difference = unFilteredWines.filter(
+      (x) => !filterWineOnClick.includes(x)
+    );
+
+    // this.setState({ glasses: glassesList });
+    this.setState({ filteredWines: difference });
+    this.setState({ unMutable: glassesList });
+    this.priceChange(glassesList);
   };
   ///
   ///
@@ -406,6 +441,7 @@ class App extends Component {
 
     this.setState({ glasses: filterCoravin });
     this.setState({ filterTerms: termsToArray });
+    this.setState({ unMutable: filterCoravin });
     // this.setState({ filterTermsWithId: termsToArrayId });
   };
 
@@ -449,7 +485,7 @@ class App extends Component {
         let grapeList = e.grape.map(capitilize);
         for (let i = 0; i < grapeList.length; i++) {
           if (grapeList[i] === value) {
-            filterWineOnClick.unshift(e);
+            filterWineOnClick.push(e);
           }
         }
       });
@@ -461,7 +497,7 @@ class App extends Component {
         let grapeList = e.description.map(capitilize);
         for (let i = 0; i < grapeList.length; i++) {
           if (grapeList[i] === value) {
-            filterWineOnClick.unshift(e);
+            filterWineOnClick.push(e);
           }
         }
       });
@@ -491,6 +527,7 @@ class App extends Component {
     this.setState({ glasses: filterWineOnClick });
     this.setState({ filterTermsWithId: termsToArray1 });
     this.setState({ filteredWines: difference });
+    this.setState({ unMutable: filterWineOnClick });
   };
 
   onClear() {
@@ -500,33 +537,90 @@ class App extends Component {
     this.setState({ filterTerms: [] });
     this.setState({ filterTermsWithId: [] });
     this.setState({ filteredWines: [] });
+    this.setState({ unMutable: unFilteredWines1 });
   }
   onSort = (event) => {
-    const glasses = this.state.unFilteredWines;
-    const termy = event.target.id;
+    const glasses = this.state.glasses;
+    let termy = event.target.id;
 
-    if (termy == "color") {
-      const sorted = glasses.sort(function (a, b) {
-        var colorA = a.color.toUpperCase();
-        var colorB = b.color.toUpperCase();
-        if (colorA < colorB) {
-          return -1;
-        }
-        if (colorA > colorB) {
-          return 1;
-        }
-        return 0;
-      });
-      this.setState({ glasses: sorted });
-    } else if (termy == "status") {
+    if (termy === "status") {
       const order = {
         removed: 1,
         added: 2,
         none: 3,
         hidden: 4,
       };
-      let sorted = glasses.sort((a, b) => order[a.status] - order[b.status]);
+      const sorted = glasses.sort((a, b) => order[a.status] - order[b.status]);
+      if (this.state.statusSort === false) {
+        sorted.reverse();
+      }
       this.setState({ glasses: sorted });
+      this.setState((state) => ({ statusSort: !this.state.statusSort }));
+      this.setState({ colorSort: true });
+      this.setState({ priceSort: true });
+      this.setState({ yearSort: true });
+    }
+    if (termy === "color") {
+      const order = {
+        red: 1,
+        white: 2,
+        sparkling: 3,
+        dessert: 4,
+      };
+      const sorted = glasses.sort((a, b) => order[a.color] - order[b.color]);
+      if (this.state.colorSort === false) {
+        sorted.reverse();
+      }
+      this.setState({ glasses: sorted });
+      this.setState((state) => ({ colorSort: !this.state.colorSort }));
+      this.setState({ statusSort: true });
+      this.setState({ priceSort: true });
+      this.setState({ yearSort: true });
+      this.setState({ unMutable: sorted });
+    }
+    if (termy === "year") {
+      const sorted = glasses.sort(function (a, b) {
+        var yearA = a.year;
+        var yearB = b.year;
+        if (yearA < yearB) {
+          return -1;
+        }
+        if (yearA > yearB) {
+          return 1;
+        }
+        return 0;
+      });
+      if (this.state.yearSort === false) {
+        sorted.reverse();
+      }
+      this.setState({ glasses: sorted });
+      this.setState({ unMutable: sorted });
+      this.setState({ colorSort: true });
+      this.setState({ statusSort: true });
+      this.setState({ priceSort: true });
+      this.setState((state) => ({ yearSort: !this.state.yearSort }));
+    }
+    if (termy === "price") {
+      const sorted = glasses.sort(function (a, b) {
+        var priceA = a.price;
+        var priceB = b.price;
+        if (priceA < priceB) {
+          return -1;
+        }
+        if (priceA > priceB) {
+          return 1;
+        }
+        return 0;
+      });
+      if (this.state.priceSort === false) {
+        sorted.reverse();
+      }
+      this.setState({ glasses: sorted });
+      this.setState({ unMutable: sorted });
+      this.setState({ colorSort: true });
+      this.setState({ statusSort: true });
+      this.setState({ yearSort: true });
+      this.setState((state) => ({ priceSort: !this.state.priceSort }));
     }
   };
   hideRemovedClick = (event) => {
@@ -535,7 +629,100 @@ class App extends Component {
   unHideHiddenClick = (event) => {
     this.setState((state) => ({ unHideHidden: !this.state.unHideHidden }));
   };
+  priceCheck = (state) => {
+    const glasses = this.state.unMutable;
+    this.setState({ checkStates: state });
+    this.priceChange(glasses);
+  };
 
+  priceChange(x) {
+    let arr = [];
+    const checkStates = this.state.checkStates;
+    const glasses2 = x;
+    console.log(x);
+
+    if (
+      checkStates.zero === false &&
+      checkStates.twentyone === false &&
+      checkStates.thirtyone === false &&
+      checkStates.fortyone === false
+    ) {
+      this.setState({ glasses: glasses2 });
+    } else {
+      if (checkStates.zero === true) {
+        const glasses = glasses2;
+        const zero = glasses.filter((wine) => wine.price < 21);
+        arr.push(zero);
+      }
+      if (checkStates.twentyone === true) {
+        const glasses = glasses2;
+        const twentyone = glasses.filter(
+          (wine) => wine.price >= 21 && wine.price < 31
+        );
+        arr.push(twentyone);
+      }
+      if (checkStates.thirtyone === true) {
+        const glasses = glasses2;
+        const thirtyone = glasses.filter(
+          (wine) => wine.price >= 31 && wine.price < 41
+        );
+        arr.push(thirtyone);
+      }
+      if (checkStates.fortyone === true) {
+        const glasses = glasses2;
+        const fortyone = glasses.filter((wine) => wine.price >= 41);
+        arr.push(fortyone);
+      }
+
+      const flat = arr.flat();
+      console.log(flat);
+      this.setState({ glasses: flat });
+    }
+    // if (this.state.glasses !== prevProps.glasses) {
+    // if (this.state.checkStates !== prevProps.checkStates) {
+    //   if (this.state.glasses !== prevState.glasses) {
+    //     console.log("dude");
+    //   }
+    // }
+    // if (
+    //   checkStates.zero === false &&
+    //   checkStates.twentyone === false &&
+    //   checkStates.thirtyone === false &&
+    //   checkStates.fortyone === false
+    // ) {
+    //   this.setState({ glasses: glasses2 });
+    // }
+    // else {
+    //   if (checkStates.zero === true) {
+    //     const glasses = glasses2;
+    //     const zero = glasses.filter((wine) => wine.price < 21);
+    //     arr.push(zero);
+    //   }
+    //   if (checkStates.twentyone === true) {
+    //     const glasses = glasses2;
+    //     const twentyone = glasses.filter(
+    //       (wine) => wine.price >= 21 && wine.price < 31
+    //     );
+    //     arr.push(twentyone);
+    //   }
+    //   if (checkStates.thirtyone === true) {
+    //     const glasses = glasses2;
+    //     const thirtyone = glasses.filter(
+    //       (wine) => wine.price >= 31 && wine.price < 41
+    //     );
+    //     arr.push(thirtyone);
+    //   }
+    //   if (checkStates.fortyone === true) {
+    //     const glasses = glasses2;
+    //     const fortyone = glasses.filter((wine) => wine.price >= 41);
+    //     arr.push(fortyone);
+    //   }
+
+    //   const flat = arr.flat();
+    //   this.setState({ glasses: flat });
+    // }
+    // }
+  }
   ///render portion
 
   //
@@ -568,6 +755,9 @@ class App extends Component {
             unHideHiddenClick={this.unHideHiddenClick}
             onRemoveFilterTerms={this.onRemoveFilterTerms}
             onSelect={this.onSelect}
+            filterTermsWithId={this.state.filterTermsWithId}
+            priceCheck={this.priceCheck}
+            onSelect={this.onSelect}
           />
 
           {/* <AppBarSearch
@@ -583,6 +773,8 @@ class App extends Component {
             onCoravinSearch={this.onCoravinSearch}
             unHideHiddenClick={this.unHideHiddenClick}
             unHideHidden={this.state.unHideHidden}
+            priceCheck={this.priceCheck}
+            checkStates={this.state.checkStates}
           />
         </div>
       );

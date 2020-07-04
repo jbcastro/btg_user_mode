@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import MobileBlocks from "./MobileBlocks";
 
 const MobileBlocksData = ({
@@ -8,9 +8,13 @@ const MobileBlocksData = ({
   onCoravinSearch,
   unHideHiddenClick,
   unHideHidden,
+  priceCheck,
+  checkedStates,
 }) => {
   const data = glasses;
-
+  // useEffect(() => {
+  //   priceCheck(checkedStates);
+  // }, [glasses]);
   const cells = data.map((data) => {
     return (
       <MobileBlocks
@@ -21,6 +25,7 @@ const MobileBlocksData = ({
         onCoravinSearch={onCoravinSearch}
         unHideHiddenClick={unHideHiddenClick}
         unHideHidden={unHideHidden}
+        priceCheck={priceCheck}
       />
     );
   });

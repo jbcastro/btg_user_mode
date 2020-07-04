@@ -298,3 +298,98 @@ newIdArray.forEach(function (e) {
     );
   }
 });
+
+
+
+
+
+
+
+
+
+const glasses = this.state.unFilteredWines;
+const termy = event.target.id;
+// const booValue = event.target.value;
+// console.log(booValue);
+// console.log(termy);
+
+if (termy == "color") {
+  let firstNum;
+  let secondNum;
+  if (this.state.colorSort === true) {
+    firstNum = -1;
+    secondNum = 1;
+  } else {
+    firstNum = 1;
+    secondNum = -1;
+  }
+  this.setState((state) => ({ colorSort: !this.state.colorSort }));
+  this.setState({ statusSort: true });
+
+  const sorted = glasses.sort(function (a, b) {
+    var colorA = a.color.toUpperCase();
+    var colorB = b.color.toUpperCase();
+    if (colorA < colorB) {
+      return firstNum;
+    }
+    if (colorA > colorB) {
+      return secondNum;
+    }
+    return 0;
+  });
+  this.setState({ glasses: sorted });
+} else if (termy == "status") {
+  this.setState((state) => ({ statusSort: !this.state.statusSort }));
+  this.setState({ colorSort: true });
+  const order = {
+    removed: 1,
+    added: 2,
+    none: 3,
+    hidden: 4,
+  };
+  let sorted = glasses.sort((a, b) => order[a.status] - order[b.status]);
+  this.setState({ glasses: sorted });
+}
+
+let arr = [];
+    const checkStates = this.state.checkStates;
+
+    if (
+      checkStates.zero === false &&
+      checkStates.twentyone === false &&
+      checkStates.thirtyone === false &&
+      checkStates.fortyone === false
+    ) {
+      this.setState({ glasses: glasses2 });
+    } else {
+      if (checkStates.zero === true) {
+        const glasses = glasses2;
+        const zero = glasses.filter((wine) => wine.price < 21);
+        arr.push(zero);
+      }
+      if (checkStates.twentyone === true) {
+        const glasses = glasses2;
+        const twentyone = glasses.filter(
+          (wine) => wine.price >= 21 && wine.price < 31
+        );
+        arr.push(twentyone);
+      }
+      if (checkStates.thirtyone === true) {
+        const glasses = glasses2;
+        const thirtyone = glasses.filter(
+          (wine) => wine.price >= 31 && wine.price < 41
+        );
+        arr.push(thirtyone);
+      }
+      if (checkStates.fortyone === true) {
+        const glasses = glasses2;
+        const fortyone = glasses.filter((wine) => wine.price >= 41);
+        arr.push(fortyone);
+      }
+
+      const flat = arr.flat();
+      this.setState({ glasses: flat });
+    }
+    // this.setState({ glasses: arr });
+
+    // }

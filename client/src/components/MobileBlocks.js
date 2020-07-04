@@ -14,11 +14,16 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import ButtonBase from "@material-ui/core/ButtonBase";
 import CardMedia from "@material-ui/core/CardMedia";
 import { string } from "prop-types";
+import Chip from "@material-ui/core/Chip";
+import Button from "@material-ui/core/Button";
 
 // import MobileBar from "./MobileBar";
 
 const useStyles = makeStyles((theme) => ({
   button: {
+    margin: theme.spacing(1),
+  },
+  margin: {
     margin: theme.spacing(1),
   },
   input: {
@@ -27,21 +32,21 @@ const useStyles = makeStyles((theme) => ({
   card: {
     maxWidth: 345,
     display: "inline-block",
-    minHeight: 436,
+    // minHeight: 436,
     overflow: "hidden",
   },
   cardAdded: {
     maxWidth: 345,
     backgroundColor: "#E6E6FA",
     display: "inline-block",
-    minHeight: 436,
+    // minHeight: 436,
     overflow: "hidden",
   },
   cardRemoved: {
     maxWidth: 345,
     backgroundColor: "#FFA07A",
     display: "inline-block",
-    minHeight: 436,
+    // minHeight: 436,
     overflow: "hidden",
   },
 
@@ -49,7 +54,7 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 345,
     backgroundColor: "yellow",
     display: "inline-block",
-    minHeight: 436,
+    // minHeight: 436,
     overflow: "hidden",
     display: "none",
   },
@@ -57,11 +62,21 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 345,
     backgroundColor: "yellow",
     display: "inline-block",
-    minHeight: 436,
+    // minHeight: 436,
     overflow: "hidden",
   },
   ButtonBase: {
     color: "blue",
+    fontSize: "0.875rem",
+    fontFamily: "Roboto",
+
+    letterspacing: "0.01071em",
+    fontWeight: "400",
+    lineHeight: "1.43",
+  },
+  lists: {
+    color: "blue",
+    margin: theme.spacing(1),
   },
   AvatarButton: {
     fontSize: "1em",
@@ -301,46 +316,60 @@ const MobileBlocks = ({
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph>
-            Grapes:{" "}
+            Grapes<br></br>
             {data.grape.map((result, index) => (
-              <li key={index}>
-                <ButtonBase
-                  className={classes.ButtonBase}
+              <li key={index} className="list">
+                <button
+                  className="descAndGrape"
                   id={grape}
                   value={result}
                   onClick={(event) => onSelect(event)}
                 >
                   {result}
-                </ButtonBase>
+                </button>
               </li>
             ))}
           </Typography>
           <Typography paragraph>
-            Descriptions:{" "}
+            Descriptions<br></br>
             {data.description.map((result, index) => (
-              <li key={index}>
-                <ButtonBase
-                  className={classes.ButtonBase}
+              <li key={index} className="list">
+                <button
+                  className="descAndGrape"
                   id={description}
                   value={result}
                   onClick={(event) => onSelect(event)}
                 >
                   {result}
-                </ButtonBase>
+                </button>
               </li>
             ))}
+            {/* 
+            {data.description.map((result, index) => (
+              <ul className="list">
+                <li key={index}>
+                  <Chip
+                    id={description}
+                    value={result}
+                    label={result}
+                    onClick={(event) => chipClick(event)}
+                    value={result}
+                  ></Chip>
+                </li>
+              </ul>
+            ))} */}
           </Typography>
-
+          <p></p>
           <Typography paragraph>
-            Appellation:{" "}
-            <ButtonBase
-              className={classes.ButtonBase}
+            Appellation<br></br>
+            <button
+              className="descAndGrape"
               value={data.appellation}
               id={appellation}
               onClick={(event) => onSelect(event)}
             >
               {data.appellation}
-            </ButtonBase>
+            </button>
           </Typography>
           <Typography paragraph>Fun Fact: {data.funfact}</Typography>
         </CardContent>
