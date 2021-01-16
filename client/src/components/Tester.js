@@ -182,214 +182,387 @@ onSearchSelect = event => {
 
 
 
-  Hubert Clavin Cremant du Jura Brut Blanc de Blancs 	100% Chardonnay	NV	Franche-Comté, France	Cotes du Jura	Citrus, Apple, Brioche, Chalk, Wet Stones, Roasted Nuts, Buckwheat	Hubert Clavelin and his two sons have vineyards in the Côte du Jura, a small range of mountains about 30 miles to the east of the Côte D’Or in the province of the Franche-Comté. Within their holding they have a parcel of very high limestone soil that they have planted in Chardonnay and from this parcel they make their sparkling wine, Brut Comte. Their method is the same as champagne; the wine is fermented in the bottle and each bottle is hand-riddled. The care that they take is shown in the very fine quality of the Brut Comte – tasting more like a lesser, true champagne than a sparkling wine from Burgundy. 	AP 	$14.00
-Veuve Fourny & Fils, Blanc de Blancs, Brut	Chardonnay	NV 	Champagne, France	Vertus, Cotes de Blanc	Lemon Cake, Apples, Pears, Brewers Yeast, Chamomile, Almonds, Wet Chalk	Champagne Veuve Fourny & Fils has been an active family domaine since 1856. The estate is located in the prestigious Côte des Blancs, in the premier cru village of Vertus, an appellation that gives them the rare opportunity to grow Pinot Noir as well as Chardonnay. Brothers Charles-Henry and Emmanuel Fourny sustainably farm nearly nine hectares of vineyards and have been carrying on the family winegrowing tradition since 1993. The house style at Veuve Fourny is best characterized as classic Côte des Blancs: a fine bead, rich, deep aromatics, and a complex minerality emphasizing freshness and purity. The Fournys believe in minimal dosage for all of their Champagnes, preferring to let the individual terroirs express themselves more clearly. Dosage: 6 g/L. Malolactic encouraged. 25% barrel aged. 3 years on lees.	AP	$25.00
 
-newIdArray.forEach(function (e) {
-  let id = e.id;
-  let value = e.value;
-  filterWineOnClick = glasses;
-  if (id == "description") {
-    console.log("dude");
-    let glassesList = filteredWines;
-    glassesList.forEach(function (f) {
-      let descriptionList = f.description.map(capitilize);
-      for (let i = 0; i < descriptionList.length; i++) {
-        if (descriptionList[i] == value) {
-          filterWineOnClick.push(f);
-          console.log(filterWineOnClick);
-        }
-      }
-    });
+
+
+
+
+
+  import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
+import Card from "@material-ui/core/Card";
+import CardHeader from "@material-ui/core/CardHeader";
+import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
+import Collapse from "@material-ui/core/Collapse";
+import Avatar from "@material-ui/core/Avatar";
+import IconButton from "@material-ui/core/IconButton";
+import Typography from "@material-ui/core/Typography";
+import { red } from "@material-ui/core/colors";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import ButtonBase from "@material-ui/core/ButtonBase";
+import CardMedia from "@material-ui/core/CardMedia";
+import { string } from "prop-types";
+
+// import MobileBar from "./MobileBar";
+
+const useStyles = makeStyles(theme => ({
+  button: {
+    margin: theme.spacing(1)
+  },
+  input: {
+    display: "none"
+  },
+  card: {
+    maxWidth: 345
+  },
+  cardAdded: {
+    maxWidth: 345,
+    backgroundColor: "#E6E6FA"
+  },
+  cardRemoved: {
+    maxWidth: 345,
+    backgroundColor: "#FFA07A"
+  },
+  cardHidden: {
+    maxWidth: 345,
+    backgroundColor: "yellow"
+  },
+  ButtonBase: {
+    color: "blue"
+  },
+  media: {
+    height: 0,
+    paddingTop: "56.25%" // 16:9
+  },
+  expand: {
+    transform: "rotate(0deg)",
+    marginLeft: "auto",
+    transition: theme.transitions.create("transform", {
+      duration: theme.transitions.duration.shortest
+    })
+  },
+  expandOpen: {
+    transform: "rotate(180deg)"
+  },
+  avatarRed: {
+    backgroundColor: red[500]
+  },
+  avatarWhite: {
+    backgroundColor: "black"
+  },
+  avatarDessert: {
+    backgroundColor: "yellow",
+    color: "black"
+  },
+  avatarCorovan: {
+    backgroundColor: "green"
+  },
+  avatarSparkling: {
+    backgroundColor: "blue"
+  },
+
+  lister: {
+    listStyleType: "none"
   }
-});
+}));
 
-this.setState({ glasses: filterWineOnClick });
+const MobileBlocks = ({ data, onSelect, hideRemoved }) => {
+  const grapes = "grapes";
+  const year = "year";
+  const place = "place";
+  const area = "area";
+  const country = "country";
+  const appellation = "appellation";
+  const grape = "grape";
+  const description = "description";
+  const vinyard = "vinyard";
 
+  const mise = "mise";
 
-let glassesList = glasses;
-if (value == "true") {
-  filterWineOnClick = glassesList.filter(
-    (result) => result.coravin == true
-  );
-  console.log("cor" + filterWineOnClick);
-} else {
-  let glassesList = glasses;
-  filterWineOnClick = glassesList.filter(
-    (result) => result.coravin == false
-  );
-  console.log("non" + filterWineOnClick);
-}
-// filterWineOnClick = glasses.filter((result) => {
-//   if (value1 === "true") {
-//     console.log("bro");
-//     result.coravin === true;
-//   } else {
-//     console.log("dude");
-//     result.coravin === false;
-//   }
-// });
+  const upperCaseFirstLetter = str =>
+    str.replace(/\b[a-z]/g, char => char.toUpperCase());
 
+  const upperCaseFirstLetterForColor = color => {
+    var str = color.charAt(0);
+    return str.toUpperCase();
+    //check to see if needed in admin mode
+  };
 
-else if (id == "coravin" && value == "false") {
-  let glassesList = glasses;
-  filterWineOnClick = glassesList.filter(
-    (result) => result.coravin == false
-  );
-  console.log("non" + filterWineOnClick);
-}
-
-
-else if (stringer !== "non-coravin" && "coravin") {
-  filterWineOnClick = unFilteredWines.filter(
-    (result) => filterNulls(result[id]) == value
-  );
-}
-
-
-
-else if (id == "coravin") {
-  filterWineOnClick = unFilteredWines.filter(
-    (result) => result.coravin === false
-  );
-}
-
-
-
-
-
-
-newIdArray.forEach(function (e) {
-  let id = e.id;
-  let value = e.value;
-  if (id == "description") {
-    let glassesList = unFilteredWines;
-    glassesList.forEach(function (f) {
-      let descriptionList = f.description.map(capitilize);
-      for (let i = 0; i < descriptionList.length; i++) {
-        if (descriptionList[i] == value) {
-          filterWineOnClick.push(f);
-        }
-      }
-    });
-  } else if (id == "grape") {
-    let glassesList = unFilteredWines;
-    glassesList.forEach(function (f) {
-      let grapeList = f.grape.map(capitilize);
-      for (let i = 0; i < grapeList.length; i++) {
-        if (grapeList[i] == value) {
-          filterWineOnClick.push(f);
-        }
-      }
-    });
-  } else if (id == "coravin") {
-    if (value === false) {
-      filterWineOnClick = unFilteredWines.filter(
-        (result) => result.coravin == false
-      );
+  const checkStatus = status => {
+    if (status === "added") {
+      return classes.cardAdded;
+    } else if (status === "removed" && !hideRemoved) {
+      return classes.cardRemoved;
+    } else if (status === "removed" && hideRemoved) {
+      return classes.cardHidden;
+    } else if (status === "hidden") {
+      return classes.cardHidden;
     } else {
-      filterWineOnClick = unFilteredWines.filter(
-        (result) => result.coravin !== false
-      );
+      return classes.card;
     }
-  } else {
-    filterWineOnClick = unFilteredWines.filter(
-      (result) => filterNulls(result[id]) == value
+  };
+  const colorz = color => {
+    if (color === "red") {
+      return classes.avatarRed;
+    } else if (color === "white") {
+      return classes.avatarWhite;
+    } else if (color === "dessert") {
+      return classes.avatarDessert;
+    } else if (color === "corovan") {
+      return classes.avatarCorovan;
+    } else {
+      return classes.avatarSparkling;
+    }
+  };
+  //to get the subheader as a button
+  let vinyard2;
+  function vinny(vinyard1) {
+    if (vinyard1 === string) {
+      vinyard2 = vinyard1.toUpperCase();
+    }
+    return (
+      <ButtonBase
+        className={classes.ButtonBase}
+        id={vinyard}
+        value={vinyard1}
+        onClick={event => onSelect(event)}
+      >
+        {vinyard1}
+      </ButtonBase>
     );
   }
-});
 
+  const classes = useStyles();
+  const [expanded, setExpanded] = React.useState(false);
 
-
-
-
-
-
-
-
-const glasses = this.state.unFilteredWines;
-const termy = event.target.id;
-// const booValue = event.target.value;
-// console.log(booValue);
-// console.log(termy);
-
-if (termy == "color") {
-  let firstNum;
-  let secondNum;
-  if (this.state.colorSort === true) {
-    firstNum = -1;
-    secondNum = 1;
-  } else {
-    firstNum = 1;
-    secondNum = -1;
-  }
-  this.setState((state) => ({ colorSort: !this.state.colorSort }));
-  this.setState({ statusSort: true });
-
-  const sorted = glasses.sort(function (a, b) {
-    var colorA = a.color.toUpperCase();
-    var colorB = b.color.toUpperCase();
-    if (colorA < colorB) {
-      return firstNum;
-    }
-    if (colorA > colorB) {
-      return secondNum;
-    }
-    return 0;
-  });
-  this.setState({ glasses: sorted });
-} else if (termy == "status") {
-  this.setState((state) => ({ statusSort: !this.state.statusSort }));
-  this.setState({ colorSort: true });
-  const order = {
-    removed: 1,
-    added: 2,
-    none: 3,
-    hidden: 4,
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
   };
-  let sorted = glasses.sort((a, b) => order[a.status] - order[b.status]);
-  this.setState({ glasses: sorted });
-}
 
-let arr = [];
-    const checkStates = this.state.checkStates;
+  return (
+    <Card className={checkStatus(data.status)} key={data._id} raised>
+      <CardHeader
+        avatar={
+          <Avatar aria-label="recipe" className={colorz(data.color)}>
+            {upperCaseFirstLetterForColor(data.color)}
+          </Avatar>
+        }
+        title={data.name}
+        subheader={vinny(data.vinyard)}
+      />
 
-    if (
-      checkStates.zero === false &&
-      checkStates.twentyone === false &&
-      checkStates.thirtyone === false &&
-      checkStates.fortyone === false
-    ) {
-      this.setState({ glasses: glasses2 });
-    } else {
-      if (checkStates.zero === true) {
-        const glasses = glasses2;
-        const zero = glasses.filter((wine) => wine.price < 21);
-        arr.push(zero);
-      }
-      if (checkStates.twentyone === true) {
-        const glasses = glasses2;
-        const twentyone = glasses.filter(
-          (wine) => wine.price >= 21 && wine.price < 31
-        );
-        arr.push(twentyone);
-      }
-      if (checkStates.thirtyone === true) {
-        const glasses = glasses2;
-        const thirtyone = glasses.filter(
-          (wine) => wine.price >= 31 && wine.price < 41
-        );
-        arr.push(thirtyone);
-      }
-      if (checkStates.fortyone === true) {
-        const glasses = glasses2;
-        const fortyone = glasses.filter((wine) => wine.price >= 41);
-        arr.push(fortyone);
-      }
+      {/* for images */}
+      {/* <CardMedia
+        className={classes.media}
+        image={`https://josephbeckcastro.com/site4/images/${data.picture}.jpg`}
+        title={data.name}
+      /> */}
 
-      const flat = arr.flat();
-      this.setState({ glasses: flat });
-    }
-    // this.setState({ glasses: arr });
+      <CardContent>
+        <Typography variant="body2" color="textSecondary" component="p">
+          A{" "}
+          <ButtonBase
+            className={classes.ButtonBase}
+            value={data.year}
+            id={year}
+            onClick={event => onSelect(event)}
+          >
+            {data.year}
+          </ButtonBase>{" "}
+          <ButtonBase
+            className={classes.ButtonBase}
+            component="button"
+            value={data.grapes}
+            id={grapes}
+            onClick={event => onSelect(event)}
+          >
+            {data.grapes}
+          </ButtonBase>{" "}
+          from{" "}
+          <ButtonBase
+            className={classes.ButtonBase}
+            value={data.place}
+            id={place}
+            onClick={event => onSelect(event)}
+          >
+            {upperCaseFirstLetter(data.place)}
+          </ButtonBase>{" "}
+          <ButtonBase
+            className={classes.ButtonBase}
+            value={data.area}
+            id={area}
+            onClick={event => onSelect(event)}
+          >
+            {data.area}
+          </ButtonBase>{" "}
+          in {""}
+          <ButtonBase
+            className={classes.ButtonBase}
+            value={data.country}
+            id={country}
+            onClick={event => onSelect(event)}
+          >
+            {data.country}
+          </ButtonBase>{" "}
+          served in a{" "}
+          <ButtonBase
+            className={classes.ButtonBase}
+            value={data.mise}
+            id={mise}
+            onClick={event => onSelect(event)}
+          >
+            {data.mise}
+          </ButtonBase>{" "}
+          for ${data.price}
+        </Typography>
+      </CardContent>
+      <CardActions disableSpacing>
+        <IconButton
+          className={clsx(classes.expand, {
+            [classes.expandOpen]: expanded
+          })}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </IconButton>
+      </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+          <Typography paragraph>
+            description:{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description1}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description1}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description2}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description2}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description3}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description3}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description4}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description4}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description5}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description5}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description6}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description6}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description7}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description7}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description8}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description8}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description9}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description9}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description10}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description10}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description11}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description11}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description12}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description12}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description13}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description13}
+            </ButtonBase>{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.description14}
+              id={description}
+              onClick={event => onSelect(event)}
+            >
+              {data.description14}
+            </ButtonBase>
+          </Typography>
+          <Typography paragraph>
+            Appellation:{" "}
+            <ButtonBase
+              className={classes.ButtonBase}
+              value={data.appellation}
+              id={appellation}
+              onClick={event => onSelect(event)}
+            >
+              {data.appellation}
+            </ButtonBase>
+          </Typography>
+          <Typography paragraph>fun fact: {data.funfact}</Typography>
+        </CardContent>
+      </Collapse>
+    </Card>
+  );
+};
 
-    // }
+export default MobileBlocks;

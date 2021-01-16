@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MobileBlocks from "./MobileBlocks";
-
+//sends info to each block so they can function independently
 const MobileBlocksData = ({
   onSelect,
   glasses,

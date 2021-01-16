@@ -3,7 +3,7 @@ import "./styles/App.css";
 // import MobileBar from "./MobileBar";
 import MobileBlocksData from "./MobileBlocksData";
 import CircularDeterminate from "./CircularDeterminate";
-import { MongoNetworkError } from "mongodb";
+// import { MongoNetworkError } from "mongodb";
 import { Drawer } from "@material-ui/core";
 import TempDrawer from "./TempDrawer";
 import CheckBoxes from "./CheckBoxes";
@@ -59,7 +59,7 @@ class App extends Component {
         this.setState({ glasses: glassesData });
         this.setState({ unFilteredWines: glassesData });
         this.setState({ unMutable: glassesData });
-
+        //returns all searchable data into an array for the searchbar
         let allSearchableData = glassesData.map((result) => {
           return [
             {
@@ -206,9 +206,9 @@ class App extends Component {
       .catch((err) => console.log(err));
   }
   // Fetches our GET route from the Express server.
-  //(Note the route we are fetching matches the GET route from server.js
+
   callBackendAPI = async () => {
-    const response = await fetch("/express_backend");
+    const response = await fetch("/api");
     const body = await response.json();
 
     if (response.status !== 200) {
@@ -301,8 +301,9 @@ class App extends Component {
     this.setState({ unMutable: filterWineOnClick });
     this.priceChange(filterWineOnClick);
   };
-  ///
 
+  //this function is called when items are removed
+  //from the filtering terms
   onRemoveFilterTerms = (result) => {
     let newFilterTermsWithId = this.state.filterTermsWithId;
     let newFilterTerms = this.state.filterTerms;
@@ -408,7 +409,8 @@ class App extends Component {
   };
   ///
   ///
-  ///
+  ///since coravin is a boolean this is a seperate function to
+  //filter wines that are coravin or not
   onCoravinSearch = (event) => {
     let id = event.target.id;
     let value = event.target.value;
@@ -420,32 +422,23 @@ class App extends Component {
       filterTerms.push(id);
     }
 
-    // let filterTerms = this.state.filterTerms;
-
-    // console.log(value);
-
     const filterCoravin = glasses.filter((result) => {
       if (value === "true") {
-        // filterTermsWithId.push(newTerm);
         return result.coravin === true;
       }
       if (value === "false") {
-        // filterTermsWithId.push(newTerm);
         return result.coravin === false;
       }
     });
     const uniqueTerms = new Set(filterTerms);
     const termsToArray = [...uniqueTerms];
-    // // const uniqueTermsId = new Set(filterTermsWithId);
-    // // const termsToArrayId = [...uniqueTermsId];
 
     this.setState({ glasses: filterCoravin });
     this.setState({ filterTerms: termsToArray });
     this.setState({ unMutable: filterCoravin });
-    // this.setState({ filterTermsWithId: termsToArrayId });
   };
 
-  //for selecting items on search v
+  //for selecting items from the search bar
   onSearchSelect = (e) => {
     let id = e.id;
     let value1 = e.value;
@@ -529,7 +522,7 @@ class App extends Component {
     this.setState({ filteredWines: difference });
     this.setState({ unMutable: filterWineOnClick });
   };
-
+  //clearnig all filters
   onClear() {
     const unFilteredWines1 = this.state.unFilteredWines;
 
@@ -539,6 +532,7 @@ class App extends Component {
     this.setState({ filteredWines: [] });
     this.setState({ unMutable: unFilteredWines1 });
   }
+  //sorting wines such as by color or status
   onSort = (event) => {
     const glasses = this.state.glasses;
     let termy = event.target.id;
@@ -623,18 +617,28 @@ class App extends Component {
       this.setState((state) => ({ priceSort: !this.state.priceSort }));
     }
   };
+
+  //hides recently removed wines. Great for a new employee who
+  //is learning the list for the first time
   hideRemovedClick = (event) => {
     this.setState((state) => ({ hideRemoved: !this.state.hideRemoved }));
   };
+
+  //hidden wines are wines that used to be on the list but have
+  //been off for a while. This hides and shows them
   unHideHiddenClick = (event) => {
     this.setState((state) => ({ unHideHidden: !this.state.unHideHidden }));
   };
+
+  //still working on a way to filter by price ranges. This is
+  //not completed yet
   priceCheck = (state) => {
     const glasses = this.state.unMutable;
     this.setState({ checkStates: state });
     this.priceChange(glasses);
   };
-
+  //still working on a way to filter by price ranges. This is
+  //not completed yet
   priceChange(x) {
     let arr = [];
     const checkStates = this.state.checkStates;

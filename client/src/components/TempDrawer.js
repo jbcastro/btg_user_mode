@@ -6,22 +6,22 @@ import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
+// import ListItemIcon from "@material-ui/core/ListItemIcon";
+// import ListItemText from "@material-ui/core/ListItemText";
+// import InboxIcon from "@material-ui/icons/MoveToInbox";
+// import MailIcon from "@material-ui/icons/Mail";
 import ReactSearchBox from "react-search-box";
 import Chip from "@material-ui/core/Chip";
 import "./styles/App.css";
-import { green } from "@material-ui/core/colors";
-import FormGroup from "@material-ui/core/FormGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
-import CheckBoxIcon from "@material-ui/icons/CheckBox";
-import Favorite from "@material-ui/icons/Favorite";
-import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
-import CheckBoxes from "./CheckBoxes";
+// import { green } from "@material-ui/core/colors";
+// import FormGroup from "@material-ui/core/FormGroup";
+// import FormControlLabel from "@material-ui/core/FormControlLabel";
+// import Checkbox from "@material-ui/core/Checkbox";
+// import CheckBoxOutlineBlankIcon from "@material-ui/icons/CheckBoxOutlineBlank";
+// import CheckBoxIcon from "@material-ui/icons/CheckBox";
+// import Favorite from "@material-ui/icons/Favorite";
+// import FavoriteBorder from "@material-ui/icons/FavoriteBorder";
+// import CheckBoxes from "./CheckBoxes";
 
 const useStyles = makeStyles({
   list: {
@@ -31,7 +31,9 @@ const useStyles = makeStyles({
     width: "auto",
   },
 });
-
+//this pulls down a drawer that will allow one to sort by certain
+//params such as color, hide removed/hidden items, clear all filters,
+//and give a "how-to"
 export default function TemporaryDrawer(props) {
   const classes = useStyles();
   const [state, setState] = React.useState({
@@ -53,7 +55,7 @@ export default function TemporaryDrawer(props) {
   const color = "color";
   const status = "status";
   const [hideUnhideRemoved, setHideUnhideRemoved] = React.useState(false);
-
+  //remove filter items
   const handleDelete = (result) => {
     onRemoveFilterTerms(result);
   };
@@ -63,8 +65,8 @@ export default function TemporaryDrawer(props) {
   //   setUpOrDown(!upOrDown);
   //   onSort(event);
   // };
-  // let thiggg = "stuff";
 
+  //show/hide removed
   const changeHideRemoved = (event) => {
     hideRemovedClick();
     setHideUnhideRemoved(!hideUnhideRemoved);
@@ -77,6 +79,7 @@ export default function TemporaryDrawer(props) {
       return "Show Removed";
     }
   };
+  //show/hide hidden aka retired wines
   const [hideUnhideHidden, setHideUnhideHidden] = React.useState(true);
   const changeHideHidden = (event) => {
     unHideHiddenClick();
@@ -89,7 +92,8 @@ export default function TemporaryDrawer(props) {
       return "Hide Retired";
     }
   };
-
+  //since coravin is a boolean it would show up as "true" or "false"
+  //for filtered items. This changes it to "coravin" or "non-coravin"
   const checkIfCoravinName = (result) => {
     if (result == "TRUE") {
       return "CORAVIN";
@@ -99,6 +103,8 @@ export default function TemporaryDrawer(props) {
       return result;
     }
   };
+
+  //hide/show how to instructions
   const [howToColor, setHowToColor] = React.useState(false);
   const handleHowToClickColor = () => {
     setHowToColor(!howToColor);
@@ -111,7 +117,7 @@ export default function TemporaryDrawer(props) {
   const handleHowToClickAvatar = () => {
     setHowToAvatar(!howToAvatar);
   };
-
+  //hide/show the drawer
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event.type === "keydown" &&
@@ -236,11 +242,11 @@ export default function TemporaryDrawer(props) {
 
   return (
     <div className="TempDrawer">
-      <CheckBoxes
+      {/* <CheckBoxes
         priceCheck={props.priceCheck}
         onSelect={props.onSelect}
         glasses={props.glasses}
-      />
+      /> */}
       {["menu"].map((anchor) => (
         <React.Fragment key={anchor}>
           <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>

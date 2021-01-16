@@ -19,6 +19,7 @@ import Button from "@material-ui/core/Button";
 
 // import MobileBar from "./MobileBar";
 
+//this component is the layout for the cards
 const useStyles = makeStyles((theme) => ({
   button: {
     margin: theme.spacing(1),
@@ -32,38 +33,56 @@ const useStyles = makeStyles((theme) => ({
   card: {
     maxWidth: 345,
     display: "inline-block",
-    // minHeight: 436,
+    minHeight: 300,
     overflow: "hidden",
+    [theme.breakpoints.down("sm")]: {
+      minHeight: 1,
+    },
   },
   cardAdded: {
     maxWidth: 345,
-    backgroundColor: "#E6E6FA",
+    backgroundColor: "#6FAEF7",
+    [theme.breakpoints.down("sm")]: {
+      minHeight: 1,
+    },
     display: "inline-block",
-    // minHeight: 436,
+    minHeight: 300,
     overflow: "hidden",
+    [theme.breakpoints.down("sm")]: {
+      minHeight: 1,
+    },
   },
   cardRemoved: {
     maxWidth: 345,
     backgroundColor: "#FFA07A",
     display: "inline-block",
-    // minHeight: 436,
+    minHeight: 300,
     overflow: "hidden",
+    [theme.breakpoints.down("sm")]: {
+      minHeight: 1,
+    },
   },
 
   cardHidden: {
     maxWidth: 345,
     backgroundColor: "yellow",
     display: "inline-block",
-    // minHeight: 436,
+    minHeight: 300,
     overflow: "hidden",
     display: "none",
+    [theme.breakpoints.down("sm")]: {
+      minHeight: 1,
+    },
   },
   cardUnHidden: {
     maxWidth: 345,
     backgroundColor: "yellow",
     display: "inline-block",
-    // minHeight: 436,
+    minHeight: 300,
     overflow: "hidden",
+    [theme.breakpoints.down("sm")]: {
+      minHeight: 1,
+    },
   },
   ButtonBase: {
     color: "blue",
@@ -147,7 +166,7 @@ const MobileBlocks = ({
     return str.toUpperCase();
     //check to see if needed in admin mode
   };
-
+  //set status of card to give it it's background color
   const checkStatus = (status) => {
     if (status === "added") {
       return classes.cardAdded;
@@ -209,6 +228,14 @@ const MobileBlocks = ({
     setExpanded(!expanded);
   };
 
+  const checkGlass = (glass) => {
+    if (glass == "AP") {
+      return "an";
+    } else {
+      return "a";
+    }
+  };
+
   return (
     <Card className={checkStatus(data.status)} key={data._id} raised>
       <CardHeader
@@ -227,7 +254,7 @@ const MobileBlocks = ({
         title={data.name}
         subheader={vinny(data.vinyard)}
       />
-
+      {/* {images enabled but commented out until I can get images} */}
       {/* for images */}
       {/* <CardMedia
         className={classes.media}
@@ -289,7 +316,7 @@ const MobileBlocks = ({
           >
             {data.country}
           </ButtonBase>{" "}
-          served in a{" "}
+          served in {checkGlass(data.mise)}{" "}
           <ButtonBase
             className={classes.ButtonBase}
             value={data.mise}
