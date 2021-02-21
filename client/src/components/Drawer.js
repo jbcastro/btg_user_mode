@@ -51,7 +51,7 @@ const TemporaryDrawer = props => {
       <Divider />
     </div>
   );
-
+console.log("test")
   return (
     <div>
       <Button onClick={toggleDrawer("top", true)}>
