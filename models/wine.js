@@ -39,4 +39,4 @@ var mySchema = mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("rnwines", mySchema);
+module.exports = mongoose.model("wines", mySchema);

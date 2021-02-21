@@ -12,6 +12,7 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import Icon from "@material-ui/core/Icon";
 
 const WineTable = props => {
+  
   const handleDelete = props.handleDelete;
   const handleSelect = props.handleSelect;
   const onSelect = props.onSelect;

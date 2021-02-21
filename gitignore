@@ -26,3 +26,15 @@ yarn-error.log*
 models/connection.js
 
 /node_modules
+/client/src/components/ComponentUsingFormState.js
+/client/src/components/data.js
+/client/src/components/data.json
+/client/src/components/Drawer.js
+/client/src/components/EditForm.js
+/client/src/components/FormTest.js
+/client/src/components/MobileBlocksOld.js
+/client/src/components/oldData.js
+/client/src/components/Tester.js
+/client/src/components/TesterData.js
+/client/src/components/WineList.js
+/client/src/components/WineTable.js

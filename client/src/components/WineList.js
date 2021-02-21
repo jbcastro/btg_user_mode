@@ -13,6 +13,7 @@ const WineList = props => {
   const grape = "grape";
 
   const content = props.glasses.map(glass => (
+    
     <div key={glass._id}>
       <table>
         <tr>
