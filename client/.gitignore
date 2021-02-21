@@ -1,13 +1,2 @@
 node_modules
-src/components/ComponentUsingFormState.js
-src/components/data.js
-src/components/data.json
-src/components/Drawer.js
-src/components/EditForm.js
-src/components/FormTest.js
-src/components/MobileBlocksOld.js
-src/components/oldData.js
-src/components/Tester.js
-src/components/TesterData.js
-src/components/WineList.js
-src/components/WineTable.js
+test

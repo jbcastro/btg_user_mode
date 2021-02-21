@@ -4,9 +4,9 @@ import "./styles/App.css";
 import MobileBlocksData from "./MobileBlocksData";
 import CircularDeterminate from "./CircularDeterminate";
 // import { MongoNetworkError } from "mongodb";
-import { Drawer } from "@material-ui/core";
+
 import TempDrawer from "./TempDrawer";
-import CheckBoxes from "./CheckBoxes";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -682,57 +682,7 @@ class App extends Component {
       console.log(flat);
       this.setState({ glasses: flat });
     }
-    // if (this.state.glasses !== prevProps.glasses) {
-    // if (this.state.checkStates !== prevProps.checkStates) {
-    //   if (this.state.glasses !== prevState.glasses) {
-    //     console.log("dude");
-    //   }
-    // }
-    // if (
-    //   checkStates.zero === false &&
-    //   checkStates.twentyone === false &&
-    //   checkStates.thirtyone === false &&
-    //   checkStates.fortyone === false
-    // ) {
-    //   this.setState({ glasses: glasses2 });
-    // }
-    // else {
-    //   if (checkStates.zero === true) {
-    //     const glasses = glasses2;
-    //     const zero = glasses.filter((wine) => wine.price < 21);
-    //     arr.push(zero);
-    //   }
-    //   if (checkStates.twentyone === true) {
-    //     const glasses = glasses2;
-    //     const twentyone = glasses.filter(
-    //       (wine) => wine.price >= 21 && wine.price < 31
-    //     );
-    //     arr.push(twentyone);
-    //   }
-    //   if (checkStates.thirtyone === true) {
-    //     const glasses = glasses2;
-    //     const thirtyone = glasses.filter(
-    //       (wine) => wine.price >= 31 && wine.price < 41
-    //     );
-    //     arr.push(thirtyone);
-    //   }
-    //   if (checkStates.fortyone === true) {
-    //     const glasses = glasses2;
-    //     const fortyone = glasses.filter((wine) => wine.price >= 41);
-    //     arr.push(fortyone);
-    //   }
-
-    //   const flat = arr.flat();
-    //   this.setState({ glasses: flat });
-    // }
-    // }
   }
-  ///render portion
-
-  //
-  //
-  //
-  //
 
   render() {
     const allInfo = this.state.allInfo;
