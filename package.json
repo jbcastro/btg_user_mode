@@ -19,7 +19,7 @@
     "mongoose": "^5.8.9",
     "mustache": "^4.0.0",
     "npm-update-all": "^1.0.1",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-scripts": "^3.3.0",
